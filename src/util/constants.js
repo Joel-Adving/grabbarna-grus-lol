@@ -1,0 +1,15 @@
+export const grusGrabb = [
+    'Leo36737',
+    'Reeduns',
+    'TheLewenhaupt',
+    'smashdude1',
+    'DoomGladiator',
+    'ChimpNE',
+    'darkeningday',
+    'TEEEMO',
+    'Loot',
+    'Forssa',
+    'Exmortius',
+    'xXitsyaboiXx',
+    'Pappenos',
+]
