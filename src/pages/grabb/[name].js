@@ -11,8 +11,15 @@ export default function GrusGrabb({ data }) {
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-background-darkest via-background-light to-background-dark">
-            <div className="container">
-                <h1 className="text-5xl text-center my-14 font-frizQuad text-gold">{data.summoner.name}</h1>
+            <div className="container flex flex-col">
+                <div className="flex items-center self-center my-14">
+                    <img
+                        src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${data.summoner.profileIconId}.png`}
+                        alt="Summoner Icon"
+                        className="w-20 h-20 mr-6 border-2 rounded-full border-border"
+                    />
+                    <h1 className="text-5xl font-frizQuad text-text">{data.summoner.name}</h1>
+                </div>
                 <div className="flex ">
                     <section className="flex flex-col flex-grow p-8 pt-4 bg-opacity-40 bg-background-darkest border-[1px] border-border">
                         <MatchHistoryList matchHistory={data.matchHistory} />

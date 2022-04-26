@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Header() {
     return (
-        <header className="w-screen p-5 bg-background-darkest border-b-[1px] border-neutral-500">
+        <header className="w-full p-5 bg-background-darkest border-b-[1px] border-neutral-500">
             <nav className="container flex items-center justify-between mx-auto text-text font-BeaufortBold">
                 <Link href={`/`}>
                     <h2 className="text-4xl cursor-pointer font-frizQuad">Grus</h2>
