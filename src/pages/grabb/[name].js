@@ -54,7 +54,7 @@ export default function GrusGrabb({ data }) {
                         <h3 className="mb-2 font-BeaufortBold text-text-highlight">RECENTLY PLAYED CHAMPIONS</h3>
                         <div className="flex gap-4 ">
                             {Object.entries(recentChamps).map(([key, value]) => (
-                                <div>
+                                <div key={Math.random()}>
                                     <img
                                         className="w-16 h-16 border-[1px] border-gray-600"
                                         src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${key}.png`}

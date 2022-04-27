@@ -5,7 +5,7 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
         <section className="flex flex-col flex-grow py-4 pb-20">
             {matchHistory
                 .filter(match => match.info)
-                .map(match => {
+                .map((match, i) => {
                     const { info } = match
                     const playerStats = info.participants.find(el => el.summonerId === summoner.id)
                     const win = playerStats.win
