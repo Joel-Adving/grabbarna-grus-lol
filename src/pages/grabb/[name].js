@@ -6,8 +6,6 @@ import { percentages, sleep } from '../../util/helpers'
 import Link from 'next/link'
 
 export default function GrusGrabb({ data }) {
-    console.log(data)
-
     const playerStats = data.matchHistory
         .filter(match => match.info)
         .map(match => match.info.participants.find(player => player.summonerId === data.summoner.id))
@@ -100,19 +98,17 @@ export async function getStaticProps(context) {
     const { name } = context.params
     const resSummoner = await summoner(name)
     const resMatchHistory = await matchHistory(resSummoner.puuid)
-    await sleep(1100)
     const resMatches = await matches(resMatchHistory)
-    // const resActiveMatch = await activeMatch(resSummoner.id)
-    await sleep(1100)
     const resSummoners = await summoners(grusGrabb)
+    // const resActiveMatch = await activeMatch(resSummoner.id)
 
     return {
         props: {
             data: {
                 summoner: resSummoner,
                 matchHistory: resMatches,
-                // activeMatch: resActiveMatch,
                 summoners: resSummoners,
+                // activeMatch: resActiveMatch,
             },
         },
     }
