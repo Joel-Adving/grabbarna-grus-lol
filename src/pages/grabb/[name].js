@@ -2,7 +2,7 @@ import { grusGrabb } from '../../util/constants'
 import { summoner, summoners, matchHistory, activeMatch, matches } from '../../util/riotFetch'
 import MatchHistoryList from '../../components/MatchHistoryList'
 import FriendList from '../../components/FriendList'
-import { percentages } from '../../util/helpers'
+import { percentages, sleep } from '../../util/helpers'
 import Link from 'next/link'
 
 export default function GrusGrabb({ data }) {
@@ -100,8 +100,10 @@ export async function getStaticProps(context) {
     const { name } = context.params
     const resSummoner = await summoner(name)
     const resMatchHistory = await matchHistory(resSummoner.puuid)
+    await sleep(1100)
     const resMatches = await matches(resMatchHistory)
     // const resActiveMatch = await activeMatch(resSummoner.id)
+    await sleep(1100)
     const resSummoners = await summoners(grusGrabb)
 
     return {
