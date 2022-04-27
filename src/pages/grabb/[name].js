@@ -3,6 +3,7 @@ import { summoner, summoners, matchHistory, activeMatch, matches } from '../../u
 import MatchHistoryList from '../../components/MatchHistoryList'
 import FriendList from '../../components/FriendList'
 import { percentages } from '../../util/helpers'
+import Link from 'next/link'
 
 export default function GrusGrabb({ data }) {
     const playerStats = data.matchHistory
@@ -20,7 +21,12 @@ export default function GrusGrabb({ data }) {
     )
 
     return (
-        <div className="min-h-screen pt-10 from-background-darkest">
+        <div className="min-h-screen pt-5 from-background-darkest">
+            <div className="container pb-5">
+                <Link href={'/'}>
+                    <a className="pl-4 text-lg sm:pl-0 font-BeaufortBold text-text">HOME</a>
+                </Link>
+            </div>
             <div className="container flex flex-col border-t-2 border-border">
                 <div className="flex flex-col md:flex-row">
                     <div className="flex flex-col justify-between">
@@ -44,9 +50,9 @@ export default function GrusGrabb({ data }) {
                         </div>
                     </div>
 
-                    <div className="flex flex-col items-center mt-5 md:ml-[15vw] text-sm">
+                    <div className="flex flex-col items-center mt-5 md:ml-[15vw] text-sm md:pb-6 md:pt-2">
                         <h3 className="mb-2 font-BeaufortBold text-text-highlight">RECENTLY PLAYED CHAMPIONS</h3>
-                        <div className="flex gap-4">
+                        <div className="flex gap-4 ">
                             {Object.entries(recentChamps).map(([key, value]) => (
                                 <div>
                                     <img
@@ -59,7 +65,7 @@ export default function GrusGrabb({ data }) {
                         </div>
                     </div>
 
-                    <div className="flex justify-center mt-6 font-BeaufortBold md:hidden">
+                    <div className="flex justify-center mt-6 mb-3 font-BeaufortBold md:hidden">
                         <h2 className=" text-text-highlight">RECENT GAMES (LAST 20 PLAYED)</h2>
                         <div className="flex ml-3">
                             <h3 className="text-victory ">{wins.length}</h3>

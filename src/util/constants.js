@@ -33,3 +33,15 @@ export const summonerSpells = {
     54: 'Summoner_UltBookPlaceholder',
     55: 'Summoner_UltBookSmitePlaceholder',
 }
+
+export const leagueRanks = {
+    GRANDMASTER: 1,
+    MASTER: 2,
+    DIAMOND: 3,
+    PLATINUM: 4,
+    GOLD: 5,
+    SILVER: 6,
+    BRONZE: 7,
+    IRON: 8,
+    UNRANKED: 9,
+}

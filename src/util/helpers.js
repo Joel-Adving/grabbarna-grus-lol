@@ -8,5 +8,10 @@ export const getJSON = async url => {
     }
 }
 
+export const sleep = milSecons =>
+    new Promise(resolve => {
+        setTimeout(resolve, milSecons)
+    })
+
 export const percentages = arr =>
     arr.reduce((el, i) => ({ ...el, [i]: Math.trunc((el[i] || 0) + 100 / arr.length) }), {})

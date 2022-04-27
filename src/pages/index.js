@@ -1,19 +1,31 @@
-import GrusGrabbList from '../components/GrusGrabbList'
+import RankList from '../components/RankList'
 import { grusGrabb } from '../util/constants'
-import { summoners } from '../util/riotFetch'
+import { sleep } from '../util/helpers'
+import { ranks, summoners } from '../util/riotFetch'
 
 export default function Home({ data }) {
-    console.log(data)
+    const { resSummoners, resRanks } = data
+    const ranksArr = resSummoners.map(summoner => ({
+        ...summoner,
+        ranks: resRanks.flat().filter(el => el.summonerId === summoner.id),
+    }))
+
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-b from-background-darkest via-background-light to-background-dark">
-                <div className="my-20 text-5xl text-center font-frizQuad text-gold-light ">
-                    <h1 className="">League of Grabbarna</h1>
-                    <h1 className="">Grus of Legends</h1>
+            <div className="min-h-screen bg-gradient-to-b from-background-darkest via-background-darkest to-background-lightest">
+                <div className="flex flex-col items-center justify-center py-10 text-2xl sm:text-4xl md:text-5xl pb-14 bg-background-darkest font-frizQuad text-gold-light">
+                    <div className="flex">
+                        <h1>LEAGUE</h1>
+                        <h3 className="self-end mb-2 ml-1 text-xs sm:text-xl text-gold-light">of</h3>
+                    </div>
+                    <h1>GRABBARNA</h1>
+                    <div className="flex">
+                        <h1>GRUS</h1>
+                        <h3 className="self-end mx-2 mb-1 text-xs sm:text-xl text-gold-light">of</h3>
+                        <h1>LEGENDS</h1>
+                    </div>
                 </div>
-                <main className="max-w-md pb-20 mx-auto">
-                    <GrusGrabbList data={data} />
-                </main>
+                <RankList data={ranksArr} />
             </div>
         </>
     )
@@ -21,10 +33,12 @@ export default function Home({ data }) {
 
 export async function getStaticProps(context) {
     const resSummoners = await summoners(grusGrabb)
+    await sleep(1200)
+    const resRanks = await ranks(resSummoners.map(summoner => summoner.id))
 
     return {
         props: {
-            data: resSummoners,
+            data: { resSummoners, resRanks },
         },
     }
 }
