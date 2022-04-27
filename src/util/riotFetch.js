@@ -7,8 +7,8 @@ const summoner = async (summonerName, region = 'eun1') => {
     return res
 }
 
-const summoners = async summoners => {
-    const res = await Promise.all(summoners.map(smnr => summoner(smnr)))
+const summoners = async summonerNames => {
+    const res = await Promise.all(summonerNames.map(name => summoner(name)))
     return res
 }
 

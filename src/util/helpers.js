@@ -7,3 +7,6 @@ export const getJSON = async url => {
         return error
     }
 }
+
+export const percentages = arr =>
+    arr.reduce((el, i) => ({ ...el, [i]: Math.trunc((el[i] || 0) + 100 / arr.length) }), {})

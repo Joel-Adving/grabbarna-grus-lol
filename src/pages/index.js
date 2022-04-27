@@ -1,42 +1,30 @@
-import Card from '../components/Card'
-import { summoner, matchHistory, summoners, activeMatch, activeMatches } from '../util/riotFetch'
-import { grusGrabb } from '../util/constants'
-import { useEffect } from 'react'
-import Link from 'next/link'
 import GrusGrabbList from '../components/GrusGrabbList'
+import { grusGrabb } from '../util/constants'
+import { summoners } from '../util/riotFetch'
 
-export default function Home() {
+export default function Home({ data }) {
+    console.log(data)
     return (
         <>
             <div className="min-h-screen bg-gradient-to-b from-background-darkest via-background-light to-background-dark">
-                <div className="my-20 text-5xl text-center font-frizQuad text-gold ">
+                <div className="my-20 text-5xl text-center font-frizQuad text-gold-light ">
                     <h1 className="">League of Grabbarna</h1>
                     <h1 className="">Grus of Legends</h1>
                 </div>
                 <main className="max-w-md pb-20 mx-auto">
-                    <GrusGrabbList />
+                    <GrusGrabbList data={data} />
                 </main>
             </div>
         </>
     )
 }
 
-// export async function getStaticProps(context) {
-//     const resSummoners = await summoners(grusGrabb)
+export async function getStaticProps(context) {
+    const resSummoners = await summoners(grusGrabb)
 
-//     // Implement later when revieving higher rate limit from riot production api key
-
-//     // const resMatches = await matchHistory(resSummoners.map(smnr => smnr.puuid))
-//     // const resActiveMatches = await activeMatches(resSummoners.map(smnr => smnr.id))
-//     // const resActiveMatch = await activeMatch(resSummoner.id)
-//     // const combined = resSummoners.map(smnr => {
-//     //     const found = resMatches.find(matchSmnr => matchSmnr.puuid === smnr.puuid)
-//     //     return { matches: found.matches, ...smnr }
-//     // })
-
-//     return {
-//         props: {
-//             data: resSummoners,
-//         },
-//     }
-// }
+    return {
+        props: {
+            data: resSummoners,
+        },
+    }
+}

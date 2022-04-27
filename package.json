@@ -12,6 +12,7 @@
     "next": "12.1.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",
+    "recoil": "^0.7.2",
     "riot-lol-api": "^4.3.4"
   },
   "devDependencies": {
