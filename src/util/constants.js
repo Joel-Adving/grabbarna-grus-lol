@@ -1,5 +1,5 @@
 export const grusGrabb = [
-    'Leo36737',
+    // 'Leo36737',
     'Reeduns',
     'TheLewenhaupt',
     'smashdude1',
@@ -7,12 +7,12 @@ export const grusGrabb = [
     'ChimpNE',
     'darkeningday',
     'TEEEMO',
-    'Loot',
-    'Forssa',
+    // 'Loot',
+    // 'Forssa',
     'Spex8',
-    'Exmortius',
-    'xXitsyaboiXx',
-    'Pappenos',
+    // 'Exmortius',
+    // 'xXitsyaboiXx',
+    // 'Pappenos',
 ]
 
 export const summonerSpells = {
