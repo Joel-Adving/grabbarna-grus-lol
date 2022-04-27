@@ -4,7 +4,7 @@ export const grusGrabb = [
     'TheLewenhaupt',
     'smashdude1',
     'DoomGladiator',
-    'ChimpNE',
+    // 'ChimpNE',
     // 'darkeningday',
     'TEEEMO',
     // 'Loot',
