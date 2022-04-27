@@ -12,7 +12,7 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                     return (
                         <div
                             className="py-3 border-b-[1px] border-neutral-700 text-text-light flex sm:justify-between justify-evenly cursor-pointer"
-                            key={match.metadata.matchId}
+                            key={match.info.gameId}
                         >
                             <div className="flex flex-col items-center sm:flex-row">
                                 <div className="relative">
@@ -67,7 +67,7 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                                                     )
                                                 return (
                                                     <img
-                                                        key={item}
+                                                        key={item * Math.random()}
                                                         className="h-8 w-8 border-border border-[1px]"
                                                         src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/item/${item}.png`}
                                                         alt="Item splash art"

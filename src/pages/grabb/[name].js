@@ -6,6 +6,8 @@ import { percentages } from '../../util/helpers'
 import Link from 'next/link'
 
 export default function GrusGrabb({ data }) {
+    console.log(data)
+
     const playerStats = data.matchHistory
         .filter(match => match.info)
         .map(match => match.info.participants.find(player => player.summonerId === data.summoner.id))
@@ -53,8 +55,8 @@ export default function GrusGrabb({ data }) {
                     <div className="flex flex-col items-center mt-5 md:ml-[15vw] text-sm md:pb-6 md:pt-2">
                         <h3 className="mb-2 font-BeaufortBold text-text-highlight">RECENTLY PLAYED CHAMPIONS</h3>
                         <div className="flex gap-4 ">
-                            {Object.entries(recentChamps).map(([key, value]) => (
-                                <div key={Math.random()}>
+                            {Object.entries(recentChamps).map(([key, value], i) => (
+                                <div key={i}>
                                     <img
                                         className="w-16 h-16 border-[1px] border-gray-600"
                                         src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${key}.png`}
@@ -99,7 +101,7 @@ export async function getStaticProps(context) {
     const resSummoner = await summoner(name)
     const resMatchHistory = await matchHistory(resSummoner.puuid)
     const resMatches = await matches(resMatchHistory)
-    const resActiveMatch = await activeMatch(resSummoner.id)
+    // const resActiveMatch = await activeMatch(resSummoner.id)
     const resSummoners = await summoners(grusGrabb)
 
     return {
@@ -107,7 +109,7 @@ export async function getStaticProps(context) {
             data: {
                 summoner: resSummoner,
                 matchHistory: resMatches,
-                activeMatch: resActiveMatch,
+                // activeMatch: resActiveMatch,
                 summoners: resSummoners,
             },
         },
