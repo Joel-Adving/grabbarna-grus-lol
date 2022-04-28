@@ -35,9 +35,9 @@ export default function Playlist({ data }) {
                         .reverse()
                         .map((item, i) => (
                             <a
-                                href={`https://www.youtube.com/watch?v=${item.snippet.resourceId.videoId}=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2`}
+                                href={`https://www.youtube.com/watch?v=${item.snippet.resourceId.videoId}&list=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2`}
                                 key={item.id}
-                                className="flex items-center cursor-pointer hover:bg-background hover:text-text-highlight"
+                                className="flex items-center pr-12 cursor-pointer sm:pr-1 hover:bg-background hover:text-text-highlight"
                             >
                                 <p className="mx-4 ">{videoNumber.find(video => video.id === item.etag).videoNumber}</p>
                                 <div className="flex border-b-[1px] border-neutral-700 flex-grow">
