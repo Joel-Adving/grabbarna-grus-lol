@@ -121,7 +121,7 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                                 <div className="self-start mb-3 sm:mb-0">
                                     <p className="text-xs">{info.mapId === 11 ? "Summoner's Rift" : 'Howling Abyss'}</p>
 
-                                    <div className="flex mt-1 space-x-3 text-xs sm:mt-2">
+                                    <div className="flex mt-1 space-x-3 text-xs sm:mt-2 ">
                                         <p>{(info.gameDuration / 60).toFixed(2).toString().replace('.', ':')}</p>
                                         <p>{new Date(info.gameEndTimestamp).toLocaleDateString()}</p>
                                     </div>
