@@ -19,6 +19,7 @@ module.exports = {
                 'text-light': '#908d82',
                 'text-diffuse': '#414443',
                 border: '#564624',
+                'border-light': '#755c29',
                 'border-dark': '#3E3023',
                 'teal-light': '#A5F5D8',
                 'teal-medium': '#3A7875',

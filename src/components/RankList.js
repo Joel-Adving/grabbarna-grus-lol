@@ -54,7 +54,7 @@ export default function RankList({ data }) {
                                 {player.joelsRanks.rank}
                             </p>
                             <p className="w-5 ml-3 mr-5 sm:ml-14 ">
-                                <span className="">{player.joelsRanks.wins}</span>
+                                <span className="text-victory">{player.joelsRanks.wins}</span>
                                 {player.joelsRanks.rank ? '/' : ''}
                                 <span className="">{player.joelsRanks.losses}</span>
                             </p>
