@@ -12,7 +12,7 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                     const win = playerStats.win
                     let gameType
 
-                    if (info.gameMode === 'CLASSIC') gameType = 'Classic (Ranked/Normal)'
+                    if (info.gameMode === 'CLASSIC') gameType = 'Classic'
                     if (info.gameType === 'TUTORIAL_GAME') gameType = 'Tutorial'
                     if (match.metadata.participants.length < 10) gameType = 'Beginner'
                     if (info.gameType === 'CUSTOM_GAME') gameType = 'Custom'
@@ -44,7 +44,9 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                                     ) : (
                                         <h2 className=" text-defeat font-BeaufortBold">DEFEAT</h2>
                                     )}
-                                    <p className="-mt-1 text-xs">{gameType ? gameType : info.gameMode}</p>
+                                    <p className="-mt-1 text-xs text-center sm:text-left">
+                                        {gameType ? gameType : info.gameMode}
+                                    </p>
 
                                     <div className="flex mt-2">
                                         <div className="h-5 border-border border-[1px] overflow-hidden">

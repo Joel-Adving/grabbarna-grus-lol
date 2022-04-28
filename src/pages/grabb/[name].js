@@ -117,7 +117,7 @@ export default function GrusGrabb() {
                         </div>
                         <div className="flex ">
                             <MatchHistoryList matchHistory={data.matchHistory} summoner={data.summoner} />
-                            <div className="hidden md:block">
+                            <div className="hidden mt-6 md:block">
                                 <FriendList data={data.friendList} />
                             </div>
                         </div>
