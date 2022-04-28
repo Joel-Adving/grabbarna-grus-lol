@@ -1,6 +1,6 @@
-This is a [Next.js](https://nextjs.org/) application 
+## This is a [Next.js](https://nextjs.org/) application 
 
-## Getting Started
+# Getting Started
 
 First, add the Riot API key to .env.local
 
