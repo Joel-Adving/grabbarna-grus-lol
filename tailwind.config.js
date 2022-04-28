@@ -3,13 +3,13 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                frizQuad: 'FrizQuadrata, cursive',
-                BeaufortBold: 'BeaufortBold, cursive',
+                frizQuad: 'FrizQuadrata',
+                BeaufortBold: 'BeaufortBold',
             },
             colors: {
                 gold: '#AE914B',
                 'gold-light': '#F4DE93',
-                background: '#112120',
+                background: '#051420',
                 'background-lightest': '#2f3948',
                 'background-light': '#1a3e51',
                 'background-dark': '#132225',

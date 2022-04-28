@@ -1,3 +1,5 @@
+export const API_PLAYLIST_URL = 'https://www.googleapis.com/youtube/v3/playlistItems'
+
 export const leagueRanks = {
     GRANDMASTER: 1,
     MASTER: 2,

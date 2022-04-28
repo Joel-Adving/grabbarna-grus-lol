@@ -19,11 +19,16 @@ export default function GrusGrabb() {
     const getData = async () => {
         const resSummoner = await getJSON('/api/summoner/' + name)
         const friendList = await getJSON('/api/summoners')
-        const playerStats = resSummoner.matchHistory
-            .filter(match => match.info)
-            .map(match => match.info.participants.find(player => player.summonerId === resSummoner.summoner.id))
-        const wins = playerStats.filter(el => el.win)
-        const champions = playerStats.map(player => player.championName)
+
+        if (!resSummoner || !friendList) return
+
+        const playerStats = resSummoner?.matchHistory
+            .filter(match => match.info !== undefined || match.info !== null)
+            .map(match => match.info?.participants.find(player => player.summonerId === resSummoner.summoner.id))
+
+        const wins = playerStats.filter(el => el?.win)
+        const champions = playerStats.map(player => player?.championName)
+
         const recentChamps = Object.assign(
             ...Object.entries(percentages(champions))
                 .sort(({ 1: a }, { 1: b }) => b - a)
@@ -42,7 +47,7 @@ export default function GrusGrabb() {
     }
 
     return (
-        <div className="min-h-screen from-background-darkest">
+        <div className="min-h-screen bg-gradient-to-b from-background-darkest via-background-background to-background">
             {data && (
                 <>
                     <div className="container flex flex-col border-t-2 border-border">
@@ -62,7 +67,7 @@ export default function GrusGrabb() {
                                         <h1 className="text-4xl font-frizQuad text-gold-light ">
                                             {data.summoner.name}
                                         </h1>
-                                        <p className="mt-2 ml-3 text-2xl font-BeaufortBold">
+                                        <p className="mt-2 ml-3 text-2xl text-text-highlight font-BeaufortBold">
                                             {data.summoner.summonerLevel}
                                         </p>
                                     </div>

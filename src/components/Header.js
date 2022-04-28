@@ -9,10 +9,14 @@ export default function Header() {
         <header className="bg-background-darkest font-BeaufortBold text-text  border-t-[2.5px] border-b-[1px] border-neutral-700 border-t-border-light">
             <nav className="container flex justify-between w-full px-3 py-4 mx-auto sm:px-0">
                 <div className="flex items-center">
-                    <h2 className="mr-3 text-xl sm:mr-12 text-text-highlight border-victory">GRUS</h2>
+                    <h2 className="hidden mr-3 text-xl sm:mr-12 text-text-highlight border-victory sm:block">GRUS</h2>
                     <div className="flex space-x-2 sm:space-x-6">
                         <Link href="/">HOME</Link>
-                        <Link href="#">PLAYLIST</Link>
+                        {user && (
+                            <button>
+                                <Link href="/playlist">PLAYLIST</Link>
+                            </button>
+                        )}
                     </div>
                 </div>
 
@@ -35,7 +39,7 @@ export default function Header() {
                                 width={48}
                             />
                         </div>
-                        <h3 className=" text-text-highlight">{user.name}</h3>
+                        <h3 className="hidden sm:block text-text-highlight">{user.name.toUpperCase()}</h3>
                     </div>
                 )}
             </nav>
