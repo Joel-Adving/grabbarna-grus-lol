@@ -3,7 +3,7 @@ import { API_PLAYLIST_URL } from '../util/constants'
 import { getJSON } from '../util/helpers'
 import Image from 'next/image'
 
-export default function playlist({ data }) {
+export default function Playlist({ data }) {
     const [search, setSearch] = useState('')
     const [filtered, setFiltered] = useState('')
 
