@@ -42,16 +42,11 @@ export default function GrusGrabb() {
     }
 
     return (
-        <div className="min-h-screen pt-5 from-background-darkest">
-            <div className="container pb-5">
-                <Link href={'/'}>
-                    <a className="pl-4 text-lg sm:pl-0 font-BeaufortBold text-text">HOME</a>
-                </Link>
-            </div>
+        <div className="min-h-screen from-background-darkest">
             {data && (
                 <>
                     <div className="container flex flex-col border-t-2 border-border">
-                        <div className="flex flex-col md:flex-row">
+                        <div className="flex flex-col justify-between md:flex-row">
                             <div className="flex flex-col justify-between">
                                 <div className="flex items-center ">
                                     <div className="flex items-center justify-center flex-grow max-w-2xl py-3 border-b-2 border-border bg-slate-4000 sm:justify-start">
@@ -83,7 +78,7 @@ export default function GrusGrabb() {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col items-center mt-5 md:ml-[15vw] text-sm md:pb-6 md:pt-2">
+                            <div className="flex flex-col items-center mt-6 mb-3 text-sm">
                                 <h3 className="mb-2 font-BeaufortBold text-text-highlight">
                                     RECENTLY PLAYED CHAMPIONS
                                 </h3>
