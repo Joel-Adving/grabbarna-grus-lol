@@ -4,9 +4,10 @@ import { AuthContextProvider } from '../context/AuthContext'
 import '../styles/globals.css'
 import { useRouter } from 'next/router'
 import Header from '../components/Header'
+import ProtectedRoute from '../util/ProtectedRoute'
 
 function MyApp({ Component, pageProps }) {
-    const authRequired = ['/test', '/add-suspect']
+    const authRequired = ['/playlist']
     const router = useRouter()
 
     return (
