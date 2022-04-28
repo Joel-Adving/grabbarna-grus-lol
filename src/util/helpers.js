@@ -1,10 +1,10 @@
-export const getJSON = async url => {
+export async function getJSON(url) {
     try {
         const res = await fetch(url)
         const data = await res.json()
         return data
-    } catch (error) {
-        return error
+    } catch (err) {
+        return err
     }
 }
 

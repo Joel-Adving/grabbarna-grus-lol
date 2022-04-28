@@ -19,7 +19,6 @@ export default function Header() {
                         )}
                     </div>
                 </div>
-
                 {!user && (
                     <button className="" onClick={() => signin()}>
                         SIGN IN
