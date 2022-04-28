@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { API_PLAYLIST_URL } from '../util/constants'
 import { getJSON } from '../util/helpers'
-// import playListJson from '../util/playListJson.json'
 import Image from 'next/image'
 
 export default function playlist({ data }) {
