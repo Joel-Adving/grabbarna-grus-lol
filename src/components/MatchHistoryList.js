@@ -1,4 +1,6 @@
 import { summonerSpells } from '../util/constants'
+import Image from 'next/image'
+import { capitalizeFirstLetter } from '../util/helpers'
 
 export default function MatchHistoryList({ matchHistory, summoner }) {
     return (
@@ -9,6 +11,13 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                     const { info } = match
                     const playerStats = info.participants.find(el => el.summonerId === summoner.id)
                     const win = playerStats.win
+                    let gameType
+                    // {info.gameType === 'CUSTOM_GAME' ? 'Custom' : info.gameMode}
+                    if (info.gameMode === 'CLASSIC') gameType = 'Classic (Ranked/Normal)'
+                    if (info.gameType === 'TUTORIAL_GAME') gameType = 'Tutorial'
+                    if (match.metadata.participants.length < 10) gameType = 'Beginner'
+                    if (info.gameType === 'CUSTOM_GAME') gameType = 'Custom'
+
                     return (
                         <div
                             className="py-3 border-b-[1px] border-neutral-700 text-text-light flex sm:justify-between justify-evenly cursor-pointer"
@@ -16,11 +25,15 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                         >
                             <div className="flex flex-col items-center sm:flex-row">
                                 <div className="relative">
-                                    <img
-                                        src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${playerStats.championName}.png`}
-                                        alt="Champion splash art"
-                                        className="w-14 h-14 border-border rounded-full border-[2.5px]"
-                                    />
+                                    <div className="w-14 h-14 border-border rounded-full border-[2.5px] overflow-hidden">
+                                        <Image
+                                            src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${playerStats.championName}.png`}
+                                            alt="Champion splash art"
+                                            height={56}
+                                            width={56}
+                                            className="rounded-full"
+                                        />
+                                    </div>
 
                                     <p className="h-5 w-5 absolute bottom-0 right-0 rounded-full border-gold border-[1px] text-xs font-BeaufortBold bg-background-darkest flex items-center justify-center">
                                         {playerStats.champLevel}
@@ -32,23 +45,29 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                                     ) : (
                                         <h2 className=" text-defeat font-BeaufortBold">DEFEAT</h2>
                                     )}
-                                    <p className="-mt-1 text-xs">{info.gameMode}</p>
+                                    <p className="-mt-1 text-xs">{gameType ? gameType : info.gameMode}</p>
 
                                     <div className="flex mt-2">
-                                        <img
-                                            src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/spell/${
-                                                summonerSpells[playerStats.summoner1Id]
-                                            }.png`}
-                                            alt="Summoner spell"
-                                            className="h-5 border-border border-[1px]"
-                                        />
-                                        <img
-                                            src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/spell/${
-                                                summonerSpells[playerStats.summoner2Id]
-                                            }.png`}
-                                            alt="Summoner spell"
-                                            className="h-5 border-border border-[1px]"
-                                        />
+                                        <div className="h-5 border-border border-[1px] overflow-hidden">
+                                            <Image
+                                                src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/spell/${
+                                                    summonerSpells[playerStats.summoner1Id]
+                                                }.png`}
+                                                alt="Summoner spell"
+                                                height={20}
+                                                width={20}
+                                            />
+                                        </div>
+                                        <div className="h-5 border-border border-[1px] overflow-hidden">
+                                            <Image
+                                                src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/spell/${
+                                                    summonerSpells[playerStats.summoner2Id]
+                                                }.png`}
+                                                alt="Summoner spell"
+                                                height={20}
+                                                width={20}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -66,16 +85,21 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                                                         ></div>
                                                     )
                                                 return (
-                                                    <img
+                                                    <div
                                                         key={item * Math.random()}
-                                                        className="h-8 w-8 border-border border-[1px]"
-                                                        src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/item/${item}.png`}
-                                                        alt="Item splash art"
-                                                    />
+                                                        className="h-8 w-8 border-border border-[1px] overflow-hidden"
+                                                    >
+                                                        <Image
+                                                            height={32}
+                                                            width={32}
+                                                            src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/item/${item}.png`}
+                                                            alt="Item splash art"
+                                                        />
+                                                    </div>
                                                 )
                                             })}
                                     </div>
-                                    <div className="flex justify-between mt-2 font-BeaufortBold">
+                                    <div className="flex justify-between mt-1.5 -mb-1.5 font-BeaufortBold">
                                         <div className="flex">
                                             <p>{playerStats.kills}</p>
                                             <span className="mx-1">/</span>

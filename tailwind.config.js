@@ -28,6 +28,8 @@ module.exports = {
                 experience: '#9D25E9',
                 victory: '#0acbe6',
                 defeat: '#eb2141',
+                diamond: '#44578f',
+                silver: '#d2e0df',
             },
         },
     },

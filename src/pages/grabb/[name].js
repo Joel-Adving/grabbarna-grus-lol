@@ -4,6 +4,7 @@ import { getJSON, percentages, sleep } from '../../util/helpers'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 export default function GrusGrabb() {
     const router = useRouter()
@@ -29,14 +30,15 @@ export default function GrusGrabb() {
                 .slice(0, 3)
                 .map(([k, v]) => ({ [k]: v }))
         )
-        setData({
+        const data = {
             ...resSummoner,
             friendList,
             playerStats,
-            champions,
             recentChamps,
             wins,
-        })
+        }
+        console.log(data)
+        setData(data)
     }
 
     return (
@@ -53,14 +55,21 @@ export default function GrusGrabb() {
                             <div className="flex flex-col justify-between">
                                 <div className="flex items-center ">
                                     <div className="flex items-center justify-center flex-grow max-w-2xl py-3 border-b-2 border-border bg-slate-4000 sm:justify-start">
-                                        <img
-                                            src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${data.summoner.profileIconId}.png`}
-                                            alt="Summoner Icon"
-                                            className="w-14 h-14 mr-3 border-[3px] rounded-full border-gold p-[2px]"
-                                        />
+                                        <div className="w-14 h-14 mr-3 border-[3px] rounded-full border-gold p-[2px] overflow-hidden">
+                                            <Image
+                                                src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${data.summoner.profileIconId}.png`}
+                                                alt="Summoner Icon"
+                                                width={56}
+                                                height={56}
+                                                className="rounded-full"
+                                            />
+                                        </div>
                                         <h1 className="text-4xl font-frizQuad text-gold-light ">
                                             {data.summoner.name}
                                         </h1>
+                                        <p className="mt-2 ml-3 text-2xl font-BeaufortBold">
+                                            {data.summoner.summonerLevel}
+                                        </p>
                                     </div>
                                 </div>
 
@@ -81,10 +90,13 @@ export default function GrusGrabb() {
                                 <div className="flex gap-4 ">
                                     {Object.entries(data.recentChamps).map(([key, value], i) => (
                                         <div key={i}>
-                                            <img
-                                                className="w-16 h-16 border-[1px] border-gray-600"
-                                                src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${key}.png`}
-                                            />
+                                            <div className="w-16 h-16 border-[1px] border-gray-600 overflow-hidden">
+                                                <Image
+                                                    src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${key}.png`}
+                                                    height={64}
+                                                    width={64}
+                                                />
+                                            </div>
                                             <p className="mt-3 text-center font-BeaufortBold text-gold-light">
                                                 {value}%
                                             </p>
@@ -116,7 +128,7 @@ export default function GrusGrabb() {
     )
 }
 
-// Because rate limited api calls, static generated pages fails to build when deployed to production
+// Because API calls are extremly rate limited, static generated pages fails to build when deployed to production
 
 // export async function getStaticPaths() {
 //     const paths = grusGrabb.map(summoner => ({ params: { name: summoner } }))
@@ -132,9 +144,7 @@ export default function GrusGrabb() {
 //     const resSummoner = await summoner(name)
 //     const resMatchHistory = await matchHistory(resSummoner.puuid)
 //     const resMatches = await matches(resMatchHistory)
-
 //     const resSummoners = await summoners(grusGrabb)
-
 //     // const resActiveMatch = await activeMatch(resSummoner.id)
 
 //     return {
@@ -142,9 +152,7 @@ export default function GrusGrabb() {
 //             data: {
 //                 summoner: resSummoner,
 //                 matchHistory: resMatches,
-
 //                 summoners: resSummoners,
-
 //                 // activeMatch: resActiveMatch,
 //             },
 //         },

@@ -1,16 +1,17 @@
 export const grusGrabb = [
-    'Leo36737',
     'Reeduns',
-    'TheLewenhaupt',
-    'smashdude1',
+    'Bumbiiz',
     'DoomGladiator',
+    'TheLewenhaupt',
+    'Forssa',
+    'smashdude1',
+    'Exmortius',
     'ChimpNE',
     'darkeningday',
     'TEEEMO',
     'Loot',
-    'Forssa',
     'Spex8',
-    'Exmortius',
+    'Leo36737',
     'xXitsyaboiXx',
     'Pappenos',
 ]
@@ -44,4 +45,16 @@ export const leagueRanks = {
     BRONZE: 7,
     IRON: 8,
     UNRANKED: 9,
+}
+
+export const rankColors = {
+    GRANDMASTER: 'defeat',
+    MASTER: 'experience',
+    DIAMOND: 'indigo-300',
+    PLATINUM: 'teal-600',
+    GOLD: 'yellow-500',
+    SILVER: 'gray-400',
+    BRONZE: 'border',
+    IRON: 'border-dark',
+    UNRANKED: 'text',
 }

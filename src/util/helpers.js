@@ -15,3 +15,5 @@ export const sleep = milSecons =>
 
 export const percentages = arr =>
     arr.reduce((el, i) => ({ ...el, [i]: Math.trunc((el[i] || 0) + 100 / arr.length) }), {})
+
+export const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1)

@@ -13,7 +13,7 @@ export default function Home({ data }) {
     return (
         <>
             <div className="min-h-screen bg-gradient-to-b from-background-darkest via-background-darkest to-background-lightest">
-                <div className="flex flex-col items-center justify-center py-10 text-2xl sm:text-4xl md:text-5xl pb-14 bg-background-darkest font-frizQuad text-gold-light">
+                <div className="flex flex-col items-center justify-center py-12 text-2xl sm:text-4xl md:text-5xl bg-background-darkest font-frizQuad text-gold-light">
                     <div className="flex">
                         <h1>LEAGUE</h1>
                         <h3 className="self-end mb-2 ml-1 text-xs sm:text-xl text-gold-light">of</h3>
@@ -31,9 +31,10 @@ export default function Home({ data }) {
     )
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
     const resSummoners = await summoners(grusGrabb)
-    await sleep(1200)
+    // sleep because of API rate limitation
+    await sleep(1100)
     const resRanks = await ranks(resSummoners.map(summoner => summoner.id))
 
     return {
