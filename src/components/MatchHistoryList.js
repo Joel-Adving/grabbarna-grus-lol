@@ -1,6 +1,5 @@
 import { summonerSpells } from '../util/constants'
 import Image from 'next/image'
-import { capitalizeFirstLetter } from '../util/helpers'
 
 export default function MatchHistoryList({ matchHistory, summoner }) {
     return (
@@ -12,7 +11,7 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                     const playerStats = info.participants.find(el => el.summonerId === summoner.id)
                     const win = playerStats.win
                     let gameType
-                    // {info.gameType === 'CUSTOM_GAME' ? 'Custom' : info.gameMode}
+
                     if (info.gameMode === 'CLASSIC') gameType = 'Classic (Ranked/Normal)'
                     if (info.gameType === 'TUTORIAL_GAME') gameType = 'Tutorial'
                     if (match.metadata.participants.length < 10) gameType = 'Beginner'
