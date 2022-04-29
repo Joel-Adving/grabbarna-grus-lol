@@ -110,7 +110,7 @@ export async function getStaticPaths() {
     // api request rate limitation...
     // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
 
-    const paths = [{ params: { name: '' } }]
+    const paths = [{ params: { name: 'Reeduns' } }]
 
     return {
         paths,
