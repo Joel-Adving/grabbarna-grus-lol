@@ -31,7 +31,7 @@ export default function Home({ data }) {
     )
 }
 
-export async function getStaticProps() {
+export async function getServersideprops() {
     const resSummoners = await summoners(grusGrabb)
     // sleep because of API rate limitation
     await sleep(1100)
