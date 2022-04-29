@@ -1,4 +1,4 @@
-import { getJSON } from './helpers'
+import { getJSON, sleep } from './helpers'
 
 const KEY = process.env.NEXT_PUBLIC_LIMITED_KEY
 
@@ -47,6 +47,7 @@ export const matchHistory = async (puuid, region = 'europe') => {
 export const matchHistories = async (puuids, region = 'europe') => {
     const res = await Promise.all(
         puuids.map(async puuid => {
+            await sleep(100)
             const res = await getJSON(
                 `https://${region}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?api_key=${KEY}`
             )
