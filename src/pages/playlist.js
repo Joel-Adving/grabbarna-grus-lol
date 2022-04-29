@@ -6,6 +6,7 @@ import Image from 'next/image'
 export default function Playlist({ data }) {
     const [search, setSearch] = useState('')
     const [filtered, setFiltered] = useState('')
+    console.log(data)
 
     const videoNumber = data.items.map((item, i) => ({
         id: item.etag,
@@ -20,11 +21,11 @@ export default function Playlist({ data }) {
     }, [search])
 
     return (
-        <div className="bg-neutral-900 ">
-            <section className="container flex flex-col pb-12 bg-background-darkest">
+        <div className="bg-background-darkest ">
+            <section className="container flex flex-col pb-12 bg-black">
                 <input
                     placeholder="Search"
-                    className="flex-grow max-w-xl my-6 rounded text-text bg-background-darkest border-[1px] border-neutral-700 p-2 mx-12"
+                    className="flex-grow max-w-xl my-6 rounded placeholder:text-text-diffuse text-text-light bg-background-darkest border-[1px] border-neutral-700 p-2 mx-12"
                     type="text"
                     value={search}
                     onChange={e => setSearch(e.target.value)}
@@ -35,7 +36,8 @@ export default function Playlist({ data }) {
                         .reverse()
                         .map((item, i) => (
                             <a
-                                href={`https://www.youtube.com/watch?v=${item.snippet.resourceId.videoId}&list=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2`}
+                                // href={`https://www.youtube.com/watch?v=${item.snippet.resourceId.videoId}&list=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2`}
+                                href={`/video/${item.snippet.resourceId.videoId}`}
                                 key={item.id}
                                 className="flex items-center pr-12 cursor-pointer sm:pr-1 hover:bg-background hover:text-text-highlight"
                             >
