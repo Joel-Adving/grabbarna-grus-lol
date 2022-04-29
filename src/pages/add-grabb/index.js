@@ -1,4 +1,4 @@
-import { useAddGrabb } from './useAddGrabb'
+import { useAddGrabb } from '../../hooks/useAddGrabb'
 
 export default function AddSummoner() {
     const { message, loading, summonerName, handleSubmit, handleInputChange } = useAddGrabb()

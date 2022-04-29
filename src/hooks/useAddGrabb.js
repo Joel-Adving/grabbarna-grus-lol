@@ -1,7 +1,7 @@
 import { doc, setDoc, collection, query, where, getDocs } from 'firebase/firestore'
 import { useState } from 'react'
-import { summoner } from '../../util/riotFetch'
-import { db } from '../../firebase/config'
+import { summoner } from '../util/riotFetch'
+import { db } from '../firebase/config'
 
 export const useAddGrabb = () => {
     const [summonerName, setSummonerName] = useState('')
