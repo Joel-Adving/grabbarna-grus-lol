@@ -1,6 +1,6 @@
 export const API_PLAYLIST_URL = 'https://www.googleapis.com/youtube/v3/playlistItems'
 
-export const leagueRanks = {
+export const leagueTiers = {
     GRANDMASTER: 1,
     MASTER: 2,
     DIAMOND: 3,
@@ -10,6 +10,14 @@ export const leagueRanks = {
     BRONZE: 7,
     IRON: 8,
     UNRANKED: 9,
+}
+
+export const leagueRanks = {
+    I: 1,
+    II: 2,
+    III: 3,
+    IV: 4,
+    V: 5,
 }
 
 export const rankColors = {

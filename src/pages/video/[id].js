@@ -5,8 +5,12 @@ export default function Video() {
     const router = useRouter()
 
     return (
-        <section className="container py-10">
-            <YoutubeEmbed id={router.query.id} />
-        </section>
+        <div className="min-h-screen bg-neutral-900">
+            <div className="bg-black">
+                <section className="container pt-10 ">
+                    <YoutubeEmbed id={router.query.id} />
+                </section>
+            </div>
+        </div>
     )
 }
