@@ -107,11 +107,16 @@ export default function GrusGrabb({ data }) {
 }
 
 export async function getStaticPaths() {
-    const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
+    // api request rate limitation...
+    // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
+
+    const paths = [{ params: { name: '' } }]
 
     return {
         paths,
-        fallback: true,
+        // api request rate limitation...
+        // fallback: true,
+        fallback: 'blocking',
     }
 }
 
@@ -129,6 +134,6 @@ export async function getStaticProps(context) {
                 summoners: resSummoners,
             },
         },
-        revalidate: 3,
+        revalidate: 5,
     }
 }
