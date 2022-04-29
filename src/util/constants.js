@@ -43,7 +43,7 @@ export const summonerSpells = {
     55: 'Summoner_UltBookSmitePlaceholder',
 }
 
-export const grusGrabb = [
+export const grusGrabbar = [
     'Reeduns',
     'Bumbiiz',
     'DoomGladiator',

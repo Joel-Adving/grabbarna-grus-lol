@@ -31,6 +31,7 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                                             height={56}
                                             width={56}
                                             className="rounded-full"
+                                            quality={50}
                                         />
                                     </div>
 
@@ -57,6 +58,7 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                                                 alt="Summoner spell"
                                                 height={20}
                                                 width={20}
+                                                quality={50}
                                             />
                                         </div>
                                         <div className="h-5 border-border border-[1px] overflow-hidden">
@@ -67,6 +69,7 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                                                 alt="Summoner spell"
                                                 height={20}
                                                 width={20}
+                                                quality={50}
                                             />
                                         </div>
                                     </div>
@@ -95,6 +98,7 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
                                                             width={32}
                                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/item/${item}.png`}
                                                             alt="Item splash art"
+                                                            quality={50}
                                                         />
                                                     </div>
                                                 )

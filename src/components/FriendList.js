@@ -14,6 +14,7 @@ export default function FriendList({ data }) {
                                 width={32}
                                 height={32}
                                 className="rounded-full"
+                                quality={50}
                             />
                         </div>
                         <a className="flex-grow py-3 text-text-light font-BeaufortBold">{el.name}</a>

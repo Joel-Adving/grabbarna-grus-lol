@@ -62,12 +62,13 @@ export default function Playlist({ data }) {
     )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const query = '?part=snippet&playlistId=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2&maxResults=50'
     const data = await getJSON(`${API_PLAYLIST_URL}${query}&key=${process.env.YOUTUBE_API_KEY}`)
     return {
         props: {
             data,
         },
+        revalidate: 3,
     }
 }

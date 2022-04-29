@@ -1,5 +1,5 @@
 import RankList from '../components/RankList'
-import { grusGrabb } from '../util/constants'
+import { grusGrabbar } from '../util/constants'
 import { sleep } from '../util/helpers'
 import { ranks, summoners } from '../util/riotFetch'
 
@@ -31,8 +31,8 @@ export default function Home({ data }) {
     )
 }
 
-export async function getServersideprops() {
-    const resSummoners = await summoners(grusGrabb)
+export async function getStaticProps(context) {
+    const resSummoners = await summoners(grusGrabbar)
     // sleep because of API rate limitation
     await sleep(1100)
     const resRanks = await ranks(resSummoners.map(summoner => summoner.id))
@@ -41,5 +41,6 @@ export async function getServersideprops() {
         props: {
             data: { resSummoners, resRanks },
         },
+        revalidate: 3,
     }
 }
