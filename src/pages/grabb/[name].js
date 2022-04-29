@@ -1,24 +1,11 @@
 import MatchHistoryList from '../../components/MatchHistoryList'
 import FriendList from '../../components/FriendList'
-import { getJSON, percentages, sleep } from '../../util/helpers'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import { percentages } from '../../util/helpers'
 import Image from 'next/image'
-import { grusGrabbar } from '../../util/constants'
-import { matches, matchHistory, summoner, summoners } from '../../util/riotFetch'
+import { matches, matchHistory, summoner } from '../../util/riotFetch'
 
 export default function GrusGrabb({ data }) {
-    const { summoner, summoners, matchHistory } = data
-    console.log(data)
-    // const router = useRouter()
-    // const { name } = router.query
-    // const [data, setData] = useState(null)
-
-    // useEffect(() => {
-    //     if (!name) return
-    //     getData()
-    // }, [name])
+    const { summoner, matchHistory } = data
 
     const playerStats = matchHistory
         .filter(match => match?.info !== undefined || match.info !== null)
@@ -26,7 +13,6 @@ export default function GrusGrabb({ data }) {
 
     const wins = playerStats.filter(el => el?.win)
     const champions = playerStats.map(player => player?.championName)
-
     const recentChamps = Object.assign(
         ...Object.entries(percentages(champions))
             .sort(({ 1: a }, { 1: b }) => b - a)
@@ -98,7 +84,7 @@ export default function GrusGrabb({ data }) {
                 <div className="flex ">
                     <MatchHistoryList matchHistory={matchHistory} summoner={summoner} />
                     <div className="hidden mt-6 md:block">
-                        <FriendList data={summoners} />
+                        <FriendList />
                     </div>
                 </div>
             </div>
@@ -124,14 +110,12 @@ export async function getStaticProps(context) {
     const { name } = context.params
     const resSummoner = await summoner(name)
     const resMatches = await matches(await matchHistory(resSummoner.puuid))
-    const resSummoners = await summoners(grusGrabbar)
 
     return {
         props: {
             data: {
                 summoner: resSummoner,
                 matchHistory: resMatches,
-                summoners: resSummoners,
             },
         },
         revalidate: 5,

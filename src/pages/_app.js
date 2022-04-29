@@ -6,8 +6,9 @@ import { useRouter } from 'next/router'
 import Header from '../components/Header'
 import ProtectedRoute from '../util/ProtectedRoute'
 
+const authRequired = ['/add-grabb']
+
 function MyApp({ Component, pageProps }) {
-    const authRequired = ['/playlist']
     const router = useRouter()
 
     return (
