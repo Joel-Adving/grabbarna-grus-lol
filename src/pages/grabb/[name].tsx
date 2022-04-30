@@ -36,10 +36,10 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
                                     <Image
                                         loader={imageLoader}
                                         src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${summoner.profileIconId}.png`}
-                                        alt="thumbnail"
                                         width={56}
                                         height={56}
                                         className="rounded-full"
+                                        alt="Summoners profile icon"
                                     />
                                 </div>
                                 <h1 className="text-4xl font-frizQuad text-gold-light ">{summoner.name}</h1>
@@ -70,6 +70,7 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${key}.png`}
                                             height={64}
                                             width={64}
+                                            alt="Recently played champion"
                                         />
                                     </div>
                                     <p className="mt-3 text-center font-BeaufortBold text-gold-light">{value}%</p>
