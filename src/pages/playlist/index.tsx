@@ -84,6 +84,6 @@ export const getStaticProps: GetStaticProps = async () => {
             data,
             videoNumbers,
         },
-        revalidate: 3,
+        revalidate: 5,
     }
 }
