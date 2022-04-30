@@ -112,8 +112,7 @@ export const getStaticPaths: GetStaticPaths = () => {
     }
 }
 
-export const getStaticProps: GetStaticProps = async context => {
-    // @ts-ignore
+export const getStaticProps = async (context: any) => {
     const { name } = context.params
     const resSummoner: Summoner = await summoner(name)
     const resMatches = await matches(await matchHistory(resSummoner.puuid))
