@@ -1,6 +1,6 @@
 export const API_PLAYLIST_URL = 'https://www.googleapis.com/youtube/v3/playlistItems'
 
-export const leagueTiers = {
+export const leagueTiers: any = {
     GRANDMASTER: 1,
     MASTER: 2,
     DIAMOND: 3,
@@ -12,7 +12,7 @@ export const leagueTiers = {
     UNRANKED: 9,
 }
 
-export const leagueRanks = {
+export const leagueRanks: any = {
     I: 1,
     II: 2,
     III: 3,
@@ -20,7 +20,7 @@ export const leagueRanks = {
     V: 5,
 }
 
-export const rankColors = {
+export const rankColors: any = {
     GRANDMASTER: 'defeat',
     MASTER: 'experience',
     DIAMOND: 'indigo-300',
@@ -32,7 +32,7 @@ export const rankColors = {
     UNRANKED: 'text',
 }
 
-export const summonerSpells = {
+export const summonerSpells: any = {
     1: 'SummonerBoost',
     3: 'SummonerExhaust',
     4: 'SummonerFlash',
@@ -51,7 +51,7 @@ export const summonerSpells = {
     55: 'Summoner_UltBookSmitePlaceholder',
 }
 
-export const grusGrabbar = [
+export const grusGrabbar: Array<string> = [
     'Reeduns',
     'Bumbiiz',
     'DoomGladiator',

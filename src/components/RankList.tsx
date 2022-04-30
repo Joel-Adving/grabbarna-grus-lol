@@ -1,11 +1,12 @@
-import { leagueRanks, leagueTiers, rankColors } from '../util/constants'
+import { leagueRanks, leagueTiers, rankColors } from '../util/config'
 import Image from 'next/image'
+import React from 'react'
 
-export default function RankList({ data }) {
+export const RankList: React.FC<{ data: Array<any> }> = ({ data }) => {
     const players = data.map(player => ({
         ...player,
         formattedRanks: player.ranks.length
-            ? player.ranks.find(el => el.queueType === 'RANKED_FLEX_SR')
+            ? player.ranks.find((el: any) => el.queueType === 'RANKED_FLEX_SR')
             : { queueType: 'RANKED_FLEX_SR', tier: 'UNRANKED' },
     }))
 
@@ -64,3 +65,5 @@ export default function RankList({ data }) {
         </section>
     )
 }
+
+export default RankList

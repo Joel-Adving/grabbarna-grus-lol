@@ -1,11 +1,14 @@
 import { createContext, useEffect, useState } from 'react'
 import { onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth'
 import { auth } from '../firebase/config'
+import { User } from '../util/types'
 
 export const AuthContext = createContext({})
 
-export const AuthContextProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
+export const AuthContextProvider: React.FC<{
+    children: React.ReactNode
+}> = ({ children }) => {
+    const [user, setUser] = useState<User | null>(null)
     const [loading, setLoading] = useState(true)
     const [isPending, setisPending] = useState(false)
     const [error, setError] = useState(null)
@@ -16,9 +19,10 @@ export const AuthContextProvider = ({ children }) => {
                 setUser({
                     uid: user.uid,
                     email: user.email,
+                    // @ts-ignore
                     photoURL: getAuth().currentUser.photoURL,
+                    // @ts-ignore
                     name: getAuth().currentUser.displayName,
-                    // displayName: user.displayName,
                 })
             } else {
                 setUser(null)
@@ -35,7 +39,7 @@ export const AuthContextProvider = ({ children }) => {
             setisPending(true)
             setError(null)
             await signInWithPopup(auth, google_provider)
-        } catch (err) {
+        } catch (err: any) {
             setError(err.message)
         } finally {
             setisPending(false)
@@ -46,7 +50,7 @@ export const AuthContextProvider = ({ children }) => {
         try {
             setUser(null)
             await signOut(auth)
-        } catch (err) {
+        } catch (err: any) {
             setError(err.message)
         }
     }

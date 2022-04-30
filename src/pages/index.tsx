@@ -1,14 +1,16 @@
+import { GetStaticProps, NextPage } from 'next'
 import RankList from '../components/RankList'
 import { getCollection } from '../firebase/getCollection'
 import { ranks } from '../util/riotFetch'
+import { Summoner, SummonerAndRank, summonerRankInfo, SummonersInfo } from '../util/types'
 
-export default function Home({ data }) {
-    const { resSummoners, resRanks } = data
-    const ranksArr = resSummoners.map(summoner => ({
+const Home: NextPage<{ data: SummonersInfo }> = ({ data }) => {
+    const { summoners, ranks: resRanks } = data
+
+    const ranksArr = summoners.map((summoner: Summoner) => ({
         ...summoner,
-        ranks: resRanks.flat().filter(el => el.summonerId === summoner.id),
+        ranks: resRanks.flat().filter((rank: summonerRankInfo) => rank.summonerId === summoner.id),
     }))
-    console.log(ranksArr)
 
     return (
         <>
@@ -31,14 +33,16 @@ export default function Home({ data }) {
     )
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async () => {
     const resSummoners = await getCollection('summoners')
     const resRanks = await ranks(resSummoners.map(summoner => summoner.id))
 
     return {
         props: {
-            data: { resSummoners, resRanks },
+            data: { summoners: resSummoners, ranks: resRanks },
         },
         revalidate: 3,
     }
 }
+
+export default Home

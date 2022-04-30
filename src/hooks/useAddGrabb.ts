@@ -1,14 +1,14 @@
 import { doc, setDoc, collection, query, where, getDocs } from 'firebase/firestore'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { summoner } from '../util/riotFetch'
 import { db } from '../firebase/config'
 
 export const useAddGrabb = () => {
     const [summonerName, setSummonerName] = useState('')
-    const [message, setMessage] = useState(null)
+    const [message, setMessage] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
 
-    const handleSubmit = async e => {
+    const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault()
         setMessage(null)
         setLoading(true)
@@ -30,7 +30,7 @@ export const useAddGrabb = () => {
         setLoading(false)
     }
 
-    const handleInputChange = e => setSummonerName(e.target.value)
+    const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => setSummonerName(e.currentTarget.value)
 
     return { message, loading, summonerName, handleSubmit, handleInputChange }
 }

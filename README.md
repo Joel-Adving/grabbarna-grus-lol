@@ -1,9 +1,14 @@
-## This is a [Next.js](https://nextjs.org/) application 
+# Grabbarna Grus Lol
 
-# Getting Started
+Grabbarna Grus Lol is a web app for our community of league of legends players to track each others ranks, stats and matches
 
-First, add the Riot API key to .env.local
+# Stack:
 
+### [Next.js](https://nextjs.org/), Typescript, firebase, Riot API and TailwindCss
+
+## Getting Started
+
+First, add all the enviroment variables, then
 run the development server:
 
 ```bash

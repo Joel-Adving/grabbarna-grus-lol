@@ -1,4 +1,4 @@
-export async function getJSON(url) {
+export async function getJSON(url: string) {
     try {
         const res = await fetch(url)
         const data = await res.json()
@@ -8,12 +8,12 @@ export async function getJSON(url) {
     }
 }
 
-export const sleep = milSecons =>
+export const sleep = (milSecons: number) =>
     new Promise(resolve => {
         setTimeout(resolve, milSecons)
     })
 
-export const percentages = arr =>
+export const percentages = (arr: Array<any>) =>
     arr.reduce((el, i) => ({ ...el, [i]: Math.trunc((el[i] || 0) + 100 / arr.length) }), {})
 
-export const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1)
+export const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)

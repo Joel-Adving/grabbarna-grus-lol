@@ -1,6 +1,7 @@
+import { NextPage } from 'next'
 import { useAddGrabb } from '../../hooks/useAddGrabb'
 
-export default function AddSummoner() {
+export const AddSummoner: NextPage = () => {
     const { message, loading, summonerName, handleSubmit, handleInputChange } = useAddGrabb()
 
     return (
@@ -22,3 +23,5 @@ export default function AddSummoner() {
         </section>
     )
 }
+
+export default AddSummoner

@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import { useRouter } from 'next/router'
 
-export default function ProtectedRoute({ children }) {
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    // @ts-ignore
     const { user } = useAuth()
     const router = useRouter()
 
@@ -12,3 +13,5 @@ export default function ProtectedRoute({ children }) {
 
     return <div>{user && children}</div>
 }
+
+export default ProtectedRoute

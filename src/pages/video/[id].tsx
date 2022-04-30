@@ -8,7 +8,7 @@ export default function Video() {
         <div className="min-h-screen bg-neutral-900">
             <div className="bg-black">
                 <section className="container pt-10 ">
-                    <YoutubeEmbed id={router.query.id} />
+                    <YoutubeEmbed id={router.query.id?.toString() ?? ''} />
                 </section>
             </div>
         </div>
