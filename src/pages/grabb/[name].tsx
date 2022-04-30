@@ -101,14 +101,16 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
     )
 }
 
-export const getStaticPaths: GetStaticPaths = () => {
+export default GrusGrabb
+
+export const getStaticPaths = () => {
     // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
-    const paths = [{ params: { name: 'Pappenos' } }]
+    const paths = [{ params: { name: 'Reeduns' } }]
 
     return {
         paths,
-        fallback: 'blocking',
         // fallback: true,
+        fallback: 'blocking',
     }
 }
 
@@ -125,5 +127,3 @@ export const getStaticProps = async (context: any) => {
         revalidate: 5,
     }
 }
-
-export default GrusGrabb
