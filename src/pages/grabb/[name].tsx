@@ -3,9 +3,8 @@ import FriendList from '../../components/FriendList'
 import { percentages } from '../../util/helpers'
 import Image from 'next/image'
 import { matches, matchHistory, summoner } from '../../util/riotFetch'
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { LeagueMatch, PlayerStats, Summoner } from '../../util/types'
-import imageLoader from '../../util/imageLoader'
 
 export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<LeagueMatch> }> = ({
     summoner,
@@ -36,7 +35,6 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
                             <div className="flex items-center justify-center flex-grow max-w-2xl py-3 border-b-2 border-border bg-slate-4000 sm:justify-start">
                                 <div className="w-14 h-14 mr-3 border-[3px] rounded-full border-gold p-[2px] overflow-hidden">
                                     <Image
-                                        loader={imageLoader}
                                         src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${summoner.profileIconId}.png`}
                                         width={56}
                                         height={56}
@@ -68,7 +66,6 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
                                 <div key={i}>
                                     <div className="w-16 h-16 border-[1px] border-gray-600 overflow-hidden">
                                         <Image
-                                            loader={imageLoader}
                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${key}.png`}
                                             height={64}
                                             width={64}
@@ -103,9 +100,9 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
 
 export default GrusGrabb
 
-export const getStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = () => {
     // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
-    const paths = [{ params: { name: 'Reeduns' } }]
+    const paths = [{ params: { name: 'Pappenos' } }]
 
     return {
         paths,
