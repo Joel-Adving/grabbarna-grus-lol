@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useAuth } from '../hooks/useAuth'
+import imageLoader from '../util/imageLoader'
 
 export default function Header() {
     // @ts-ignore
@@ -32,6 +33,7 @@ export default function Header() {
                         </button>
                         <div className="w-12 h-12 mx-3 border-[2.5px] rounded-full border-victory">
                             <Image
+                                loader={imageLoader}
                                 className="rounded-full "
                                 src={user.photoURL}
                                 alt="User profile image"
