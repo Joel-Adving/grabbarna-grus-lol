@@ -13,7 +13,7 @@ export default function FriendList() {
                     .slice()
                     .sort((a, b) => a.name.localeCompare(b.name))
                     .map((summoner: Summoner) => (
-                        <Link href={`/grabb/${summoner.name}`} key={summoner.puuid}>
+                        <Link passHref href={`/grabb/${summoner.name}`} key={summoner.puuid}>
                             <div className="flex items-center pl-2 cursor-pointer lg:pr-14 md:pr-2 hover:bg-slate-800 hover:text-text-highlight">
                                 <div className="mr-2 border-2 rounded-full w-8 h-8  border-gold p-[2px] overflow-hidden">
                                     <Image

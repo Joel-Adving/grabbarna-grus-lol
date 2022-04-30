@@ -19,7 +19,7 @@ const Playlist: NextPage<{ data: Playlist; videoNumbers: Array<VideoNumber> }> =
         setFiltered(
             data.items.filter(item => item.snippet.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
         )
-    }, [search])
+    }, [search, data.items])
 
     return (
         <div className="bg-background-darkest ">

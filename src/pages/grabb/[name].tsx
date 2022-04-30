@@ -34,7 +34,7 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
                                 <div className="w-14 h-14 mr-3 border-[3px] rounded-full border-gold p-[2px] overflow-hidden">
                                     <Image
                                         src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${summoner.profileIconId}.png`}
-                                        alt="Summoner Icon"
+                                        alt="User/Summoner's profile Icon"
                                         width={56}
                                         height={56}
                                         className="rounded-full"
