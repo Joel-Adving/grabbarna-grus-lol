@@ -1,6 +1,7 @@
 import { summonerSpells } from '../util/config'
 import Image from 'next/image'
 import { LeagueMatch, Summoner } from '../util/types'
+import imageLoader from '../util/imageLoader'
 
 export const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: Summoner }> = ({
     matchHistory,
@@ -30,6 +31,7 @@ export const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summ
                                 <div className="relative">
                                     <div className="w-14 h-14 border-border rounded-full border-[2.5px] overflow-hidden">
                                         <Image
+                                            loader={imageLoader}
                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${playerStats.championName}.png`}
                                             alt="Champion splash art"
                                             height={56}
@@ -56,6 +58,7 @@ export const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summ
                                     <div className="flex mt-2">
                                         <div className="h-5 border-border border-[1px] overflow-hidden">
                                             <Image
+                                                loader={imageLoader}
                                                 src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/spell/${
                                                     summonerSpells[playerStats.summoner1Id]
                                                 }.png`}
@@ -67,6 +70,7 @@ export const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summ
                                         </div>
                                         <div className="h-5 border-border border-[1px] overflow-hidden">
                                             <Image
+                                                loader={imageLoader}
                                                 src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/spell/${
                                                     summonerSpells[playerStats.summoner2Id]
                                                 }.png`}
@@ -98,6 +102,7 @@ export const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summ
                                                         className="h-8 w-8 border-border border-[1px] overflow-hidden"
                                                     >
                                                         <Image
+                                                            loader={imageLoader}
                                                             height={32}
                                                             width={32}
                                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/item/${item}.png`}

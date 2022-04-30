@@ -4,6 +4,7 @@ import { getJSON } from '../../util/helpers'
 import Image from 'next/image'
 import { Playlist, PlaylistItem } from '../../util/types'
 import { GetStaticProps, NextPage } from 'next'
+import imageLoader from '../../util/imageLoader'
 
 interface VideoNumber {
     id: string
@@ -52,6 +53,7 @@ const Playlist: NextPage<{ data: Playlist; videoNumbers: Array<VideoNumber> }> =
                                     <div className="flex items-center">
                                         <div className="">
                                             <Image
+                                                loader={imageLoader}
                                                 src={item.snippet.thumbnails.default.url}
                                                 width={120}
                                                 height={90}

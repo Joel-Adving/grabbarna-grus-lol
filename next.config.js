@@ -3,6 +3,8 @@ const nextConfig = {
     reactStrictMode: true,
     images: {
         domains: ['i.ytimg.com', 'ddragon.leagueoflegends.com', 'lh3.googleusercontent.com'],
+        loader: 'custom',
+        path: '/',
     },
 }
 
