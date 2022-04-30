@@ -36,6 +36,7 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
                             <div className="flex items-center justify-center flex-grow max-w-2xl py-3 border-b-2 border-border bg-slate-4000 sm:justify-start">
                                 <div className="w-14 h-14 mr-3 border-[3px] rounded-full border-gold p-[2px] overflow-hidden">
                                     <Image
+                                        loader={imageLoader}
                                         src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${summoner.profileIconId}.png`}
                                         width={56}
                                         height={56}
@@ -67,6 +68,7 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
                                 <div key={i}>
                                     <div className="w-16 h-16 border-[1px] border-gray-600 overflow-hidden">
                                         <Image
+                                            loader={imageLoader}
                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${key}.png`}
                                             height={64}
                                             width={64}
@@ -101,21 +103,21 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
 
 export default GrusGrabb
 
-// export const getStaticPaths = () => {
-//     // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
-//     const paths = [{ params: { name: 'Reeduns' } }]
+export const getStaticPaths = () => {
+    // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
+    const paths = [{ params: { name: 'Reeduns' } }]
 
-//     return {
-//         paths,
-//         // fallback: true,
-//         fallback: 'blocking',
-//     }
-// }
+    return {
+        paths,
+        // fallback: true,
+        fallback: 'blocking',
+    }
+}
 
-export const getServerSideProps: GetServerSideProps = async context => {
-    const { name } = context.query
+export const getStaticProps: GetStaticProps = async context => {
     // @ts-ignore
-    const resSummoner: Summoner = await summoner(name)
+    const { name } = context.params
+    const resSummoner = await summoner(name)
     const resMatches = await matches(await matchHistory(resSummoner.puuid))
 
     return {
@@ -123,6 +125,6 @@ export const getServerSideProps: GetServerSideProps = async context => {
             summoner: resSummoner,
             matchHistory: resMatches,
         },
-        // revalidate: 5,
+        revalidate: 5,
     }
 }

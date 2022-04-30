@@ -39,6 +39,7 @@ const RankList: React.FC<{ data: Array<any> }> = ({ data }) => {
                             <p className="w-3 mr-3 sm:mr-16">{i + 1}</p>
                             <div className="mr-2 border-2 rounded-full w-6 h-6  border-gold p-[1px] overflow-hidden">
                                 <Image
+                                    loader={imageLoader}
                                     src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${player.profileIconId}.png`}
                                     alt="Summoner Icon"
                                     width={24}
