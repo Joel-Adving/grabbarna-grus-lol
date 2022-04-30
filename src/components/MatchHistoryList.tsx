@@ -31,7 +31,6 @@ const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: S
                                 <div className="relative">
                                     <div className="w-14 h-14 border-border rounded-full border-[2.5px] overflow-hidden">
                                         <Image
-                                            loader={imageLoader}
                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${playerStats.championName}.png`}
                                             alt="Champion splash art"
                                             height={56}
@@ -58,7 +57,6 @@ const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: S
                                     <div className="flex mt-2">
                                         <div className="h-5 border-border border-[1px] overflow-hidden">
                                             <Image
-                                                loader={imageLoader}
                                                 src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/spell/${
                                                     summonerSpells[playerStats.summoner1Id]
                                                 }.png`}
@@ -70,7 +68,6 @@ const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: S
                                         </div>
                                         <div className="h-5 border-border border-[1px] overflow-hidden">
                                             <Image
-                                                loader={imageLoader}
                                                 src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/spell/${
                                                     summonerSpells[playerStats.summoner2Id]
                                                 }.png`}
@@ -102,7 +99,6 @@ const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: S
                                                         className="h-8 w-8 border-border border-[1px] overflow-hidden"
                                                     >
                                                         <Image
-                                                            loader={imageLoader}
                                                             height={32}
                                                             width={32}
                                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/item/${item}.png`}
