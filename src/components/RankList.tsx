@@ -3,7 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import imageLoader from '../util/imageLoader'
 
-export const RankList: React.FC<{ data: Array<any> }> = ({ data }) => {
+const RankList: React.FC<{ data: Array<any> }> = ({ data }) => {
     const players = data.map(player => ({
         ...player,
         formattedRanks: player.ranks.length

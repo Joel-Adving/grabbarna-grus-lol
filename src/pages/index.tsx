@@ -33,6 +33,8 @@ const Home: NextPage<{ data: SummonersInfo }> = ({ data }) => {
     )
 }
 
+export default Home
+
 export const getStaticProps: GetStaticProps = async () => {
     const resSummoners = await getCollection('summoners')
     const resRanks = await ranks(resSummoners.map(summoner => summoner.id))
@@ -44,5 +46,3 @@ export const getStaticProps: GetStaticProps = async () => {
         revalidate: 3,
     }
 }
-
-export default Home

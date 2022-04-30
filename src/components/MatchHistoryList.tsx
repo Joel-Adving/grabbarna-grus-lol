@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { LeagueMatch, Summoner } from '../util/types'
 import imageLoader from '../util/imageLoader'
 
-export const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: Summoner }> = ({
+const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: Summoner }> = ({
     matchHistory,
     summoner,
 }) => {
