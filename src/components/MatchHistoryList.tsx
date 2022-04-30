@@ -1,7 +1,6 @@
 import { summonerSpells } from '../util/config'
 import Image from 'next/image'
 import { LeagueMatch, Summoner } from '../util/types'
-import imageLoader from '../util/imageLoader'
 
 const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: Summoner }> = ({
     matchHistory,
@@ -99,7 +98,6 @@ const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: S
                                                         className="h-8 w-8 border-border border-[1px] overflow-hidden"
                                                     >
                                                         <Image
-                                                            loader={imageLoader}
                                                             height={32}
                                                             width={32}
                                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/item/${item}.png`}
