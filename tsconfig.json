@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "src/components/FriendList.tsx",
+        "src/components/Header.tsx",
+        "src/util/ProtectedRoute.tsx",
+        "src/hooks/useRealTimeCollection.ts",
+        "src/pages/playlist/index.tsx",
+        "src/util/config.js",
+        "src/firebase/config.js"
+    ],
+    "exclude": ["node_modules"]
+}

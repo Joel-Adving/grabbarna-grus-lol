@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useAuth } from '../hooks/useAuth'
 
 export default function Header() {
+    // @ts-ignore
     const { user, signin, logout } = useAuth()
 
     return (

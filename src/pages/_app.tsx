@@ -1,14 +1,14 @@
 import Head from 'next/head'
-import React from 'react'
-import { AuthContextProvider } from '../context/AuthContext'
-import '../styles/globals.css'
-import { useRouter } from 'next/router'
 import Header from '../components/Header'
 import ProtectedRoute from '../util/ProtectedRoute'
+import { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+import { AuthContextProvider } from '../context/AuthContext'
+import '../styles/globals.css'
 
 const authRequired = ['/add-grabb', '/playlist']
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
     const router = useRouter()
 
     return (

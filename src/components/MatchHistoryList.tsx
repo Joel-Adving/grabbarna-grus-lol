@@ -1,12 +1,16 @@
-import { summonerSpells } from '../util/constants'
+import { summonerSpells } from '../util/config'
 import Image from 'next/image'
+import { LeagueMatch, Summoner } from '../util/types'
 
-export default function MatchHistoryList({ matchHistory, summoner }) {
+export const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: Summoner }> = ({
+    matchHistory,
+    summoner,
+}) => {
     return (
         <section className="flex flex-col flex-grow py-4 pb-20">
             {matchHistory
                 .filter(match => match.info)
-                .map((match, i) => {
+                .map(match => {
                     const { info } = match
                     const playerStats = info.participants.find(el => el.summonerId === summoner.id)
                     const win = playerStats.win
@@ -138,3 +142,5 @@ export default function MatchHistoryList({ matchHistory, summoner }) {
         </section>
     )
 }
+
+export default MatchHistoryList

@@ -3,19 +3,23 @@ import FriendList from '../../components/FriendList'
 import { percentages } from '../../util/helpers'
 import Image from 'next/image'
 import { matches, matchHistory, summoner } from '../../util/riotFetch'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { LeagueMatch, PlayerStats, Summoner } from '../../util/types'
 
-export default function GrusGrabb({ data }) {
-    const { summoner, matchHistory } = data
-
+export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<LeagueMatch> }> = ({
+    summoner,
+    matchHistory,
+}) => {
     const playerStats = matchHistory
-        .filter(match => match?.info !== undefined || match.info !== null)
-        .map(match => match?.info?.participants.find(player => player.summonerId === summoner.id))
+        .filter((match: LeagueMatch) => match.info)
+        .map((match: LeagueMatch) => match.info.participants.find((player: any) => player.summonerId === summoner.id))
 
-    const wins = playerStats.filter(el => el?.win)
-    const champions = playerStats.map(player => player?.championName)
+    const wins = playerStats.filter((player: PlayerStats) => player?.win)
+    const champions = playerStats.map((player: PlayerStats) => player?.championName)
     const recentChamps = Object.assign(
+        // @ts-ignore
         ...Object.entries(percentages(champions))
-            .sort(({ 1: a }, { 1: b }) => b - a)
+            .sort(({ 1: a }: any, { 1: b }: any) => b - a)
             .slice(0, 3)
             .map(([k, v]) => ({ [k]: v }))
     )
@@ -56,7 +60,7 @@ export default function GrusGrabb({ data }) {
                     <div className="flex flex-col items-center mt-6 mb-3 text-sm">
                         <h3 className="mb-2 font-BeaufortBold text-text-highlight">RECENTLY PLAYED CHAMPIONS</h3>
                         <div className="flex gap-4 ">
-                            {Object.entries(recentChamps).map(([key, value], i) => (
+                            {Object.entries(recentChamps).map(([key, value]: any, i) => (
                                 <div key={i}>
                                     <div className="w-16 h-16 border-[1px] border-gray-600 overflow-hidden">
                                         <Image
@@ -70,7 +74,6 @@ export default function GrusGrabb({ data }) {
                             ))}
                         </div>
                     </div>
-
                     <div className="flex justify-center mt-6 mb-3 font-BeaufortBold md:hidden">
                         <h2 className=" text-text-highlight">RECENT GAMES (LAST 20 PLAYED)</h2>
 
@@ -92,32 +95,30 @@ export default function GrusGrabb({ data }) {
     )
 }
 
-export async function getStaticPaths() {
-    // api request rate limitation...
+export const getStaticPaths: GetStaticPaths = () => {
     // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
-
     const paths = [{ params: { name: 'Reeduns' } }]
 
     return {
         paths,
-        // api request rate limitation...
-        // fallback: true,
         fallback: 'blocking',
+        // fallback: true,
     }
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async context => {
+    // @ts-ignore
     const { name } = context.params
-    const resSummoner = await summoner(name)
+    const resSummoner: Summoner = await summoner(name)
     const resMatches = await matches(await matchHistory(resSummoner.puuid))
 
     return {
         props: {
-            data: {
-                summoner: resSummoner,
-                matchHistory: resMatches,
-            },
+            summoner: resSummoner,
+            matchHistory: resMatches,
         },
         revalidate: 5,
     }
 }
+
+export default GrusGrabb

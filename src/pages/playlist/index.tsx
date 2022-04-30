@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { API_PLAYLIST_URL } from '../../util/constants'
+import { API_PLAYLIST_URL } from '../../util/config'
 import { getJSON } from '../../util/helpers'
 import Image from 'next/image'
+import { Playlist, PlaylistItem } from '../../util/types'
+import { GetStaticProps, NextPage } from 'next'
 
-export default function Playlist({ data }) {
+interface VideoNumber {
+    id: string
+    videoNumber: number
+}
+
+const Playlist: NextPage<{ data: Playlist; videoNumbers: Array<VideoNumber> }> = ({ data, videoNumbers }) => {
     const [search, setSearch] = useState('')
-    const [filtered, setFiltered] = useState('')
-    console.log(data)
-
-    const videoNumber = data.items.map((item, i) => ({
-        id: item.etag,
-        videoNumber: i + 1,
-    }))
+    const [filtered, setFiltered] = useState<Array<PlaylistItem>>([])
 
     useEffect(() => {
         if (!search) return setFiltered(data.items)
@@ -41,7 +42,12 @@ export default function Playlist({ data }) {
                                 key={item.id}
                                 className="flex items-center pr-12 cursor-pointer sm:pr-1 hover:bg-background hover:text-text-highlight"
                             >
-                                <p className="mx-4 ">{videoNumber.find(video => video.id === item.etag).videoNumber}</p>
+                                <p className="mx-4 ">
+                                    {
+                                        // @ts-ignore
+                                        videoNumbers.find(video => video.id === item.etag).videoNumber
+                                    }
+                                </p>
                                 <div className="flex border-b-[1px] border-neutral-700 flex-grow">
                                     <div className="flex items-center">
                                         <div className="">
@@ -62,13 +68,22 @@ export default function Playlist({ data }) {
     )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
     const query = '?part=snippet&playlistId=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2&maxResults=50'
     const data = await getJSON(`${API_PLAYLIST_URL}${query}&key=${process.env.YOUTUBE_API_KEY}`)
+
+    const videoNumbers: Array<VideoNumber> = data?.items.map((item: PlaylistItem, i: number) => ({
+        id: item.etag,
+        videoNumber: i + 1,
+    }))
+
     return {
         props: {
             data,
+            videoNumbers,
         },
         revalidate: 3,
     }
 }
+
+export default Playlist
