@@ -12,8 +12,10 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
     matchHistory,
 }) => {
     const playerStats = matchHistory
-        .filter((match: LeagueMatch) => match.info)
-        .map((match: LeagueMatch) => match.info.participants.find((player: any) => player.summonerId === summoner.id))
+        .filter((match: LeagueMatch) => match?.info !== undefined || match?.info == null)
+        .map((match: LeagueMatch) =>
+            match?.info?.participants.find((player: any) => player?.summonerId === summoner.id)
+        )
 
     const wins = playerStats.filter((player: PlayerStats) => player?.win)
     const champions = playerStats.map((player: PlayerStats) => player?.championName)
@@ -101,7 +103,7 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
 
 export const getStaticPaths: GetStaticPaths = () => {
     // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
-    const paths = [{ params: { name: 'Reeduns' } }]
+    const paths = [{ params: { name: 'Pappenos' } }]
 
     return {
         paths,

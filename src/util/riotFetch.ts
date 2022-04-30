@@ -20,7 +20,12 @@ const match = async (matchId: string, region: string = 'europe') => {
 }
 
 const matches = async (matchIds: Array<string>) => {
-    const res = await Promise.all(matchIds.map(id => match(id)))
+    const res = await Promise.all(
+        matchIds.map(async id => {
+            await sleep(60)
+            return match(id)
+        })
+    )
     return res
 }
 
