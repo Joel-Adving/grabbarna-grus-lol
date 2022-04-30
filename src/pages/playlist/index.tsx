@@ -53,6 +53,7 @@ const Playlist: NextPage<{ data: Playlist; videoNumbers: Array<VideoNumber> }> =
                                     <div className="flex items-center">
                                         <div className="">
                                             <Image
+                                                loader={imageLoader}
                                                 src={item.snippet.thumbnails.default.url}
                                                 width={120}
                                                 height={90}

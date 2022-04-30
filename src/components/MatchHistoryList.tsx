@@ -99,6 +99,7 @@ const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: S
                                                         className="h-8 w-8 border-border border-[1px] overflow-hidden"
                                                     >
                                                         <Image
+                                                            loader={imageLoader}
                                                             height={32}
                                                             width={32}
                                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/item/${item}.png`}
