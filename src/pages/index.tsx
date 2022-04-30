@@ -1,4 +1,4 @@
-import { GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import RankList from '../components/RankList'
 import { getCollection } from '../firebase/getCollection'
 import { ranks } from '../util/riotFetch'
@@ -35,7 +35,7 @@ const Home: NextPage<{ data: SummonersInfo }> = ({ data }) => {
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     const resSummoners = await getCollection('summoners')
     const resRanks = await ranks(resSummoners.map(summoner => summoner.id))
 
@@ -43,6 +43,6 @@ export const getStaticProps: GetStaticProps = async () => {
         props: {
             data: { summoners: resSummoners, ranks: resRanks },
         },
-        revalidate: 3,
+        // revalidate: true,
     }
 }

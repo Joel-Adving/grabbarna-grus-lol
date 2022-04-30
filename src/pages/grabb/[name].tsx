@@ -3,7 +3,7 @@ import FriendList from '../../components/FriendList'
 import { percentages } from '../../util/helpers'
 import Image from 'next/image'
 import { matches, matchHistory, summoner } from '../../util/riotFetch'
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { LeagueMatch, PlayerStats, Summoner } from '../../util/types'
 
 export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<LeagueMatch> }> = ({
@@ -100,20 +100,20 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
 
 export default GrusGrabb
 
-export const getStaticPaths: GetStaticPaths = () => {
-    // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
-    const paths = [{ params: { name: 'Pappenos' } }]
+// export const getStaticPaths: GetStaticPaths = () => {
+//     // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
+//     const paths = [{ params: { name: 'Pappenos' } }]
 
-    return {
-        paths,
-        // fallback: true,
-        fallback: 'blocking',
-    }
-}
+//     return {
+//         paths,
+//         // fallback: true,
+//         fallback: 'blocking',
+//     }
+// }
 
-export const getStaticProps: GetStaticProps = async context => {
+export const getServerSideProps: GetServerSideProps = async context => {
     // @ts-ignore
-    const { name } = context.params
+    const { name } = context.query
     const resSummoner = await summoner(name)
     const resMatches = await matches(await matchHistory(resSummoner.puuid))
 
@@ -122,6 +122,6 @@ export const getStaticProps: GetStaticProps = async context => {
             summoner: resSummoner,
             matchHistory: resMatches,
         },
-        revalidate: 5,
+        // revalidate: 5,
     }
 }
