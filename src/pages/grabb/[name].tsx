@@ -36,7 +36,6 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
                             <div className="flex items-center justify-center flex-grow max-w-2xl py-3 border-b-2 border-border bg-slate-4000 sm:justify-start">
                                 <div className="w-14 h-14 mr-3 border-[3px] rounded-full border-gold p-[2px] overflow-hidden">
                                     <Image
-                                        loader={imageLoader}
                                         src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${summoner.profileIconId}.png`}
                                         width={56}
                                         height={56}
@@ -68,7 +67,6 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
                                 <div key={i}>
                                     <div className="w-16 h-16 border-[1px] border-gray-600 overflow-hidden">
                                         <Image
-                                            loader={imageLoader}
                                             src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${key}.png`}
                                             height={64}
                                             width={64}
@@ -116,7 +114,8 @@ export default GrusGrabb
 
 export const getServerSideProps: GetServerSideProps = async context => {
     const { name } = context.query
-    const resSummoner: Summoner = await summoner(typeof name === 'string' ? name : '')
+    // @ts-ignore
+    const resSummoner: Summoner = await summoner(name)
     const resMatches = await matches(await matchHistory(resSummoner.puuid))
 
     return {

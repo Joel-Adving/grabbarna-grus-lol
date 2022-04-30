@@ -2,7 +2,7 @@ import { GetStaticProps, NextPage } from 'next'
 import RankList from '../components/RankList'
 import { getCollection } from '../firebase/getCollection'
 import { ranks } from '../util/riotFetch'
-import { Summoner, SummonerAndRank, summonerRankInfo, SummonersInfo } from '../util/types'
+import { Summoner, summonerRankInfo, SummonersInfo } from '../util/types'
 
 const Home: NextPage<{ data: SummonersInfo }> = ({ data }) => {
     const { summoners, ranks: resRanks } = data
