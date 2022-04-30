@@ -113,7 +113,7 @@ export default GrusGrabb
 
 export const getServerSideProps: GetServerSideProps = async context => {
     // @ts-ignore
-    const { name } = context.query
+    const { name } = context.params
     const resSummoner = await summoner(name)
     const resMatches = await matches(await matchHistory(resSummoner.puuid))
 
