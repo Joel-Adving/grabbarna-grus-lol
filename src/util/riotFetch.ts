@@ -72,4 +72,4 @@ const ranks = async (summonerIds: Array<string>) => {
     return res
 }
 
-export { summoner, summoners, match, matches, matchHistory, matchHistories, rank, ranks, activeMatches }
+export { summoner, summoners, match, matches, matchHistory, matchHistories, rank, ranks, activeMatch, activeMatches }

@@ -2,16 +2,22 @@ import MatchHistoryList from '../../components/MatchHistoryList'
 import FriendList from '../../components/FriendList'
 import { percentages } from '../../util/helpers'
 import Image from 'next/image'
-import { GetServerSideProps, GetStaticPaths, NextPage } from 'next'
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { LeagueMatch, PlayerStats, Summoner } from '../../util/types'
 import { limit, orderBy, where } from 'firebase/firestore'
 import { getCollection } from '../../firebase/getCollection'
 import { getSubCollection } from '../../firebase/getSubCollection'
 import { ParsedUrlQuery } from 'querystring'
+import { activeMatch } from '../../util/riotFetch'
 
-export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<LeagueMatch> }> = ({
+export const GrusGrabb: NextPage<{
+    summoner: Summoner
+    matchHistory: Array<LeagueMatch>
+    //  resActiveMatch: any
+}> = ({
     summoner,
     matchHistory,
+    // resActiveMatch,
 }) => {
     const playerStats = matchHistory
         .filter((match: LeagueMatch) => match?.info !== undefined || match?.info == null)
@@ -118,7 +124,7 @@ interface Params extends ParsedUrlQuery {
     name: string
 }
 
-export const getStaticProps: GetServerSideProps = async context => {
+export const getStaticProps: GetStaticProps = async context => {
     const params = context.params as Params
 
     const resSummoner = await getCollection('summoners', [where('name', '==', params.name)])
@@ -127,10 +133,13 @@ export const getStaticProps: GetServerSideProps = async context => {
         limit(20),
     ])
 
+    // const resActiveMatch = await activeMatch(resSummoner[0].id)
+
     return {
         props: {
             summoner: resSummoner[0],
             matchHistory: resMatches,
+            // resActiveMatch,
         },
         revalidate: 3,
     }
