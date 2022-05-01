@@ -1,6 +1,6 @@
 export const API_PLAYLIST_URL = 'https://www.googleapis.com/youtube/v3/playlistItems'
 
-export const leagueTiers: any = {
+export const leagueTiers: object = {
     GRANDMASTER: 1,
     MASTER: 2,
     DIAMOND: 3,
@@ -12,7 +12,7 @@ export const leagueTiers: any = {
     UNRANKED: 9,
 }
 
-export const leagueRanks: any = {
+export const leagueRanks: object = {
     I: 1,
     II: 2,
     III: 3,
@@ -20,7 +20,7 @@ export const leagueRanks: any = {
     V: 5,
 }
 
-export const rankColors: any = {
+export const rankColors: object = {
     GRANDMASTER: 'defeat',
     MASTER: 'experience',
     DIAMOND: 'indigo-300',
@@ -32,7 +32,7 @@ export const rankColors: any = {
     UNRANKED: 'text',
 }
 
-export const summonerSpells: any = {
+export const summonerSpells: object = {
     1: 'SummonerBoost',
     3: 'SummonerExhaust',
     4: 'SummonerFlash',
