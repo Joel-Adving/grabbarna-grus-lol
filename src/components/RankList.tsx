@@ -2,7 +2,12 @@ import { leagueRanks, leagueTiers, rankColors } from '../util/config'
 import Image from 'next/image'
 import React from 'react'
 
-const RankList: React.FC<{ data: Array<any> }> = ({ data }) => {
+interface Props {
+    data: Array<any>
+}
+
+const RankList: React.FC<Props> = props => {
+    const { data } = props
     const players = data.map(player => ({
         ...player,
         formattedRanks: player.rankedStats.length

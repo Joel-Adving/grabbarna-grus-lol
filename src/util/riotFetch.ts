@@ -1,4 +1,4 @@
-import { getJSON, sleep } from './helpers'
+import { getJSON } from './helpers'
 
 const KEY = process.env.NEXT_PUBLIC_RIOT_API_KEY
 

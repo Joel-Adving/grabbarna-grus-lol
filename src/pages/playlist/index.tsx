@@ -10,7 +10,13 @@ interface VideoNumber {
     videoNumber: number
 }
 
-const Playlist: NextPage<{ data: Playlist; videoNumbers: Array<VideoNumber> }> = ({ data, videoNumbers }) => {
+interface Props {
+    data: Playlist
+    videoNumbers: Array<VideoNumber>
+}
+
+const Playlist: NextPage<Props> = props => {
+    const { data, videoNumbers } = props
     const [search, setSearch] = useState('')
     const [filtered, setFiltered] = useState<Array<PlaylistItem>>([])
 
