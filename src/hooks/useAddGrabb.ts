@@ -1,7 +1,8 @@
-import { doc, setDoc, collection, query, where, getDocs } from 'firebase/firestore'
+import { doc, setDoc, where } from 'firebase/firestore'
 import React, { useState } from 'react'
-import { summoner } from '../util/riotFetch'
 import { db } from '../firebase/config'
+import { getCollection } from '../firebase/getCollection'
+import { summoner } from '../util/riotFetch'
 
 export const useAddGrabb = () => {
     const [summonerName, setSummonerName] = useState('')
@@ -13,21 +14,19 @@ export const useAddGrabb = () => {
         setMessage(null)
         setLoading(true)
 
-        const q = query(collection(db, 'summoners'), where('name', '==', summonerName))
-        const querySnapshot = await getDocs(q)
+        const res = await getCollection('summoners', [where('name', '==', summonerName)])
 
-        if (!querySnapshot.empty) {
+        if (res.length) {
             setMessage('Summoner already exists in database')
             setLoading(false)
             setSummonerName('')
-            return
+        } else {
+            const resSummoner = await summoner(summonerName)
+            await setDoc(doc(db, 'summoners', resSummoner.id), resSummoner)
+            setMessage(`Added ${summonerName} to database`)
+            setSummonerName('')
+            setLoading(false)
         }
-
-        const resSummoner = await summoner(summonerName)
-        await setDoc(doc(db, 'summoners', resSummoner.id), resSummoner)
-        setMessage(`Added ${summonerName} to database`)
-        setSummonerName('')
-        setLoading(false)
     }
 
     const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => setSummonerName(e.currentTarget.value)
