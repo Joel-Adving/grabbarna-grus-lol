@@ -2,10 +2,14 @@ import { summonerSpells } from '../util/config'
 import Image from 'next/image'
 import { LeagueMatch, Summoner } from '../util/types'
 
-const MatchHistoryList: React.FC<{ matchHistory: Array<LeagueMatch>; summoner: Summoner }> = ({
-    matchHistory,
-    summoner,
-}) => {
+interface Props {
+    matchHistory: Array<LeagueMatch>
+    summoner: Summoner
+}
+
+const MatchHistoryList: React.FC<Props> = props => {
+    const { matchHistory, summoner } = props
+
     return (
         <section className="flex flex-col flex-grow py-4 pb-20">
             {matchHistory

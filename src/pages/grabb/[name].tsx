@@ -2,23 +2,21 @@ import MatchHistoryList from '../../components/MatchHistoryList'
 import FriendList from '../../components/FriendList'
 import { percentages } from '../../util/helpers'
 import Image from 'next/image'
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { LeagueMatch, PlayerStats, Summoner } from '../../util/types'
 import { limit, orderBy, where } from 'firebase/firestore'
 import { getCollection } from '../../firebase/getCollection'
 import { getSubCollection } from '../../firebase/getSubCollection'
 import { ParsedUrlQuery } from 'querystring'
-import { activeMatch } from '../../util/riotFetch'
 
-export const GrusGrabb: NextPage<{
+interface Props {
     summoner: Summoner
     matchHistory: Array<LeagueMatch>
-    //  resActiveMatch: any
-}> = ({
-    summoner,
-    matchHistory,
-    // resActiveMatch,
-}) => {
+}
+
+export const GrusGrabb: NextPage<Props> = props => {
+    const { summoner, matchHistory } = props
+
     const playerStats = matchHistory
         .filter((match: LeagueMatch) => match?.info !== undefined || match?.info == null)
         .map((match: LeagueMatch) =>
@@ -27,6 +25,7 @@ export const GrusGrabb: NextPage<{
 
     const wins = playerStats.filter((player: PlayerStats) => player?.win)
     const champions = playerStats.map((player: PlayerStats) => player?.championName)
+
     const recentChamps = Object.assign(
         // @ts-ignore
         ...Object.entries(percentages(champions))
@@ -116,7 +115,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths,
         fallback: true,
-        // fallback: 'blocking',
     }
 }
 
@@ -133,13 +131,10 @@ export const getStaticProps: GetStaticProps = async context => {
         limit(20),
     ])
 
-    // const resActiveMatch = await activeMatch(resSummoner[0].id)
-
     return {
         props: {
             summoner: resSummoner[0],
             matchHistory: resMatches,
-            // resActiveMatch,
         },
         revalidate: 3,
     }
