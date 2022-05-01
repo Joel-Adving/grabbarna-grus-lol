@@ -5,8 +5,8 @@ import React from 'react'
 const RankList: React.FC<{ data: Array<any> }> = ({ data }) => {
     const players = data.map(player => ({
         ...player,
-        formattedRanks: player.ranks.length
-            ? player.ranks.find((el: any) => el.queueType === 'RANKED_FLEX_SR')
+        formattedRanks: player.rankedStats.length
+            ? player.rankedStats.find((el: any) => el.queueType === 'RANKED_FLEX_SR')
             : { queueType: 'RANKED_FLEX_SR', tier: 'UNRANKED' },
     }))
 

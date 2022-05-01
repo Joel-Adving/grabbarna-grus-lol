@@ -1,16 +1,9 @@
-import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
-import RankList from '../components/RankList'
+import { GetStaticProps, NextPage } from 'next'
 import { getCollection } from '../firebase/getCollection'
-import { ranks } from '../util/riotFetch'
-import { Summoner, summonerRankInfo, SummonersInfo } from '../util/types'
+import RankList from '../components/RankList'
 
-const Home: NextPage<{ data: SummonersInfo }> = ({ data }) => {
-    const { summoners, ranks: resRanks } = data
-
-    const ranksArr = summoners.map((summoner: Summoner) => ({
-        ...summoner,
-        ranks: resRanks.flat().filter((rank: summonerRankInfo) => rank.summonerId === summoner.id),
-    }))
+const Home: NextPage<{ data: any }> = ({ data }) => {
+    const { summoners } = data
 
     return (
         <>
@@ -27,7 +20,7 @@ const Home: NextPage<{ data: SummonersInfo }> = ({ data }) => {
                         <h1>LEGENDS</h1>
                     </div>
                 </div>
-                <RankList data={ranksArr} />
+                <RankList data={summoners} />
             </div>
         </>
     )
@@ -35,14 +28,14 @@ const Home: NextPage<{ data: SummonersInfo }> = ({ data }) => {
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
     const resSummoners = await getCollection('summoners')
-    const resRanks = await ranks(resSummoners.map(summoner => summoner.id))
-
     return {
         props: {
-            data: { summoners: resSummoners, ranks: resRanks },
+            data: {
+                summoners: resSummoners,
+            },
         },
-        // revalidate: true,
+        revalidate: 3,
     }
 }

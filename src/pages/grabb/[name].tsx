@@ -2,9 +2,12 @@ import MatchHistoryList from '../../components/MatchHistoryList'
 import FriendList from '../../components/FriendList'
 import { percentages } from '../../util/helpers'
 import Image from 'next/image'
-import { matches, matchHistory, summoner } from '../../util/riotFetch'
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, GetStaticPaths, NextPage } from 'next'
 import { LeagueMatch, PlayerStats, Summoner } from '../../util/types'
+import { limit, orderBy, where } from 'firebase/firestore'
+import { getCollection } from '../../firebase/getCollection'
+import { getSubCollection } from '../../firebase/getSubCollection'
+import { ParsedUrlQuery } from 'querystring'
 
 export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<LeagueMatch> }> = ({
     summoner,
@@ -100,28 +103,35 @@ export const GrusGrabb: NextPage<{ summoner: Summoner; matchHistory: Array<Leagu
 
 export default GrusGrabb
 
-// export const getStaticPaths: GetStaticPaths = () => {
-//     // const paths = grusGrabbar.map(summoner => ({ params: { name: summoner } }))
-//     const paths = [{ params: { name: 'Pappenos' } }]
+export const getStaticPaths: GetStaticPaths = async () => {
+    const resSummoner = await getCollection('summoners')
+    const paths = resSummoner.map(summoner => ({ params: { name: summoner.name } }))
 
-//     return {
-//         paths,
-//         // fallback: true,
-//         fallback: 'blocking',
-//     }
-// }
+    return {
+        paths,
+        fallback: true,
+        // fallback: 'blocking',
+    }
+}
 
-export const getServerSideProps: GetServerSideProps = async context => {
-    // @ts-ignore
-    const { name } = context.params
-    const resSummoner = await summoner(name)
-    const resMatches = await matches(await matchHistory(resSummoner.puuid))
+interface Params extends ParsedUrlQuery {
+    name: string
+}
+
+export const getStaticProps: GetServerSideProps = async context => {
+    const params = context.params as Params
+
+    const resSummoner = await getCollection('summoners', [where('name', '==', params.name)])
+    const resMatches = await getSubCollection('match-history', resSummoner[0].id, 'match', [
+        orderBy('info.gameEndTimestamp', 'desc'),
+        limit(20),
+    ])
 
     return {
         props: {
-            summoner: resSummoner,
+            summoner: resSummoner[0],
             matchHistory: resMatches,
         },
-        // revalidate: 5,
+        revalidate: 3,
     }
 }
