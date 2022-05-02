@@ -1,42 +1,9 @@
 import { doc, setDoc, where, getDoc, startAfter, limit, updateDoc, orderBy, startAt } from 'firebase/firestore'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { db } from '../../../firebase/config'
+import { getCollection } from '../../../firebase/getCollection'
 import { sleep } from '../../../util/helpers'
 import { matches, matchHistory, rank, summoner } from '../../../util/riotFetch'
-import { collection, getDocs, query } from 'firebase/firestore'
-import { initializeApp, getApps, getApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
-
-const firebaseConfig = {
-    apiKey: process.env.NEXT_PUBLIC_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_APP_ID,
-}
-
-getApps().length === 0 ? initializeApp(firebaseConfig) : getApp()
-const db = getFirestore()
-
-async function getCollection(col: string, queryArr: Array<any> = []) {
-    const colRef = collection(db, col)
-    const data: Array<any> = []
-
-    if (queryArr.length) {
-        const q = query(colRef, ...queryArr)
-        const querySnapshot = await getDocs(q)
-        querySnapshot.forEach(doc => {
-            data.push(doc.data())
-        })
-    } else {
-        const querySnapshot = await getDocs(colRef)
-        querySnapshot.forEach(doc => {
-            data.push(doc.data())
-        })
-    }
-
-    return data
-}
 
 const addRecentMatches = async (summonerName: string) => {
     const resSummoner = await summoner(summonerName)
