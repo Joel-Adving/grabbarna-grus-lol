@@ -4,4 +4,4 @@ Grabbarna Grus Lol is a web app for our community of league of legends players t
 
 # Stack:
 
-### [Next.js](https://nextjs.org/), Typescript, firebase, Riot API and TailwindCss
+### Next.js, Typescript, firebase, Riot API and TailwindCss
