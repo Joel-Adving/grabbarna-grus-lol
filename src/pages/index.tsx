@@ -3,7 +3,7 @@ import RankList from '../components/RankList'
 import { useGetSummoners } from '../hooks/useGetSummoners'
 
 const Home: NextPage = () => {
-    const { isLoading, summoners } = useGetSummoners()
+    const { summoners } = useGetSummoners()
 
     return (
         <>
@@ -16,7 +16,6 @@ const Home: NextPage = () => {
                         <h1>LEGENDS</h1>
                     </div>
                 </div>
-                {isLoading && <div className="text-2xl text-center text-victory">Loading...</div>}
                 {summoners && <RankList summoners={summoners} />}
             </div>
         </>

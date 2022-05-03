@@ -10,6 +10,7 @@ export const useGetMatchHistory = () => {
     const { summoners } = useGetSummoners()
     const [matchHistory, setMatchHistory] = useState<any>(null)
     const [summoner, setSummoner] = useState<any>(null)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (!summoners) return
@@ -17,6 +18,7 @@ export const useGetMatchHistory = () => {
     }, [summoners, name])
 
     const getMatchHistory = async () => {
+        setLoading(true)
         const foundSummoner = summoners?.find(summoner => summoner.name === name)
         setSummoner(foundSummoner)
         const resMatches = await getSubCollection('match-history', foundSummoner.id, 'match', [
@@ -25,6 +27,7 @@ export const useGetMatchHistory = () => {
         ])
 
         setMatchHistory(resMatches)
+        setLoading(false)
     }
-    return { matchHistory, summoner }
+    return { matchHistory, summoner, loading }
 }
