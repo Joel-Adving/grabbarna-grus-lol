@@ -34,6 +34,12 @@ export const rankColors: any = {
     UNRANKED: 'text',
 }
 
+export const queueTypes: any = {
+    RANKED_FLEX_SR: 'RANKED FLEX',
+    RANKED_SOLO_5x5: 'SOLO/DUO QUEUE',
+    RANKED_TFT_PAIRS: 'TFT',
+}
+
 export const summonerSpells: any = {
     1: 'SummonerBoost',
     3: 'SummonerExhaust',
