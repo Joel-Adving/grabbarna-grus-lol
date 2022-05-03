@@ -1,5 +1,7 @@
 export const API_PLAYLIST_URL = 'https://www.googleapis.com/youtube/v3/playlistItems'
 
+export const authRequired = ['/add-grabb', '/playlist']
+
 export const leagueTiers: any = {
     GRANDMASTER: 1,
     MASTER: 2,

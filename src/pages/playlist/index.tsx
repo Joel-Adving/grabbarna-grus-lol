@@ -15,8 +15,7 @@ interface Props {
     videoNumbers: Array<VideoNumber>
 }
 
-const Playlist: NextPage<Props> = props => {
-    const { data, videoNumbers } = props
+const Playlist: NextPage<Props> = ({ data, videoNumbers }) => {
     const [search, setSearch] = useState('')
     const [filtered, setFiltered] = useState<Array<PlaylistItem>>([])
 
@@ -90,6 +89,6 @@ export const getStaticProps: GetStaticProps = async () => {
             data,
             videoNumbers,
         },
-        revalidate: 5,
+        revalidate: 2,
     }
 }

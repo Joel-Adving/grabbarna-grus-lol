@@ -3,12 +3,11 @@ import Image from 'next/image'
 import React from 'react'
 
 interface Props {
-    data: Array<any>
+    summoners: Array<any>
 }
 
-const RankList: React.FC<Props> = props => {
-    const { data } = props
-    const players = data.map(player => ({
+const RankList: React.FC<Props> = ({ summoners }) => {
+    const players = summoners.map(player => ({
         ...player,
         formattedRanks: player.rankedStats.length
             ? player.rankedStats.find((el: any) => el.queueType === 'RANKED_FLEX_SR')
