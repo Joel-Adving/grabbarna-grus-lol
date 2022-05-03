@@ -17,7 +17,6 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
                     .map(match => {
                         const { info } = match
                         const playerStats = info.participants.find(el => el.summonerId === summoner.id)
-                        console.log(playerStats)
                         const win = playerStats?.win
                         let gameType
 

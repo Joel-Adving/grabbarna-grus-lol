@@ -21,6 +21,7 @@ export interface Summoner {
     puuid: string
     revisionDate: number
     summonerLevel: number
+    rankedStats: Array<summonerRankInfo>
 }
 
 export interface summonerRankInfo {

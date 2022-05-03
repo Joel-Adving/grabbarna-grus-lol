@@ -10,8 +10,8 @@ export default function Header() {
         <header className="bg-background-darkest font-BeaufortBold text-text  border-t-[2.5px] border-b-[1px] border-neutral-700 border-t-border-light">
             <nav className="container flex justify-between w-full px-3 py-4 mx-auto sm:px-0">
                 <div className="flex items-center">
-                    <h2 className="hidden mr-3 text-xl sm:mr-12 text-text-highlight border-victory sm:block">GRUS</h2>
-                    <div className="flex space-x-6">
+                    {/* <h2 className="hidden mr-3 text-xl sm:mr-12 text-text-highlight border-victory sm:block">GRUS</h2> */}
+                    <div className="flex space-x-8">
                         <Link href="/">HOME</Link>
                         {user && (
                             <button>
