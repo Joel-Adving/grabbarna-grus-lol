@@ -47,7 +47,7 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
                                 <div>{queuStats.tier}</div>
                                 <div>{queuStats.rank}</div>
                             </div>
-                            <div className="flex  items-center justify-between text-sm text-text-highlight border-t-[1px] border-b-[1px] py-2 border-t-text border-b-neutral-900">
+                            <div className="flex  items-center justify-between text-sm text-text-highlight border-t-[1px] border-b-[1px] py-2 border-neutral-700 border-t-border-light">
                                 <div className="flex">
                                     <p className="mr-10">#</p>
                                     <p className="mr-10">SUMMONER</p>
