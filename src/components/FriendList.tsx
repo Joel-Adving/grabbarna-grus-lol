@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRealTimeCollection } from '../hooks/useRealTimeCollection'
 import { Summoner } from '../util/types'
+import { useGetSummoners } from '../hooks/useGetSummoners'
 
 export default function FriendList() {
-    const { data: summoners } = useRealTimeCollection('summoners')
+    const { summoners } = useGetSummoners()
 
     return (
         <section className="flex flex-col flex-grow max-w-[16rem] mx-auto bg-background ml-3">

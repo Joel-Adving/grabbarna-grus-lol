@@ -4,9 +4,9 @@ import ProtectedRoute from '../util/ProtectedRoute'
 import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { AuthContextProvider } from '../context/AuthContext'
+import { RecoilRoot } from 'recoil'
+import { authRequired } from '../util/config'
 import '../styles/globals.css'
-
-const authRequired = ['/add-grabb', '/playlist']
 
 function MyApp({ Component, pageProps }: AppProps) {
     const router = useRouter()
@@ -18,16 +18,18 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <meta name="description" content="Grabbarna Grus Lol" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
-            {!authRequired.includes(router.pathname) ? (
-                <>
-                    <Component {...pageProps} />
-                </>
-            ) : (
-                <ProtectedRoute>
-                    <Component {...pageProps} />
-                </ProtectedRoute>
-            )}
+            <RecoilRoot>
+                <Header />
+                {!authRequired.includes(router.pathname) ? (
+                    <>
+                        <Component {...pageProps} />
+                    </>
+                ) : (
+                    <ProtectedRoute>
+                        <Component {...pageProps} />
+                    </ProtectedRoute>
+                )}
+            </RecoilRoot>
         </AuthContextProvider>
     )
 }
