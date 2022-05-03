@@ -29,8 +29,10 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
             </div>
             <div className="flex justify-center mt-6 mb-10 space-x-8 sm:mb-0 sm:justify-start font-BeaufortBold text-text-highlight">
                 {summoner.rankedStats &&
-                    summoner.rankedStats.map(queue => (
-                        <button onClick={() => setFilter(queue.queueType)}>{queueTypes[queue.queueType]}</button>
+                    summoner.rankedStats.map((queue, i) => (
+                        <button key={i} onClick={() => setFilter(queue.queueType)}>
+                            {queueTypes[queue.queueType]}
+                        </button>
                     ))}
             </div>
 
