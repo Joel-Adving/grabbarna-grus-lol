@@ -47,7 +47,7 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
                                 <div>{queuStats.tier}</div>
                                 <div>{queuStats.rank}</div>
                             </div>
-                            <div className="flex  items-center justify-between text-sm text-text-highlight border-t-[1px] border-b-[1px] py-2 border-t-neutral-900">
+                            <div className="flex  items-center justify-between text-sm text-text-highlight border-t-[1px] border-b-[1px] py-2 border-t-text border-b-neutral-900">
                                 <div className="flex">
                                     <p className="mr-10">#</p>
                                     <p className="mr-10">SUMMONER</p>
@@ -57,7 +57,7 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
                                     <p className="">POINTS</p>
                                 </div>
                             </div>
-                            <div className="flex justify-between col-span-3 my-1">
+                            <div className="flex justify-between col-span-3 py-3">
                                 <div className="flex">
                                     <div>1</div>
                                     <div className="ml-10">{queuStats.summonerName}</div>
