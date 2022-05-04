@@ -27,7 +27,7 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
                 <h1 className="text-2xl sm:text-4xl font-frizQuad text-gold-light ">{summoner.name}</h1>
                 <p className="mt-2 ml-3 text-2xl text-text-highlight font-BeaufortBold">{summoner.summonerLevel}</p>
             </div>
-            <div className="flex justify-center mt-6 mb-10 space-x-8 sm:mb-0 sm:justify-start font-BeaufortBold text-text-highlight">
+            <div className="flex justify-center mt-6 mb-10 space-x-8 sm:mb-0 sm:justify-start font-BeaufortBold text-text">
                 {summoner.rankedStats &&
                     summoner.rankedStats.map((queue, i) => (
                         <button key={i} onClick={() => setFilter(queue.queueType)}>
@@ -62,8 +62,8 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
                                     <div>1</div>
                                     <div className="ml-10">{queuStats.summonerName}</div>
                                 </div>
-                                <div className="flex">
-                                    <div className="mr-14">
+                                <div className="flex flex-grow max-w-[9.4rem] justify-between">
+                                    <div className="">
                                         <span className="text-victory">{queuStats.wins}</span>
                                         {queuStats.wins ? '/' : ''}
                                         <span className="">{queuStats.losses}</span>
