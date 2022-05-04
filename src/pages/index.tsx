@@ -8,7 +8,7 @@ const Home: NextPage = () => {
     return (
         <>
             <div className="min-h-screen bg-gradient-to-b from-background-darkest via-background-darkest to-background-lightest">
-                <div className="flex flex-col items-center justify-center py-6 text-2xl sm:pb-10 sm:text-4xl md:text-5xl bg-background-darkest font-frizQuad text-gold-light">
+                <div className="flex flex-col items-center justify-center py-6 text-2xl sm:pb-8 sm:text-4xl md:text-5xl bg-background-darkest font-frizQuad text-gold-light">
                     <h1>GRABBARNA</h1>
                     <div className="flex">
                         <h1>GRUS</h1>
