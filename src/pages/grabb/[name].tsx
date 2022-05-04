@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { NextPage } from 'next'
 import { useGetMatchHistory } from '../../hooks/useGetMatchHistory'
 import { useGetMatchHistoryStats } from '../../hooks/useGetMatchHistoryStats'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SummonerRankedInfo from '../../components/SummonerRankedInfo'
 
 export const GrusGrabb: NextPage = () => {
@@ -12,11 +12,20 @@ export const GrusGrabb: NextPage = () => {
     const { stats } = useGetMatchHistoryStats()
     const [filter, setFilter] = useState('MATCH_HISTORY')
 
+    useEffect(() => {
+        if (!summoner) return
+        if (summoner.rankedStats.length < 1) {
+            setFilter('MATCH_HISTORY')
+        }
+    }, [summoner])
+
     return (
         <div className="min-h-screen bg-gradient-to-b from-background-darkest via-background-background to-background">
             <div className="container px-3 pt-3 mb-6 space-x-8 text-text font-BeaufortBold md:mb-0 sm:px-0">
                 <button onClick={() => setFilter('MATCH_HISTORY')}>MATCH HISTORY</button>
-                <button onClick={() => setFilter('RANKED')}>RANKED</button>
+                {summoner && summoner.rankedStats.length > 0 && (
+                    <button onClick={() => setFilter('RANKED')}>RANKED</button>
+                )}
                 {/* <button onClick={() => setFilter('STATS')}>STATS</button> */}
             </div>
             <div className="container flex flex-row">
