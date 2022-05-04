@@ -12,7 +12,7 @@ const RankList: React.FC<Props> = ({ summoners }) => {
 
     return (
         <section className="flex flex-col max-w-2xl pb-20 mx-auto font-BeaufortBold text-text-light">
-            <div className="container flex justify-center my-6 space-x-8 text-text bg-background-darkest">
+            <div className="container flex justify-center py-6 space-x-8 text-text bg-background-darkest">
                 <button onClick={() => setFilter('RANKED_FLEX_SR')}>RANKED FLEX</button>
                 <button onClick={() => setFilter('RANKED_SOLO_5x5')}>SOLO/DUO QUEUE</button>
             </div>
