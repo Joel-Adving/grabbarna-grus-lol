@@ -89,7 +89,7 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex flex-col-reverse items-center mr-0 lg:mr-24 sm:flex-row">
+                                <div className="flex flex-col-reverse items-center justify-center mr-0 lg:mr-24 sm:flex-row">
                                     <div className="sm:mr-8 ">
                                         <div className="flex ">
                                             {playerStats &&
