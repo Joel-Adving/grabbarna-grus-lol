@@ -6,10 +6,18 @@ export const useFilterRanks = (summoners: Array<any>) => {
     const [sortedSummoners, setSortedSummoners] = useState<Array<any>>([])
 
     useEffect(() => {
-        const filteredByQueue = summoners.map(summoner => ({
-            ...summoner,
-            rankedStats: summoner.rankedStats.find((el: any) => el.queueType === filter),
-        }))
+        const filteredByQueue = summoners.map(summoner => {
+            if (summoner.rankedStats.length) {
+                return {
+                    ...summoner,
+                    rankedStats: summoner.rankedStats.find((el: any) => el.queueType === filter),
+                }
+            } else
+                return {
+                    ...summoner,
+                    rankedStats: null,
+                }
+        })
 
         const hasRanks = filteredByQueue.slice().filter(el => el.rankedStats)
         const noRanks = filteredByQueue.slice().filter(el => el.rankedStats === null || el.rankedStats === undefined)
