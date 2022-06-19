@@ -17,6 +17,20 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <title>Grabbarna Grus</title>
                 <meta name="description" content="Grabbarna Grus Lol" />
                 <link rel="icon" href="/favicon.ico" />
+                <link
+                    rel="preload"
+                    href="/fonts/Friz-Quadrata-Regular.woff2"
+                    as="font"
+                    crossOrigin=""
+                    type="font/woff2"
+                />
+                <link
+                    rel="preload"
+                    href="https://db.onlinewebfonts.com/t/fe90d2b331edb90ed36369d0c270d5b6.woff2"
+                    as="font"
+                    crossOrigin=""
+                    type="font/woff2"
+                />
             </Head>
             <RecoilRoot>
                 <Header />
