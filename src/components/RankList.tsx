@@ -52,7 +52,9 @@ const RankList: React.FC<Props> = ({ summoners }) => {
                             {player.rankedStats && (
                                 <div className="flex flex-grow max-w-[9rem] sm:max-w-[12rem]">
                                     <p>
-                                        {player.rankedStats.tier !== 'UNRANKED' ? player.rankedStats.tier : 'UNRANKED'}{' '}
+                                        {player.rankedStats.tier !== 'UNRANKED'
+                                            ? player.rankedStats.tier
+                                            : 'UNRANKED'}{' '}
                                         {player.rankedStats.rank}
                                     </p>
                                     <p className="flex w-10 ml-auto">
