@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { API_PLAYLIST_URL } from '../../util/config'
-import { getJSON } from '../../util/helpers'
+import React from 'react'
+
 import Image from 'next/image'
 import { Playlist, PlaylistItem } from '../../util/types'
-import { GetStaticProps, NextPage } from 'next'
 
 interface VideoNumber {
   id: string

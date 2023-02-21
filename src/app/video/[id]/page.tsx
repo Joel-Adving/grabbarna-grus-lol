@@ -1,7 +1,6 @@
 'use client'
 
 import YoutubeEmbed from '../../../components/YoutubeEmbed'
-import { useRouter } from 'next/navigation'
 
 export default function Video({ params }: any) {
   return (
