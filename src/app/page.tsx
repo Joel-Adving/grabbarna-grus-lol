@@ -1,5 +1,3 @@
-'use client'
-
 import RankList from '@/components/RankList'
 
 export default function Home() {
