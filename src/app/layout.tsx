@@ -2,11 +2,11 @@
 
 import './globals.css'
 import Header from '@/components/Header'
-import { RecoilRoot } from 'recoil'
-import { authRequired } from '../util/config'
-import ProtectedRoute from '@/util/ProtectedRoute'
+import { authRequired } from '../utils/config'
+import ProtectedRoute from '@/utils/ProtectedRoute'
 import { usePathname } from 'next/navigation'
 import { AuthContextProvider } from '@/context/AuthContext'
+import { SWRConfig } from 'swr'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname()
@@ -16,10 +16,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
       <body>
         <AuthContextProvider>
-          <RecoilRoot>
+          <SWRConfig>
             <Header />
             {!authRequired.includes(pathName as string) ? children : <ProtectedRoute>{children}</ProtectedRoute>}
-          </RecoilRoot>
+          </SWRConfig>
         </AuthContextProvider>
       </body>
     </html>

@@ -2,21 +2,22 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth'
+import styles from './styles.module.css'
 
 export default function Header() {
   // @ts-ignore
   const { user, signin, logout } = useAuth()
 
   return (
-    <header className="sticky top-0 left-0 z-10 bg-background-darkest font-BeaufortBold text-text  border-t-[2.5px] border-b-[1px] border-neutral-700 border-t-border-light">
+    <header className={styles.header}>
       <nav className="container flex justify-between w-full px-3 py-4 mx-auto sm:px-0">
         <div className="flex items-center">
           <div className="flex space-x-8">
-            <Link href="/">HOME</Link>
+            <Link href="">HOME</Link>
             {user && (
               <button>
-                <Link href="/playlist">PLAYLIST</Link>
+                <Link href="playlist">PLAYLIST</Link>
               </button>
             )}
           </div>

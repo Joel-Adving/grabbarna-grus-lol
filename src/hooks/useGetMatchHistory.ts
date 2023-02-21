@@ -1,33 +1,22 @@
-'use client'
-
 import { limit, orderBy } from 'firebase/firestore'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { getSubCollection } from '../firebase/getSubCollection'
-import { useGetSummoners } from './useGetSummoners'
+import { getSubCollection } from '@/lib/firebase/getSubCollection'
+import { useSummoners } from './useSummoners'
+import useSWR from 'swr'
+
+const getMatchHistory = async (summonerId: string) => {
+  return await getSubCollection('match-history', summonerId, 'match', [orderBy('info.gameEndTimestamp', 'desc'), limit(20)])
+}
 
 export const useGetMatchHistory = (name: string) => {
-  const { summoners } = useGetSummoners()
-  const [matchHistory, setMatchHistory] = useState<any>(null)
-  const [summoner, setSummoner] = useState<any>(null)
-  const [loading, setLoading] = useState(false)
+  const { summoners } = useSummoners()
+  const summoner = summoners?.find((summoner: any) => summoner.name === name)
+  const { data: matchHistory, isLoading } = useSWR(summoner?.id ? `matchhistory/${name}` : null, () =>
+    getMatchHistory(summoner?.id)
+  )
 
-  useEffect(() => {
-    if (!summoners) return
-    getMatchHistory()
-  }, [summoners, name])
-
-  const getMatchHistory = async () => {
-    setLoading(true)
-    const foundSummoner = summoners?.find((summoner) => summoner.name === name)
-    setSummoner(foundSummoner)
-    const resMatches = await getSubCollection('match-history', foundSummoner?.id, 'match', [
-      orderBy('info.gameEndTimestamp', 'desc'),
-      limit(20)
-    ])
-
-    setMatchHistory(resMatches)
-    setLoading(false)
+  return {
+    matchHistory,
+    summoner,
+    isLoading
   }
-  return { matchHistory, summoner, loading }
 }

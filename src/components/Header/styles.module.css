@@ -1,0 +1,4 @@
+.header {
+  @apply sticky top-0 left-0 z-10 bg-background-darkest bg-opacity-20 font-BeaufortBold text-text  border-t-[2.5px] border-b-[1px] border-neutral-700 border-t-border-light;
+  backdrop-filter: blur(10px);
+}

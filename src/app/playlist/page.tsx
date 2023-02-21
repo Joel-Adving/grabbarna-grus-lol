@@ -1,7 +1,8 @@
 import React from 'react'
 
 import Image from 'next/image'
-import { Playlist, PlaylistItem } from '../../util/types'
+import { Playlist, PlaylistItem } from '../../utils/types'
+import Link from 'next/link'
 
 interface VideoNumber {
   id: string
@@ -46,9 +47,10 @@ export default async function PlaylistPage() {
           ?.slice()
           ?.reverse()
           ?.map((item: any, i: number) => (
-            <a
+            <Link
+              passHref
               // href={`https://www.youtube.com/watch?v=${item.snippet.resourceId.videoId}&list=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2`}
-              href={`/video/${item.snippet.resourceId.videoId}`}
+              href={`video/${item.snippet.resourceId.videoId}`}
               key={item.id}
               className="flex items-center pr-12 cursor-pointer sm:pr-1 hover:bg-background hover:text-text-highlight"
             >
@@ -68,7 +70,7 @@ export default async function PlaylistPage() {
                   <h2 className="ml-3 ">{item.snippet.title}</h2>
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
       </section>
     </div>

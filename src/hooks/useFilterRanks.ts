@@ -1,26 +1,27 @@
-'use client'
-
 import { useEffect, useState } from 'react'
-import { leagueRanks, leagueTiers } from '../util/config'
+import { leagueRanks, leagueTiers } from '../utils/config'
+import { useSummoners } from './useSummoners'
 
-export const useFilterRanks = (summoners: Array<any>) => {
+export const useFilterRanks = () => {
+  const { summoners } = useSummoners()
   const [filter, setFilter] = useState('RANKED_FLEX_SR')
   const [sortedSummoners, setSortedSummoners] = useState<Array<any>>([])
 
   useEffect(() => {
-    const filteredByQueue = summoners.map((summoner) => ({
+    if (!summoners) return
+    const filteredByQueue = summoners.map((summoner: any) => ({
       ...summoner,
       rankedStats: summoner.rankedStats.find((el: any) => el.queueType === filter)
     }))
 
-    const hasRanks = filteredByQueue.slice().filter((el) => el.rankedStats)
-    const noRanks = filteredByQueue.slice().filter((el) => el.rankedStats === null || el.rankedStats === undefined)
+    const hasRanks = filteredByQueue.slice().filter((el: any) => el.rankedStats)
+    const noRanks = filteredByQueue.slice().filter((el: any) => el.rankedStats === null || el.rankedStats === undefined)
     const sortedByRank = hasRanks
-      .sort((a, b) => leagueRanks[a.rankedStats.rank] - leagueRanks[b.rankedStats.rank])
-      .sort((a, b) => leagueTiers[a.rankedStats.tier] - leagueTiers[b.rankedStats.tier])
+      .sort((a: any, b: any) => leagueRanks[a.rankedStats.rank] - leagueRanks[b.rankedStats.rank])
+      .sort((a: any, b: any) => leagueTiers[a.rankedStats.tier] - leagueTiers[b.rankedStats.tier])
 
     setSortedSummoners([...sortedByRank, ...noRanks])
-  }, [filter])
+  }, [filter, summoners])
 
   return { sortedSummoners, filter, setFilter }
 }

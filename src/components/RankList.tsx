@@ -1,18 +1,15 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { useFilterRanks } from '../hooks/useFilterRanks'
 
-interface Props {
-  summoners: Array<any>
-}
-
-const RankList: React.FC<Props> = ({ summoners }) => {
-  const { sortedSummoners, filter, setFilter } = useFilterRanks(summoners)
+export default function RankList() {
+  const { sortedSummoners, filter, setFilter } = useFilterRanks()
 
   return (
-    <section className="flex flex-col max-w-xl pb-20 mx-auto font-BeaufortBold text-text-light">
+    <section className="flex flex-col max-w-lg pb-20 mx-auto font-BeaufortBold text-text-light">
       <div className="container flex justify-center my-6 mb-10 space-x-8 text-text bg-background-darkest">
         <button
           className={`${filter === 'RANKED_FLEX_SR' ? 'border-text' : 'border-background-darkest'}  border-b-2`}
@@ -38,45 +35,43 @@ const RankList: React.FC<Props> = ({ summoners }) => {
           <p className="flex w-10 ml-auto">W/L</p>
         </div>
       </div>
-      {sortedSummoners.length &&
-        sortedSummoners.map((player, i) => {
-          return (
-            <a
-              href={'/grabb/' + player.name}
-              key={player.id}
-              className="flex items-center justify-between py-1.5 text-sm hover:bg-background-lightest px-3 hover:text-text-highlight"
-            >
-              <div className="flex items-center">
-                <p className="w-3 mr-3 sm:mr-16">{i + 1}</p>
-                <div className="mr-2 border-2 rounded-full w-6 h-6  border-gold p-[1px] overflow-hidden">
-                  <Image
-                    src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${player.profileIconId}.png`}
-                    alt="Summoner Icon"
-                    width={24}
-                    height={24}
-                    className="rounded-full"
-                  />
-                </div>
-                <p className="self-center">{player.name}</p>
+      {sortedSummoners?.map((player, i) => {
+        return (
+          <Link
+            passHref
+            href={`grabb/${player.name}`}
+            key={player.id}
+            className="flex items-center justify-between py-1.5 text-sm hover:bg-background-lightest px-3 hover:text-text-highlight"
+          >
+            <div className="flex items-center">
+              <p className="w-3 mr-3 sm:mr-16">{i + 1}</p>
+              <div className="mr-2 border-2 rounded-full w-6 h-6  border-gold p-[1px] overflow-hidden">
+                <Image
+                  src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${player.profileIconId}.png`}
+                  alt="Summoner Icon"
+                  width={24}
+                  height={24}
+                  className="rounded-full"
+                />
               </div>
+              <p className="self-center">{player.name}</p>
+            </div>
 
-              {player.rankedStats && (
-                <div className="flex flex-grow max-w-[9rem] sm:max-w-[12rem]">
-                  <p>
-                    {player.rankedStats.tier !== 'UNRANKED' ? player.rankedStats.tier : 'UNRANKED'} {player.rankedStats.rank}
-                  </p>
-                  <span className="flex w-10 ml-auto">
-                    <p className="text-victory">{player.rankedStats.wins}</p>
-                    {player.rankedStats.rank ? '/' : ''}
-                    <p className="">{player.rankedStats.losses}</p>
-                  </span>
-                </div>
-              )}
-            </a>
-          )
-        })}
+            {player.rankedStats && (
+              <div className="flex flex-grow max-w-[9rem] sm:max-w-[12rem]">
+                <p>
+                  {player.rankedStats.tier !== 'UNRANKED' ? player.rankedStats.tier : 'UNRANKED'} {player.rankedStats.rank}
+                </p>
+                <span className="flex w-10 ml-auto">
+                  <p className="text-victory">{player.rankedStats.wins}</p>
+                  {player.rankedStats.rank ? '/' : ''}
+                  <p className="">{player.rankedStats.losses}</p>
+                </span>
+              </div>
+            )}
+          </Link>
+        )
+      })}
     </section>
   )
 }
-
-export default RankList

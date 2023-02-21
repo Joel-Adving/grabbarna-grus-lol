@@ -1,11 +1,6 @@
-'use client'
-
 import RankList from '@/components/RankList'
-import { useGetSummoners } from '@/hooks/useGetSummoners'
 
 export default function Home() {
-  const { summoners } = useGetSummoners()
-
   return (
     <>
       <div className="min-h-screen bg-background-darkest">
@@ -17,8 +12,7 @@ export default function Home() {
             <h1>LEGENDS</h1>
           </div>
         </div>
-
-        {summoners && <RankList summoners={summoners} />}
+        <RankList />
       </div>
     </>
   )

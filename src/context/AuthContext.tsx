@@ -2,8 +2,8 @@
 
 import { createContext, useEffect, useState } from 'react'
 import { onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth'
-import { auth } from '../firebase/config'
-import { User } from '../util/types'
+import { auth } from '@/lib/firebase/config'
+import { User } from '@/utils/types'
 
 export const AuthContext = createContext({})
 

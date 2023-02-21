@@ -1,19 +1,21 @@
-'use client'
-
 import { useEffect, useState } from 'react'
-import { percentages } from '../util/helpers'
-import { LeagueMatch, PlayerStats } from '../util/types'
+import { percentages } from '../utils/helpers'
+import { LeagueMatch, PlayerStats } from '../utils/types'
 import { useGetMatchHistory } from './useGetMatchHistory'
 
-export const useGetMatchHistoryStats = ({ params }: any) => {
+export const useGetMatchHistoryStats = (name: string) => {
   const [stats, setStats] = useState<any>(null)
-  const { matchHistory, summoner } = useGetMatchHistory(params?.name)
+  const { matchHistory, summoner } = useGetMatchHistory(name)
 
   useEffect(() => {
-    if (!matchHistory) return
+    if (!matchHistory || !summoner?.id) return
+    console.log(matchHistory)
+
     const playerStats = matchHistory
       .filter((match: LeagueMatch) => match?.info !== undefined || match?.info == null)
       .map((match: LeagueMatch) => match?.info?.participants.find((player: any) => player?.summonerId === summoner?.id))
+
+    // console.log(playerStats)
 
     const wins = playerStats.filter((player: PlayerStats) => player?.win) as any[] | null
     const champions = playerStats.map((player: PlayerStats) => player?.championName)
