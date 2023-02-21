@@ -3,9 +3,23 @@
 import { createContext, useEffect, useState } from 'react'
 import { onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth'
 import { auth } from '@/lib/firebase/config'
-import { User } from '@/utils/types'
 
-export const AuthContext = createContext({})
+type User = {
+  name: string
+  uid: string
+  email?: string
+  photoURL?: string
+}
+
+type AuthContextType = {
+  user: User | null
+  signin: () => Promise<void>
+  logout: () => Promise<void>
+  error: string | null
+  isPending: boolean
+}
+
+export const AuthContext = createContext({} as AuthContextType)
 
 export const AuthContextProvider: React.FC<{
   children: React.ReactNode
@@ -20,11 +34,9 @@ export const AuthContextProvider: React.FC<{
       if (user) {
         setUser({
           uid: user.uid,
-          email: user.email,
-          // @ts-ignore
-          photoURL: getAuth().currentUser.photoURL,
-          // @ts-ignore
-          name: getAuth().currentUser.displayName
+          email: user?.email ?? '',
+          photoURL: getAuth()?.currentUser?.photoURL ?? '',
+          name: getAuth()?.currentUser?.displayName ?? ''
         })
       } else {
         setUser(null)

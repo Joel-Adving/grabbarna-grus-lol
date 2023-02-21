@@ -5,14 +5,6 @@ export interface User {
   name?: string | null
 }
 
-export interface UserContext {
-  user: User
-  signin: () => void
-  logout: () => void
-  error: string | null
-  isPending: boolean
-}
-
 export interface Summoner {
   accountId: string
   id: string

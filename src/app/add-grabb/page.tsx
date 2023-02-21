@@ -1,9 +1,13 @@
 'use client'
 
+import { useAuth } from '@/hooks/useAuth'
 import { useAddGrabb } from '../../hooks/useAddGrabb'
 
 export default function AddSummoner() {
+  const { user } = useAuth()
   const { message, loading, summonerName, handleSubmit, handleInputChange } = useAddGrabb()
+
+  if (!user || user.name !== 'Joel Adving') return null
 
   return (
     <section className="container text-text font-BeaufortBold">

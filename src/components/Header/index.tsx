@@ -6,7 +6,6 @@ import { useAuth } from '../../hooks/useAuth'
 import styles from './styles.module.css'
 
 export default function Header() {
-  // @ts-ignore
   const { user, signin, logout } = useAuth()
 
   return (
@@ -23,9 +22,15 @@ export default function Header() {
           <div className="flex items-center ">
             <button onClick={() => logout()}>SIGN OUT</button>
             <div className="w-12 h-12 ml-3 sm:mx-3 border-[2.5px] rounded-full border-victory">
-              <Image className="rounded-full " src={user.photoURL} alt="User profile image" height={48} width={48} />
+              <Image
+                className="rounded-full "
+                src={user?.photoURL as string}
+                alt="User profile image"
+                height={48}
+                width={48}
+              />
             </div>
-            <h3 className="hidden sm:block text-text-highlight">{user.name.toUpperCase()}</h3>
+            <h3 className="hidden sm:block text-text-highlight">{user?.name?.toUpperCase()}</h3>
           </div>
         )}
       </nav>
