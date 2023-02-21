@@ -13,20 +13,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/components/FriendList.tsx",
-    "src/components/Header.tsx",
-    "src/util/ProtectedRoute.tsx",
-    "src/hooks/useRealTimeCollection.ts",
-    "src/pages/playlist/index.tsx",
-    "src/util/config.js",
-    "src/firebase/config.js",
-    "src/pages/_document.js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

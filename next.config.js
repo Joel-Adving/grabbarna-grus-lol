@@ -1,9 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
-    images: {
-        domains: ['i.ytimg.com', 'ddragon.leagueoflegends.com', 'lh3.googleusercontent.com'],
-    },
+  experimental: {
+    appDir: true
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**'
+      },
+      {
+        protocol: 'http',
+        hostname: '**'
+      }
+    ]
+  }
 }
 
 module.exports = nextConfig
