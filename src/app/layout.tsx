@@ -10,12 +10,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head />
       <body>
-        <AuthContextProvider>
-          <SWRConfig>
-            <Header />
-            {children}
-          </SWRConfig>
-        </AuthContextProvider>
+        <SWRConfig>
+          <AuthContextProvider>
+            <>
+              <Header />
+              {children}
+            </>
+          </AuthContextProvider>
+        </SWRConfig>
       </body>
     </html>
   )
