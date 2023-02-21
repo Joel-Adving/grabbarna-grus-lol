@@ -1,4 +1,5 @@
-import { queueTypes } from '../util/config'
+'use client'
+
 import Image from 'next/image'
 import React from 'react'
 import { useFilterRanks } from '../hooks/useFilterRanks'
@@ -11,17 +12,27 @@ const RankList: React.FC<Props> = ({ summoners }) => {
   const { sortedSummoners, filter, setFilter } = useFilterRanks(summoners)
 
   return (
-    <section className="flex flex-col max-w-2xl pb-20 mx-auto font-BeaufortBold text-text-light">
-      <div className="container flex justify-center my-6 space-x-8 text-text bg-background-darkest">
-        <button onClick={() => setFilter('RANKED_FLEX_SR')}>RANKED FLEX</button>
-        <button onClick={() => setFilter('RANKED_SOLO_5x5')}>SOLO/DUO QUEUE</button>
+    <section className="flex flex-col max-w-xl pb-20 mx-auto font-BeaufortBold text-text-light">
+      <div className="container flex justify-center my-6 mb-10 space-x-8 text-text bg-background-darkest">
+        <button
+          className={`${filter === 'RANKED_FLEX_SR' ? 'border-text' : 'border-background-darkest'}  border-b-2`}
+          onClick={() => setFilter('RANKED_FLEX_SR')}
+        >
+          RANKED FLEX
+        </button>
+        <button
+          className={`${filter === 'RANKED_SOLO_5x5' ? 'border-text' : 'border-background-darkest'}  border-b-2`}
+          onClick={() => setFilter('RANKED_SOLO_5x5')}
+        >
+          SOLO/DUO QUEUE
+        </button>
       </div>
       <div className="flex items-center justify-between py-3 text-sm text-text-highlight border-b-[1px] px-3 border-t-[1px] border-zinc-600">
         <div className="flex ">
           <p className="w-3 mr-3 sm:mr-16">#</p>
           <p>GRUSGRABBAR</p>
         </div>
-        <p className="hidden sm:block">{queueTypes[filter]}</p>
+        {/* <p className="hidden sm:block">{queueTypes[filter]}</p> */}
         <div className="max-w-[9rem] sm:max-w-[12rem] flex justify-between flex-grow">
           <p className="">LEAGUE</p>
           <p className="flex w-10 ml-auto">W/L</p>
@@ -52,8 +63,7 @@ const RankList: React.FC<Props> = ({ summoners }) => {
               {player.rankedStats && (
                 <div className="flex flex-grow max-w-[9rem] sm:max-w-[12rem]">
                   <p>
-                    {player.rankedStats.tier !== 'UNRANKED' ? player.rankedStats.tier : 'UNRANKED'}{' '}
-                    {player.rankedStats.rank}
+                    {player.rankedStats.tier !== 'UNRANKED' ? player.rankedStats.tier : 'UNRANKED'} {player.rankedStats.rank}
                   </p>
                   <span className="flex w-10 ml-auto">
                     <p className="text-victory">{player.rankedStats.wins}</p>
