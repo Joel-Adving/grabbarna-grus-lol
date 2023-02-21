@@ -14,24 +14,14 @@ export default function Header() {
       <nav className="container flex justify-between w-full px-3 py-4 mx-auto sm:px-0">
         <div className="flex items-center">
           <div className="flex space-x-8">
-            <Link href="">HOME</Link>
-            {user && (
-              <button>
-                <Link href="playlist">PLAYLIST</Link>
-              </button>
-            )}
+            <Link href="/">HOME</Link>
+            {user && <Link href="playlist">PLAYLIST</Link>}
           </div>
         </div>
-        {!user && (
-          <button className="" onClick={() => signin()}>
-            SIGN IN
-          </button>
-        )}
+        {!user && <button onClick={() => signin()}>SIGN IN</button>}
         {user && (
           <div className="flex items-center ">
-            <button className="" onClick={() => logout()}>
-              SIGN OUT
-            </button>
+            <button onClick={() => logout()}>SIGN OUT</button>
             <div className="w-12 h-12 ml-3 sm:mx-3 border-[2.5px] rounded-full border-victory">
               <Image className="rounded-full " src={user.photoURL} alt="User profile image" height={48} width={48} />
             </div>
