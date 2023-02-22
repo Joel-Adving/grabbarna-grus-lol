@@ -1,15 +1,15 @@
 'use client'
 
-import MatchHistoryList from '../../../components/MatchHistoryList'
+import MatchHistoryList from '@/components/MatchHistoryList'
 import Image from 'next/image'
-import { useGetMatchHistory } from '../../../hooks/useGetMatchHistory'
-import { useGetMatchHistoryStats } from '../../../hooks/useGetMatchHistoryStats'
+import { useGetMatchHistory } from '@/hooks/useGetMatchHistory'
+import { useGetMatchHistoryStats } from '@/hooks/useGetMatchHistoryStats'
 import { useEffect, useState } from 'react'
-import SummonerRankedInfo from '../../../components/SummonerRankedInfo'
+import SummonerRankedInfo from '@/components/SummonerRankedInfo'
 
 export default function GrusGrabb({ params }: any) {
   const { matchHistory, summoner } = useGetMatchHistory(params?.name)
-  const { stats } = useGetMatchHistoryStats(params?.name)
+  const { stats } = useGetMatchHistoryStats(matchHistory, summoner)
   const [filter, setFilter] = useState('MATCH_HISTORY')
 
   useEffect(() => {

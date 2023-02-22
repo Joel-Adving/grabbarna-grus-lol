@@ -1,5 +1,3 @@
-'use client'
-
 import YoutubeEmbed from '../../../components/YoutubeEmbed'
 
 export default function Video({ params }: any) {

@@ -1,5 +1,3 @@
-'use client'
-
 import FriendList from '@/components/FriendList'
 
 export default function GrabbLayout({ children }: { children: React.ReactNode }) {

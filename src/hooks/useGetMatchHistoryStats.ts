@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import { percentages } from '../utils/helpers'
 import { LeagueMatch, PlayerStats } from '../utils/types'
-import { useGetMatchHistory } from './useGetMatchHistory'
 
-export const useGetMatchHistoryStats = (name: string) => {
+export const useGetMatchHistoryStats = (matchHistory: any, summoner: any) => {
   const [stats, setStats] = useState<any>(null)
-  const { matchHistory, summoner } = useGetMatchHistory(name)
 
   useEffect(() => {
     if (!matchHistory || !summoner?.id) return
