@@ -1,9 +1,9 @@
 'use client'
 
 import './globals.css'
+import { SWRConfig } from 'swr'
 import Header from '@/components/Header'
 import { AuthContextProvider } from '@/context/AuthContext'
-import { SWRConfig } from 'swr'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <AuthContextProvider>
           <SWRConfig>
-            {/* <Header /> */}
+            <Header />
             {children}
           </SWRConfig>
         </AuthContextProvider>

@@ -9,13 +9,10 @@ export const useGetMatchHistoryStats = (name: string) => {
 
   useEffect(() => {
     if (!matchHistory || !summoner?.id) return
-    console.log(matchHistory)
 
     const playerStats = matchHistory
       .filter((match: LeagueMatch) => match?.info !== undefined || match?.info == null)
       .map((match: LeagueMatch) => match?.info?.participants.find((player: any) => player?.summonerId === summoner?.id))
-
-    // console.log(playerStats)
 
     const wins = playerStats.filter((player: PlayerStats) => player?.win) as any[] | null
     const champions = playerStats.map((player: PlayerStats) => player?.championName)
