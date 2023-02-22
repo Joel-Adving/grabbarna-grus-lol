@@ -4,17 +4,19 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useAuth } from '../../hooks/useAuth'
 import styles from './styles.module.css'
+import { useRouter } from 'next/navigation'
 
 export default function Header() {
   const { user, signin, logout } = useAuth()
+  const router = useRouter()
 
   return (
     <header className={styles.header}>
       <nav className="container flex justify-between w-full px-3 py-4 mx-auto sm:px-0">
         <div className="flex items-center">
           <div className="flex space-x-8">
-            <Link href="/">HOME</Link>
-            {user && <Link href="playlist">PLAYLIST</Link>}
+            <button onClick={() => router.push('/')}>HOME</button>
+            {user && <button onClick={() => router.push('/playlist')}>PLAYLIST</button>}
           </div>
         </div>
         {!user && <button onClick={() => signin()}>SIGN IN</button>}
