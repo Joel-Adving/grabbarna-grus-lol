@@ -1,18 +1,15 @@
-import { limit, orderBy } from 'firebase/firestore'
-import { getSubCollection } from '@/lib/firebase/getSubCollection'
 import { useSummoners } from './useSummoners'
 import useSWR from 'swr'
+import { API_URL } from '@/utils/config'
 
-const fetcher = async (summonerId: string) => {
-  return await getSubCollection('match-history', summonerId, 'match', [orderBy('info.gameEndTimestamp', 'desc'), limit(20)])
-}
+const fetcher = async (name: string) => await fetch(`${API_URL}/matchHistory/name/${name}`).then((res) => res.json())
 
 export const useGetMatchHistory = (name: string) => {
   const { summoners } = useSummoners()
   const summoner = summoners?.find((summoner: any) => summoner.name === name)
-  const { data: matchHistory, isLoading } = useSWR(summoner?.id && name ? `matchHistory/${name}` : null, () =>
-    fetcher(summoner?.id)
-  )
+  const { data: matchHistory, isLoading } = useSWR(name ? `matchHistory/${name}` : null, () => fetcher(name))
+
+  //   console.log('matchHistory', matchHistory)
 
   return {
     matchHistory,

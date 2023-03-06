@@ -1,3 +1,5 @@
+export const API_URL = 'http://localhost:3001/api'
+
 export const API_PLAYLIST_URL = 'https://www.googleapis.com/youtube/v3/playlistItems'
 
 export const authRequired = ['/add-grabb']

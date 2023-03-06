@@ -1,7 +1,7 @@
-import { getCollection } from '@/lib/firebase/getCollection'
+import { API_URL } from '@/utils/config'
 import useSWR from 'swr'
 
-const fetcher = async () => await getCollection('summoners')
+const fetcher = async () => await fetch(`${API_URL}/summoners`).then((res) => res.json())
 
 export function useSummoners() {
   const { data, error, isLoading } = useSWR('summoners', fetcher)
