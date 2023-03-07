@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Summoner {
+  id Int @id @default(autoincrement())
+  name String @unique
+  accountId String @unique
+  profileIconId Int
+  puuid String
+  revisionDate BigInt
+  summonerLevel Int
+  rankedStats RankedStats[]
+  matchHistory Match[]
+  
+}
+
+model RankedStats {
+    id Int @id @default(autoincrement())
+    freshBlood Boolean
+    hotStreak Boolean
+    inactive Boolean
+    leagueId String
+    leaguePoints Int
+    losses Int
+    queueType String
+    rank String
+    summonerName String
+    tier String
+    veteran Boolean
+    wins Int
+
+    summoner Summoner @relation(fields: [summonerId], references: [id])
+    summonerId Int
+}
+
+model Match {
+    id Int @id @default(autoincrement())
+    date BigInt
+    matchId String @unique
+    info Json
+    metaData Json
+    summoners Summoner[]
+}

@@ -32,8 +32,6 @@ export const useGetMatchHistoryStats = (matchHistory: any, summoner: any) => {
 
     const percentage = (num: number, total: number) => (num / total) * 100
 
-    // percentage()
-
     const mostPlayed = new Map()
     const sortedChampsMap = new Map([...(champsMap.entries() as any)].sort((a, b) => b[1] - a[1])) as any
 
@@ -48,8 +46,6 @@ export const useGetMatchHistoryStats = (matchHistory: any, summoner: any) => {
         )
       )
     }
-
-    console.log(sortedChampsMap)
 
     Array(3)
       .fill(0)
