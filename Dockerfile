@@ -1,7 +1,7 @@
 FROM node:alpine as dependencies
 WORKDIR /app
 COPY package.json prisma ./
-RUN npm install 
+RUN npm install --frozen-lockfile
 RUN npx prisma generate
 
 FROM node:alpine as builder
@@ -17,8 +17,13 @@ ENV NODE_ENV production
 # COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 
-EXPOSE 80
-CMD ["npm", "run", "start"]
+
+EXPOSE 3000
+ENV PORT 3000
+
+CMD ["node", "server.js"]
