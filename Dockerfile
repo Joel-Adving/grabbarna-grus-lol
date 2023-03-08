@@ -1,15 +1,15 @@
-FROM node:lts as dependencies
+FROM node:alpine as dependencies
 WORKDIR /app
 COPY package.json ./
 RUN npm install 
 
-FROM node:lts as builder
+FROM node:alpine as builder
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
 RUN npm run build
 
-FROM node:lts as runner
+FROM node:alpine as runner
 WORKDIR /app
 ENV NODE_ENV production
 # If you are using a custom next.config.js file, uncomment this line.
