@@ -1,6 +1,6 @@
 FROM node:alpine as dependencies
 WORKDIR /app
-COPY package.json ./
+COPY package.json prisma ./
 RUN npm install 
 RUN npx prisma generate
 
