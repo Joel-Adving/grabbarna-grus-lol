@@ -13,7 +13,7 @@ export default function FriendList() {
     <section className="flex flex-col flex-grow max-w-[16rem] mx-auto bg-background border-[1px] border-background-light rounded-sm p-2 ml-3">
       {summoners
         ?.slice()
-        .sort((a, b) => a.name.localeCompare(b.name))
+        .sort((a: any, b: any) => a.name.localeCompare(b.name))
         .map((summoner: Summoner) => (
           <React.Fragment key={summoner.puuid}>
             <Link passHref href={`grabb/${summoner.name}`}>
