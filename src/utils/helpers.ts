@@ -29,7 +29,7 @@ function logRequestInfo(req: any) {
 }
 
 function percentages(arr: Array<any>) {
-  return arr.reduce((el, i) => ({ ...el, [i]: Math.trunc((el[i] || 0) + 100 / arr.length) }), {})
+  return arr?.reduce((el, i) => ({ ...el, [i]: Math.trunc((el[i] || 0) + 100 / arr.length) }), {})
 }
 
 function capitalizeFirstLetter(string: string) {

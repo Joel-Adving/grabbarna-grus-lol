@@ -41,15 +41,15 @@ export const useGetMatchHistoryStats = (matchHistory: any, summoner: any) => {
         Math.round(
           percentage(
             [...arr.values()][i],
-            [...arr.values()].reduce((a, b) => a + b)
+            [...arr.values()]?.reduce((a, b) => a + b)
           )
         )
       )
     }
 
-    Array(3)
-      .fill(0)
-      .forEach((_, i) => {
+    ;[...new Array(3)]
+      ?.map(() => 0)
+      ?.forEach((_, i) => {
         setMap(mostPlayed, sortedChampsMap, i)
       })
 
