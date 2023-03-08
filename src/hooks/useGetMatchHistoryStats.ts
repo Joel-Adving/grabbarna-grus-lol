@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { LeagueMatch, PlayerStats } from '../utils/types'
+import { LeagueMatch, PlayerStats } from '../types'
 
 export const useGetMatchHistoryStats = (matchHistory: any, summoner: any) => {
   const [mostPlayed, setMostPlayed] = useState<Map<any, any> | null>(null)

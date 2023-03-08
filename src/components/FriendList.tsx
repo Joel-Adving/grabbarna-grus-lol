@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Summoner } from '../utils/types'
+import { Summoner } from '../types'
 import { useSummoners } from '@/hooks/useSummoners'
 import React from 'react'
 

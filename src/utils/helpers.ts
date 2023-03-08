@@ -1,19 +1,39 @@
-export async function getJSON(url: string) {
+async function getJSON(url: string) {
   try {
     const res = await fetch(url)
-    const data = await res.json()
-    return data
-  } catch (e) {
-    console.log(e)
+    return await res.json()
+  } catch (err) {
+    console.log(err)
   }
 }
 
-export const sleep = (milSecons: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, milSecons)
+function sleep(ms: number) {
+  return new Promise((r) => {
+    setTimeout(r, ms)
   })
+}
 
-export const percentages = (arr: Array<any>) =>
-  arr.reduce((el, i) => ({ ...el, [i]: Math.trunc((el[i] || 0) + 100 / arr.length) }), {})
+function findSummonerByName(summoners: any[], name: string) {
+  return summoners.find((summoner) => summoner.name.toLowerCase() === name.toLowerCase())
+}
 
-export const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
+function findSummonerById(summoners: any[], id: number) {
+  return summoners.find((summoner) => summoner.id === id)
+}
+
+function logRequestInfo(req: any) {
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  const date = new Date()
+  const formattedDate = `${date.toLocaleDateString()}, ${date.toLocaleTimeString()}`
+  console.log({ ip, at: formattedDate })
+}
+
+function percentages(arr: Array<any>) {
+  return arr.reduce((el, i) => ({ ...el, [i]: Math.trunc((el[i] || 0) + 100 / arr.length) }), {})
+}
+
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+export { getJSON, sleep, findSummonerByName, findSummonerById, logRequestInfo, percentages, capitalizeFirstLetter }

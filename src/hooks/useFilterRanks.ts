@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { leagueRanks, leagueTiers } from '../utils/config'
+import { leagueRanks, leagueTiers } from '../config'
 import { useSummoners } from './useSummoners'
 
 export const useFilterRanks = () => {

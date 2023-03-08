@@ -1,8 +1,8 @@
 'use client'
 
-import { summonerSpells } from '../utils/config'
+import { summonerSpells } from '../config'
 import Image from 'next/image'
-import { LeagueMatch, Summoner } from '../utils/types'
+import { LeagueMatch, Summoner } from '../types'
 
 interface Props {
   matchHistory: Array<LeagueMatch>

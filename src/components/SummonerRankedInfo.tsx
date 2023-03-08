@@ -3,9 +3,9 @@
 import React from 'react'
 import Image from 'next/image'
 import { useRankedStats } from '../hooks/useRankedStats'
-import { queueTypes } from '../utils/config'
+import { queueTypes } from '../config'
 import { capitalizeFirstLetter } from '../utils/helpers'
-import { Summoner } from '../utils/types'
+import { Summoner } from '../types'
 
 interface Props {
   summoner: Summoner

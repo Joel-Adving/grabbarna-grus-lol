@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Summoner, summonerRankInfo } from '../utils/types'
+import { Summoner, summonerRankInfo } from '../types'
 
 export const useRankedStats = (summoner: Summoner) => {
   const [filter, setFilter] = useState('RANKED_FLEX_SR')

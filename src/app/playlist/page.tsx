@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Image from 'next/image'
-import { Playlist, PlaylistItem } from '../../utils/types'
+import { Playlist, PlaylistItem } from '../../types'
 import Link from 'next/link'
 
 interface VideoNumber {

@@ -2,22 +2,19 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useAuth } from '../../hooks/useAuth'
 import styles from './styles.module.css'
 
 export default function Header() {
-  const { user, signin, logout } = useAuth()
-
   return (
     <header className={styles.header}>
       <nav className="container flex justify-between w-full px-3 py-4 mx-auto sm:px-0">
         <div className="flex items-center">
           <div className="flex space-x-8">
             <Link href="/">HOME</Link>
-            {user && <Link href="playlist">PLAYLIST</Link>}
+            {/* {user && <Link href="playlist">PLAYLIST</Link>} */}
           </div>
         </div>
-        {!user && <button onClick={() => signin()}>SIGN IN</button>}
+        {/* {!user && <button onClick={() => signin()}>SIGN IN</button>}
         {user && (
           <div className="flex items-center ">
             <button onClick={() => logout()}>SIGN OUT</button>
@@ -32,7 +29,7 @@ export default function Header() {
             </div>
             <h3 className="hidden sm:block text-text-highlight">{user?.name?.toUpperCase()}</h3>
           </div>
-        )}
+        )} */}
       </nav>
     </header>
   )

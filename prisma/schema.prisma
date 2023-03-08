@@ -14,6 +14,7 @@ model Summoner {
   id Int @id @default(autoincrement())
   name String @unique
   accountId String @unique
+  summonerId String @unique
   profileIconId Int
   puuid String
   revisionDate BigInt
@@ -37,7 +38,6 @@ model RankedStats {
     tier String
     veteran Boolean
     wins Int
-
     summoner Summoner @relation(fields: [summonerId], references: [id])
     summonerId Int
 }
@@ -49,4 +49,10 @@ model Match {
     info Json
     metaData Json
     summoners Summoner[]
+}
+
+model LastUpdated {
+    id Int @id @default(autoincrement())
+    name String 
+    summonerId Int
 }
