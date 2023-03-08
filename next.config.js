@@ -13,7 +13,8 @@ const nextConfig = {
         protocol: 'http',
         hostname: '**'
       }
-    ]
+    ],
+    output: 'standalone'
   }
 }
 
