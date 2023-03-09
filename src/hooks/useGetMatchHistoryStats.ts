@@ -32,29 +32,29 @@ export const useGetMatchHistoryStats = (matchHistory: any, summoner: any) => {
 
     const percentage = (num: number, total: number) => (num / total) * 100
 
-    const mostPlayed = new Map()
+    const mostPlayedMap = new Map()
     const sortedChampsMap = new Map([...(champsMap.entries() as any)].sort((a, b) => b[1] - a[1])) as any
 
-    const setMap = (map: Map<any, any>, arr: Map<any, any>, i: number) => {
-      map.set(
-        [...arr.keys()][i],
-        Math.round(
-          percentage(
-            [...arr.values()][i],
-            [...arr.values()]?.reduce((a, b) => a + b)
+    try {
+      const setMap = (map: Map<any, any>, arr: Map<any, any>, i: number) => {
+        map.set(
+          [...arr.keys()][i],
+          Math.round(
+            percentage(
+              [...arr.values()][i],
+              [...arr.values()]?.reduce((a, b) => a + b)
+            )
           )
         )
-      )
-    }
+      }
 
-    ;[...new Array(3)]
-      ?.map(() => 0)
-      ?.forEach((_, i) => {
-        setMap(mostPlayed, sortedChampsMap, i)
+      ;[0, 0, 0].forEach((_, i) => {
+        setMap(mostPlayedMap, sortedChampsMap, i)
       })
 
-    setMostPlayed(mostPlayed)
-  }, [matchHistory, summoner?.puuid])
+      setMostPlayed(mostPlayed)
+    } catch (err) {}
+  }, [matchHistory, mostPlayed, summoner?.puuid])
 
   return { mostPlayed, wins, winRate }
 }
