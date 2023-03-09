@@ -2,7 +2,7 @@ import { findSummonerById, findSummonerByName, logRequestInfo } from '@/utils/he
 import { getSummoners } from '@/utils/server/getSummoners'
 import { updateProfileAndMatchHistory } from '@/utils/riot/updateProfileAndMatchHistory'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/libs/prisma'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   logRequestInfo(req)
@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await prisma.lastUpdated.create({
       data: {
         name: summoners[0].name,
-        summonerId: summoners[0].id
+        summonerId: summoners[0].summonerId
       }
     })
     return res.json('bruh')
@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const foundSummoner = findSummonerById(summoners, lastUpdated.summonerId)
   await updateProfileAndMatchHistory(foundSummoner.name)
-  const indexOfUpdatededProfile = summoners.findIndex((s: any) => s.id === lastUpdated.summonerId)
+  const indexOfUpdatededProfile = summoners.findIndex((sum: any) => sum.summonerId === lastUpdated.summonerId)
 
   if (indexOfUpdatededProfile + 1 >= summoners.length) {
     await prisma.lastUpdated.update({
@@ -51,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         id: lastUpdated.id
       },
       data: {
-        summonerId: summoners[0].id,
+        summonerId: summoners[0].summonerId,
         name: summoners[0].name
       }
     })
@@ -70,7 +70,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         id: lastUpdated.id
       },
       data: {
-        summonerId: nextToBeUpdated.id,
+        summonerId: nextToBeUpdated.summonerId,
         name: nextToBeUpdated.name
       }
     })

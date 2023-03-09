@@ -3,7 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { useRankedStats } from '../hooks/useRankedStats'
-import { queueTypes } from '../config'
+import { queueTypes } from '../constants'
 import { capitalizeFirstLetter } from '../utils/helpers'
 import { Summoner } from '../types'
 

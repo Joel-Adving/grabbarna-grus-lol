@@ -1,7 +1,7 @@
 import { findSummonerByName, logRequestInfo } from '@/utils/helpers'
 import { getSummoners } from '@/utils/server/getSummoners'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/libs/prisma'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   logRequestInfo(req)
@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await prisma.lastUpdated.create({
       data: {
         name: foundSummoner.name,
-        summonerId: foundSummoner.id
+        summonerId: foundSummoner.summonerId
       }
     })
     return res.json('bruh')
@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       id: summoner.id
     },
     data: {
-      summonerId: foundSummoner.id,
+      summonerId: foundSummoner.summonerId,
       name: foundSummoner.name
     }
   })

@@ -1,4 +1,3 @@
-import { API_URL } from '@/config'
 import useSWR from 'swr'
 
 const fetcher = async () => await fetch(`/api/summoners`).then((res) => res.json())

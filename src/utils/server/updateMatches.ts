@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/libs/prisma'
 
 export async function updateMatchHistory(matches: any[], name: string) {
   try {

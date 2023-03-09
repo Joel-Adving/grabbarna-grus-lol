@@ -1,6 +1,6 @@
 'use client'
 
-import { summonerSpells } from '../config'
+import { summonerSpells } from '../constants'
 import Image from 'next/image'
 import { LeagueMatch, Summoner } from '../types'
 

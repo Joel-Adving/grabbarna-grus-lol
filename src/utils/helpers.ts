@@ -17,8 +17,8 @@ function findSummonerByName(summoners: any[], name: string) {
   return summoners.find((summoner) => summoner.name.toLowerCase() === name.toLowerCase())
 }
 
-function findSummonerById(summoners: any[], id: number) {
-  return summoners.find((summoner) => summoner.id === id)
+function findSummonerById(summoners: any[], summonerId: string) {
+  return summoners.find((summoner) => summoner.id === summonerId)
 }
 
 function logRequestInfo(req: any) {

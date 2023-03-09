@@ -12,20 +12,20 @@ datasource db {
 
 model Summoner {
   id Int @id @default(autoincrement())
+  summonerId String @unique
   name String @unique
   accountId String @unique
-  summonerId String @unique
   profileIconId Int
   puuid String
   revisionDate BigInt
   summonerLevel Int
   rankedStats RankedStats[]
   matchHistory Match[]
-  
 }
 
 model RankedStats {
     id Int @id @default(autoincrement())
+    summonerId String
     freshBlood Boolean
     hotStreak Boolean
     inactive Boolean
@@ -38,8 +38,7 @@ model RankedStats {
     tier String
     veteran Boolean
     wins Int
-    summoner Summoner @relation(fields: [summonerId], references: [id])
-    summonerId Int
+    summoner Summoner @relation(fields: [summonerId], references: [summonerId])
 }
 
 model Match {
@@ -53,6 +52,6 @@ model Match {
 
 model LastUpdated {
     id Int @id @default(autoincrement())
+    summonerId String
     name String 
-    summonerId Int
 }
