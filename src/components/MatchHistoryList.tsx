@@ -13,7 +13,7 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
   if (!matchHistory || !summoner) return null
 
   return (
-    <section className="flex flex-col flex-grow py-4 pb-20">
+    <section className="flex flex-col flex-grow py-4">
       {matchHistory.map((match) => {
         const { info } = match
         const playerStats = info.participants.find((el) => el.puuid === summoner.puuid)

@@ -3,18 +3,16 @@
 import MatchHistoryList from '@/components/MatchHistoryList'
 import Image from 'next/image'
 import { useGetMatchHistory } from '@/hooks/useGetMatchHistory'
-import { useGetMatchHistoryStats } from '@/hooks/useGetMatchHistoryStats'
 import { useEffect, useState } from 'react'
 import SummonerRankedInfo from '@/components/SummonerRankedInfo'
+import ProfileInfo from '@/components/ProfileInfo'
 
 export default function GrusGrabb({ params }: any) {
-  const { matchHistory, summoner } = useGetMatchHistory(params?.name)
-  const { mostPlayed, wins, winRate } = useGetMatchHistoryStats(matchHistory, summoner)
   const [filter, setFilter] = useState('MATCH_HISTORY')
+  const { matchHistory, summoner, mostPlayed, winRate, wins } = useGetMatchHistory(params?.name)
 
   useEffect(() => {
-    if (!summoner) return
-    if (summoner.rankedStats.length < 1) {
+    if (summoner?.rankedStats.length < 1) {
       setFilter('MATCH_HISTORY')
     }
   }, [summoner])
@@ -22,33 +20,36 @@ export default function GrusGrabb({ params }: any) {
   return (
     <>
       <div className="w-full">
-        <div className="container px-3 pt-3 mb-6 space-x-8 text-text font-BeaufortBold md:mb-0 sm:px-0">
-          <button onClick={() => setFilter('MATCH_HISTORY')}>MATCH HISTORY</button>
-          {summoner?.rankedStats.length > 0 && <button onClick={() => setFilter('RANKED')}>RANKED</button>}
+        <div className="container px-3 pt-6 mb-6 space-x-8 text-text font-BeaufortBold md:mb-0 sm:px-0">
+          <button
+            autoFocus
+            className={`pb-1 border-b-2 border-transparent outline-none hover:text-text-highlight focus:border-text`}
+            onClick={() => setFilter('MATCH_HISTORY')}
+          >
+            MATCH HISTORY
+          </button>
+
+          {summoner?.rankedStats.length > 0 && (
+            <button
+              className="pb-1 border-b-2 border-transparent outline-none hover:text-text-highlight focus:border-text"
+              onClick={() => setFilter('RANKED')}
+            >
+              RANKED
+            </button>
+          )}
         </div>
+
         <div className="container flex flex-row">
           <div className="flex flex-col flex-grow">
             {filter === 'MATCH_HISTORY' && (
               <div className="flex flex-col items-center md:flex-row">
                 <div className="flex flex-col justify-center h-full">
-                  <div className="flex items-center justify-center flex-grow py-3 my-4 border-b-2 border-border bg-slate-4000 sm:justify-start">
-                    <div className="w-14 h-14 mr-3 border-[3px] rounded-full border-gold p-[2px] overflow-hidden">
-                      <Image
-                        src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${summoner?.profileIconId}.png`}
-                        width={56}
-                        height={56}
-                        className="rounded-full"
-                        alt="Summoners profile icon"
-                      />
-                    </div>
-                    <h1 className="text-4xl font-frizQuad text-gold-light">{summoner?.name}</h1>
-                    <p className="mt-2 ml-3 text-2xl text-text-highlight font-BeaufortBold">{summoner?.summonerLevel}</p>
-                  </div>
+                  <ProfileInfo summoner={summoner} />
 
-                  <div className="hidden gap-3 mt-2 font-BeaufortBold md:flex">
-                    <h2 className="text-text-highlight">GAMES PLAYED</h2>
+                  <div className="hidden h-full gap-3 mt-2 font-BeaufortBold md:flex">
                     {wins && matchHistory && winRate && (
                       <>
+                        <h2 className="text-text-highlight">GAMES PLAYED</h2>
                         <p className="text-text-highlight">{matchHistory.length}</p>
                         <p>-</p>
                         <p className={`${winRate >= 50 ? 'text-victory' : 'text-defeat'}`}>{winRate}%</p>
@@ -83,10 +84,11 @@ export default function GrusGrabb({ params }: any) {
                     </div>
                   </div>
                 </div>
-                <div className="flex justify-center gap-3 mt-6 mb-3 font-BeaufortBold md:hidden">
-                  <h2 className="text-text-highlight">GAMES PLAYED</h2>
+
+                <div className="flex justify-center h-full gap-3 mt-6 mb-3 font-BeaufortBold md:hidden">
                   {wins && matchHistory && winRate && (
                     <>
+                      <h2 className="text-text-highlight">GAMES PLAYED</h2>
                       <p className="text-text-highlight">{matchHistory.length}</p>
                       <p>-</p>
                       <p className={`${winRate >= 50 ? 'text-victory' : 'text-defeat'}`}>{winRate}%</p>

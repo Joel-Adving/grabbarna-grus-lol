@@ -6,6 +6,7 @@ import { useRankedStats } from '../hooks/useRankedStats'
 import { queueTypes } from '../constants'
 import { capitalizeFirstLetter } from '../utils/helpers'
 import { Summoner } from '../types'
+import ProfileInfo from './ProfileInfo'
 
 interface Props {
   summoner: Summoner
@@ -16,20 +17,8 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
 
   return (
     <div className="flex flex-col flex-grow font-BeaufortBold">
-      <div className="flex items-center justify-center flex-grow py-3 mt-4 bg-slate-4000 sm:justify-start">
-        <div className="w-14 h-14 mr-3 border-[3px] rounded-full border-gold p-[2px] overflow-hidden">
-          <Image
-            src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${summoner.profileIconId}.png`}
-            width={56}
-            height={56}
-            className="rounded-full"
-            alt="Summoners profile icon"
-          />
-        </div>
-        <h1 className="text-2xl sm:text-4xl font-frizQuad text-gold-light ">{summoner.name}</h1>
-        <p className="mt-2 ml-3 text-2xl text-text-highlight font-BeaufortBold">{summoner.summonerLevel}</p>
-      </div>
-      <div className="flex justify-center mt-6 mb-10 space-x-8 sm:mb-0 sm:justify-start font-BeaufortBold text-text-highlight">
+      <ProfileInfo summoner={summoner} />
+      <div className="flex justify-center mt-2 mb-10 space-x-8 sm:mb-0 sm:justify-start font-BeaufortBold text-text-highlight">
         {summoner.rankedStats &&
           summoner.rankedStats.map((queue, i) => (
             <button key={i} onClick={() => setFilter(queue.queueType)}>
@@ -40,8 +29,8 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
 
       <div>
         {queuStats && (
-          <div className="flex flex-col items-center grid-cols-5 mb-10 sm:grid">
-            <div className="col-span-3">
+          <div className="flex flex-col px-6 mt-6 sm:px-0 sm:flex-row">
+            <div className="w-full max-w-md col-span-3">
               <div>{new Date().getFullYear()} SEASON</div>
               <div className="flex mb-2 space-x-3 text-2xl text-text-highlight">
                 <div>{queueTypes[filter]}</div>
@@ -49,7 +38,7 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
                 <div>{queuStats.tier}</div>
                 <div>{queuStats.rank}</div>
               </div>
-              <div className="flex  items-center justify-between text-sm text-text-highlight border-t-[1px] border-b-[1px] py-2 border-neutral-700 border-t-border-light">
+              <div className="flex items-center justify-between text-sm text-text-highlight border-t-[1px] border-b-[1px] py-2 border-neutral-700 border-t-border-light">
                 <div className="flex">
                   <p className="mr-10">#</p>
                   <p className="mr-10">SUMMONER</p>
@@ -75,7 +64,7 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
               </div>
             </div>
 
-            <div className="grid col-span-2 ">
+            <div className="grid col-span-2 mx-auto">
               <div className="flex flex-col items-center mt-6 sm:mt-0">
                 <Image
                   src={`/ranked-emblems/Emblem_${
