@@ -3,13 +3,31 @@
 import MatchHistoryList from '@/components/MatchHistoryList'
 import Image from 'next/image'
 import { useGetMatchHistory } from '@/hooks/useGetMatchHistory'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import SummonerRankedInfo from '@/components/SummonerRankedInfo'
 import ProfileInfo from '@/components/ProfileInfo'
 
 export default function GrusGrabb({ params }: any) {
   const [filter, setFilter] = useState('MATCH_HISTORY')
-  const { matchHistory, summoner, mostPlayed, winRate, wins } = useGetMatchHistory(params?.name)
+  const { matchHistory, summoner, mostPlayed, winRate, wins, setSize, isLoading } = useGetMatchHistory(params?.name)
+
+  const handleScroll = useCallback(
+    (e: any) => {
+      if (isLoading) return
+      if (
+        window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight &&
+        filter === 'MATCH_HISTORY'
+      ) {
+        setSize((prev) => prev + 1)
+      }
+    },
+    [filter, isLoading, setSize]
+  )
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   useEffect(() => {
     if (summoner?.rankedStats.length < 1) {

@@ -14,7 +14,7 @@ function sleep(ms: number) {
 }
 
 function findSummonerByName(summoners: any[], name: string) {
-  return summoners.find((summoner) => summoner.name.toLowerCase() === name.toLowerCase())
+  return summoners?.find((summoner) => summoner.name.toLowerCase() === name.toLowerCase())
 }
 
 function findSummonerById(summoners: any[], summonerId: string) {

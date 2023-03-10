@@ -14,9 +14,11 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
 
   return (
     <section className="flex flex-col flex-grow py-4">
-      {matchHistory.map((match) => {
+      {matchHistory?.map((match) => {
         const { info } = match
-        const playerStats = info.participants.find((el) => el.puuid === summoner.puuid)
+        if (!info) return null
+
+        const playerStats = info?.participants.find((el) => el.puuid === summoner.puuid)
         const win = playerStats?.win
         let gameType
 
