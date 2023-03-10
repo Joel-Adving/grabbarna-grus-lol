@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (key !== process.env.UPDATE_GRABB) {
-    return res.json('bruh')
+    return res.json('bruuh')
   }
 
   if (name !== '_') {
@@ -31,6 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const lastUpdated = await prisma.lastUpdated.findFirst()
+
   if (!lastUpdated) {
     await prisma.lastUpdated.create({
       data: {
@@ -38,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         summonerId: summoners[0].summonerId
       }
     })
-    return res.json('bruh')
+    return res.json('no last updated')
   }
 
   const foundSummoner = findSummonerById(summoners, lastUpdated.summonerId)

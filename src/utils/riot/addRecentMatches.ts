@@ -27,7 +27,7 @@ export async function addRecentMatches(name: string) {
 
   const newMatches = matchesInfo.filter((match: any) => {
     for (let currentMatch of currentRecentMatches) {
-      if (currentMatch.matchId === match.metadata.matchId) {
+      if (currentMatch?.matchId === match?.metadata?.matchId) {
         return false
       }
     }

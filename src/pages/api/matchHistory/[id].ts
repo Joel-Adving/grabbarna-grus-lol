@@ -9,6 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const matches = await prisma.match.findMany({
+    take: 20,
     where: {
       summoners: {
         some: {

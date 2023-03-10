@@ -18,7 +18,7 @@ function findSummonerByName(summoners: any[], name: string) {
 }
 
 function findSummonerById(summoners: any[], summonerId: string) {
-  return summoners.find((summoner) => summoner.id === summonerId)
+  return summoners.find((summoner) => summoner.summonerId === summonerId)
 }
 
 function logRequestInfo(req: any) {
