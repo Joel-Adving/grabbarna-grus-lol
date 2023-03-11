@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Image from 'next/image'
 import { Playlist, PlaylistItem } from '../../types'
 import Link from 'next/link'
@@ -18,7 +16,7 @@ const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&pl
 
 export default async function PlaylistPage() {
   const res = await fetch(url, { next: { revalidate: 120 } }).then((res) => res.json())
-  const data = { ...res, items: res.items.filter((item: any) => item.snippet.title !== 'Deleted video') }
+  const data = { ...res, items: res?.items?.filter((item: any) => item?.snippet?.title !== 'Deleted video') }
 
   const videoNumbers: Array<VideoNumber> = data?.items.map((item: PlaylistItem, i: number) => ({
     id: item.etag,
