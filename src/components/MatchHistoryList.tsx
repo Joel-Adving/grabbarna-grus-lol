@@ -3,7 +3,6 @@
 import { LEAGUE_CDN, summonerSpells } from '../constants'
 import { LeagueMatch, Summoner } from '../types'
 import Image from 'next/image'
-import Loader from './Loader/Loader'
 
 interface Props {
   matchHistory: Array<LeagueMatch>
