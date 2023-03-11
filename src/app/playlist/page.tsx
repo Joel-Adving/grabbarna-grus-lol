@@ -18,7 +18,7 @@ export default async function PlaylistPage() {
   const res = await fetch(url, { next: { revalidate: 120 } }).then((res) => res.json())
   const data = { ...res, items: res?.items?.filter((item: any) => item?.snippet?.title !== 'Deleted video') }
 
-  const videoNumbers: Array<VideoNumber> = data?.items.map((item: PlaylistItem, i: number) => ({
+  const videoNumbers: Array<VideoNumber> = data?.items?.map((item: PlaylistItem, i: number) => ({
     id: item.etag,
     videoNumber: i + 1
   }))
