@@ -1,18 +1,17 @@
 'use client'
 
-import React from 'react'
 import Image from 'next/image'
 import { useRankedStats } from '../hooks/useRankedStats'
 import { queueTypes } from '../constants'
 import { capitalizeFirstLetter } from '../utils/helpers'
-import { Summoner } from '../types'
 import ProfileInfo from './ProfileInfo'
+import { RankedStats, Summoner } from '@prisma/client'
 
-interface Props {
-  summoner: Summoner
+export type FullSummonerProfile = Summoner & {
+  rankedStats: RankedStats[]
 }
 
-const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
+export default function SummonerRankedInfo({ summoner }: { summoner: FullSummonerProfile }) {
   const { filter, queuStats, setFilter } = useRankedStats(summoner)
 
   return (
@@ -88,5 +87,3 @@ const SummonerRankedInfo: React.FC<Props> = ({ summoner }) => {
     </div>
   )
 }
-
-export default SummonerRankedInfo
