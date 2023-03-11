@@ -2,7 +2,7 @@ import { findSummonerById, findSummonerByName, logRequestInfo } from '@/utils/he
 import { getSummoners } from '@/utils/server/getSummoners'
 import { updateProfileAndMatchHistory } from '@/utils/riot/updateProfileAndMatchHistory'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { prisma } from '@/libs/prisma'
+import { prisma } from '@/lib/prisma'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   logRequestInfo(req)

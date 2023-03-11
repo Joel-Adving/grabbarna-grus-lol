@@ -1,7 +1,6 @@
 import { LEAGUE_CDN } from '@/constants'
 import { Summoner } from '@prisma/client'
 import Image from 'next/image'
-import cn from 'classnames'
 import styles from './styles.module.css'
 
 const sizes = {
@@ -17,7 +16,7 @@ type Props = {
 
 export default function SummonerIcon({ summoner, size = 'small' }: Props) {
   return (
-    <div className={cn(styles[size], `rounded-full border-gold overflow-hidden`)}>
+    <div className={`${styles[size]} rounded-full border-gold overflow-hidden`}>
       <Image
         src={`${LEAGUE_CDN}/img/profileicon/${summoner?.profileIconId}.png`}
         width={sizes[size]}

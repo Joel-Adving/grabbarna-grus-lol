@@ -1,4 +1,4 @@
-import { prisma } from '@/libs/prisma'
+import { prisma } from '@/lib/prisma'
 import { sleep } from '../helpers'
 import { updateMatchHistory } from '../server/updateMatches'
 import { matchHistory, matches, summoner } from './riotApi'

@@ -1,4 +1,4 @@
-import { prisma } from '@/libs/prisma'
+import { prisma } from '@/lib/prisma'
 import * as riotApi from './riotApi'
 
 export async function updateSummonerProfile(name: string) {

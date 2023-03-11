@@ -8,16 +8,16 @@ import ProfileInfo from '@/components/ProfileInfo'
 import MatchesInfo from '@/components/MatchesInfo'
 import MostPlayedChamps from '@/components/MostPlayedChamps'
 import Loader from '@/components/Loader'
+import { SortBy, useFilterAndSortMatches } from '@/hooks/useFilterAndSortMatches'
 
 export default function GrusGrabb({ params }: any) {
-  const [filter, setFilter] = useState('MATCH_HISTORY')
+  const [view, setView] = useState('MATCH_HISTORY')
   const { matchHistory, summoner, mostPlayed, winRate, wins, isLoading, isValidating, setFetchAll, fetchAll } =
     useGetMatchHistory(params?.name)
+  const { setSortBy, sortedMatchHistory } = useFilterAndSortMatches(matchHistory, summoner)
 
   useEffect(() => {
-    if (summoner?.rankedStats.length < 1) {
-      setFilter('MATCH_HISTORY')
-    }
+    if (summoner?.rankedStats.length < 1) setView('MATCH_HISTORY')
   }, [summoner])
 
   return (
@@ -27,7 +27,7 @@ export default function GrusGrabb({ params }: any) {
           <button
             autoFocus
             className="pb-1 border-b-2 border-transparent outline-none hover:text-text-highlight focus:border-text"
-            onClick={() => setFilter('MATCH_HISTORY')}
+            onClick={() => setView('MATCH_HISTORY')}
           >
             MATCH HISTORY
           </button>
@@ -35,7 +35,7 @@ export default function GrusGrabb({ params }: any) {
           {summoner?.rankedStats.length > 0 && (
             <button
               className="pb-1 border-b-2 border-transparent outline-none hover:text-text-highlight focus:border-text"
-              onClick={() => setFilter('RANKED')}
+              onClick={() => setView('RANKED')}
             >
               RANKED
             </button>
@@ -44,7 +44,7 @@ export default function GrusGrabb({ params }: any) {
 
         <div className="container flex flex-row">
           <div className="flex flex-col flex-grow">
-            {filter === 'MATCH_HISTORY' && (
+            {view === 'MATCH_HISTORY' && (
               <>
                 <div className="flex flex-col items-center md:flex-row">
                   <div className="flex flex-col justify-center h-full">
@@ -70,15 +70,40 @@ export default function GrusGrabb({ params }: any) {
                   </div>
                 </div>
 
-                {matchHistory?.length <= 20 && (
-                  <button
-                    disabled={isLoading}
-                    onClick={() => setFetchAll(true)}
-                    className="px-2 py-1 pb-[0.33rem] mt-2 hover:border-text-light hover:text-text-highlight mx-auto sm:mx-0 sm:mr-auto text-sm leading-none border rounded border-text-diffuse"
+                <div className="flex gap-2 mx-auto mt-2 sm:mx-0 sm:mr-auto">
+                  {matchHistory?.length <= 20 && (
+                    <button
+                      disabled={isLoading}
+                      onClick={() => setFetchAll(true)}
+                      className="px-2 py-1 text-sm border rounded hover:border-text-light hover:text-text-highlight border-text-diffuse"
+                    >
+                      Fetch all games since april 2022
+                    </button>
+                  )}
+
+                  <select
+                    onChange={(e) => setSortBy(e.target.value as SortBy)}
+                    className="px-2 py-1 text-sm border rounded outline-none bg-background-darkest hover:border-text-light border-text-diffuse"
                   >
-                    Fetch all games since april 2022
-                  </button>
-                )}
+                    <option value="date">Date</option>
+                    <option value="kills">Kills</option>
+                    <option value="deaths">Deaths</option>
+                    <option value="assists">Assists</option>
+                    <option value="kda">K/D/A</option>
+                    <option value="totalDamageDealt">Damage</option>
+                    <option value="totalDamageDealtToChampions">Damage To Champions</option>
+                    <option value="gameLength">Game Length</option>
+                    <option value="champion">Champion</option>
+                    <option value="gold">Gold</option>
+                    <option value="soloKills">Solo Kills</option>
+                    <option value="pentaKills">Penta Kills</option>
+                    <option value="totalHeal">Total Healed</option>
+                    <option value="totalMinionsKilled">Minions Killed</option>
+                    <option value="skillshotsDodged">Skillshots Dodged</option>
+                    <option value="perfectGame">Perfect Game</option>
+                    <option value="snowballsHit">Snowballs Hit</option>
+                  </select>
+                </div>
               </>
             )}
 
@@ -89,12 +114,12 @@ export default function GrusGrabb({ params }: any) {
                 </div>
               ) : (
                 <>
-                  {summoner && matchHistory && filter === 'MATCH_HISTORY' && (
-                    <MatchHistoryList matchHistory={matchHistory} summoner={summoner} />
+                  {summoner && matchHistory && view === 'MATCH_HISTORY' && (
+                    <MatchHistoryList matchHistory={sortedMatchHistory} summoner={summoner} />
                   )}
                 </>
               )}
-              {filter === 'RANKED' && summoner && <SummonerRankedInfo summoner={summoner} />}
+              {view === 'RANKED' && summoner && <SummonerRankedInfo summoner={summoner} />}
             </div>
           </div>
         </div>

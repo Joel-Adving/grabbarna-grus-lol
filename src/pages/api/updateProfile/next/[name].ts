@@ -1,7 +1,7 @@
 import { findSummonerByName, logRequestInfo } from '@/utils/helpers'
 import { getSummoners } from '@/utils/server/getSummoners'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { prisma } from '@/libs/prisma'
+import { prisma } from '@/lib/prisma'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   logRequestInfo(req)

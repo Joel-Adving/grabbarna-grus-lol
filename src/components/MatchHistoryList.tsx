@@ -29,7 +29,7 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
 
         return (
           <div
-            className="py-3 border-b-[1px] border-neutral-700 text-text-light flex sm:justify-between justify-evenly cursor-pointer"
+            className="py-3 border-b-[1px] border-neutral-700 text-text-light flex sm:justify-between justify-evenly"
             key={match.info.gameId}
           >
             <div className="flex flex-col items-center sm:flex-row">

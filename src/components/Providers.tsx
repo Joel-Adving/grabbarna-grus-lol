@@ -1,14 +1,13 @@
 'use client'
 
 import { SWRConfig } from 'swr'
-
-const swrConf = {
-  dedupingInterval: 3600000, // one hour
-  revalidateOnFocus: false,
-  revalidateOnReconnect: false,
-  provider: () => new Map()
-}
+import { swrConfig } from '@/config'
+import { SessionProvider } from 'next-auth/react'
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  return <SWRConfig value={swrConf}>{children}</SWRConfig>
+  return (
+    <SessionProvider>
+      <SWRConfig value={swrConfig}>{children}</SWRConfig>
+    </SessionProvider>
+  )
 }
