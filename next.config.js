@@ -14,7 +14,7 @@ const nextConfig = {
         hostname: '**'
       }
     ],
-    minimumCacheTTL: 60 * 60 * 24 * 7 // 7 days
+    minimumCacheTTL: 60 * 60 * 24 * 7 * 4 // 4 weeks
   },
   output: 'standalone'
 }

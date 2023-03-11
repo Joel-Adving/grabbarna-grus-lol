@@ -77,7 +77,8 @@ export const useGetMatchHistory = (name: string) => {
   return {
     matchHistory,
     summoner,
-    isLoading: isLoading || isValidating,
+    isLoading,
+    isValidating,
     wins,
     winRate,
     mostPlayed,

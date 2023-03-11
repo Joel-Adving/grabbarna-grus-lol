@@ -7,14 +7,13 @@ import Image from 'next/image'
 interface Props {
   matchHistory: Array<LeagueMatch>
   summoner: Summoner
-  isLoading?: boolean
 }
 
-const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner, isLoading }) => {
+const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
   if (!matchHistory || !summoner) return null
 
   return (
-    <section className="flex flex-col flex-grow py-4">
+    <section className="flex flex-col flex-grow pt-4">
       {matchHistory?.map((match) => {
         const { info } = match
         if (!info) return null

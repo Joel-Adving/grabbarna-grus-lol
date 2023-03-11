@@ -11,9 +11,8 @@ import Loader from '@/components/Loader'
 
 export default function GrusGrabb({ params }: any) {
   const [filter, setFilter] = useState('MATCH_HISTORY')
-  const { matchHistory, summoner, mostPlayed, winRate, wins, isLoading, fetchAll, setFetchAll } = useGetMatchHistory(
-    params?.name
-  )
+  const { matchHistory, summoner, mostPlayed, winRate, wins, isLoading, isValidating, setFetchAll, fetchAll } =
+    useGetMatchHistory(params?.name)
 
   useEffect(() => {
     if (summoner?.rankedStats.length < 1) {
@@ -75,7 +74,7 @@ export default function GrusGrabb({ params }: any) {
                   <button
                     disabled={isLoading}
                     onClick={() => setFetchAll(true)}
-                    className="px-2 py-1 pb-[0.3rem] mt-2 hover:border-text-light hover:text-text-highlight mr-auto text-sm leading-none border rounded border-text-diffuse"
+                    className="px-2 py-1 pb-[0.33rem] mt-2 hover:border-text-light hover:text-text-highlight mx-auto sm:mx-0 sm:mr-auto text-sm leading-none border rounded border-text-diffuse"
                   >
                     Fetch all games since april 2022
                   </button>
@@ -84,12 +83,14 @@ export default function GrusGrabb({ params }: any) {
             )}
 
             <div className="flex w-full">
-              {isLoading ? (
-                <div className="grid w-full h-[50vh] place-content-center">{isLoading && <Loader />}</div>
+              {isLoading || (isValidating && fetchAll) ? (
+                <div className="grid w-full h-[50vh] place-content-center">
+                  <Loader />
+                </div>
               ) : (
                 <>
                   {summoner && matchHistory && filter === 'MATCH_HISTORY' && (
-                    <MatchHistoryList matchHistory={matchHistory} summoner={summoner} isLoading={isLoading} />
+                    <MatchHistoryList matchHistory={matchHistory} summoner={summoner} />
                   )}
                 </>
               )}
