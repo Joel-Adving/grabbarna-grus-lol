@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useFilterRanks } from '../hooks/useFilterRanks'
+import SummonerIcon from './SummonerIcon/SummonerIcon'
 
 export default function RankList() {
   const { sortedSummoners, filter, setFilter } = useFilterRanks()
@@ -45,16 +45,8 @@ export default function RankList() {
           >
             <div className="flex items-center">
               <p className="w-3 mr-3 sm:mr-8">{i + 1}</p>
-              <div className="mr-2 border-2 rounded-full w-6 h-6  border-gold p-[1px] overflow-hidden">
-                <Image
-                  src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${player.profileIconId}.png`}
-                  alt="Summoner Icon"
-                  width={24}
-                  height={24}
-                  className="rounded-full"
-                />
-              </div>
-              <p className="self-center">{player.name}</p>
+              <SummonerIcon size="small" summoner={player} />
+              <p className="self-center ml-1.5">{player.name}</p>
             </div>
 
             {player.rankedStats && (

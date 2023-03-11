@@ -1,0 +1,17 @@
+.loader {
+  border: 7px solid rgba(250, 250, 250, 0.34);
+  border-top: 7px solid #b8b8b8;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

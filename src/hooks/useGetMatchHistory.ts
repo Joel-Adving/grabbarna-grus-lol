@@ -1,48 +1,40 @@
+import useSWR, { useSWRConfig } from 'swr'
 import { useSummoners } from './useSummoners'
-import useSWRInfinite from 'swr/infinite'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { LeagueMatch, PlayerStats } from '@/types'
 import { findSummonerByName } from '@/utils/helpers'
 
-// const getKey = (pageIndex, previousPageData) => {
-//   if (previousPageData && !previousPageData.length) return null // reached the end
-//   return `/api/matchHistory/name/${name}?page=${pageIndex}&limit=10` // SWR key
-// }
-
-// const fetcher = async (name: string, cursor?: number) =>
-//   await fetch(`/api/matchHistory/name/${name}${cursor ? `?cursor=${cursor}` : ''}`).then((res) => res.json())
-
-const fetcher = async (url: string) => await fetch(url).then((res) => res.json())
+const fetcher = async (name: string, fetchAll: boolean) =>
+  await fetch(`/api/matchHistory/name/${name}?fetchAll=${fetchAll}`).then((res) => res.json())
 
 export const useGetMatchHistory = (name: string) => {
-  const { summoners } = useSummoners()
-  const summoner = findSummonerByName(summoners, name)
-
-  const { data, isLoading, size, setSize } = useSWRInfinite((pageIndex, previousPageData) => {
-    if (previousPageData && !previousPageData.data) return null
-    if (pageIndex === 0) return `/api/matchHistory/name/${name}`
-    const cursor = previousPageData?.data[previousPageData?.data.length]?.id
-    console.log('cursor', cursor)
-    return `/api/matchHistory/name/${name}?cursor=${cursor}}`
-  }, fetcher)
-
   const [wins, setWins] = useState<any[] | null>()
   const [winRate, setWinRate] = useState<number>()
   const [mostPlayed, setMostPlayed] = useState<Map<any, any> | null>(null)
 
-  const matchHistory = useMemo(() => data?.flatMap((i) => i) ?? [], [data])
+  const { summoners } = useSummoners()
+  const summoner = findSummonerByName(summoners, name)
+  const [fetchAll, setFetchAll] = useState(false)
+
+  const { mutate } = useSWRConfig()
+  const { data: matchHistory, isLoading, isValidating } = useSWR(`matchHistory/${name}`, () => fetcher(name, fetchAll))
 
   useEffect(() => {
-    if (matchHistory?.length < 1 || !summoner?.puuid) return
+    if (!matchHistory || matchHistory?.length > 20) return
+    mutate(`matchHistory/${name}`)
+  }, [fetchAll])
+
+  useEffect(() => {
+    if (!matchHistory || matchHistory?.length < 1 || !summoner?.puuid) return
 
     const playerStats = matchHistory
       .filter((match: LeagueMatch) => match?.info !== undefined || match?.info == null)
       .map((match: LeagueMatch) => match?.info?.participants.find((player: any) => player?.puuid === summoner?.puuid))
 
-    const wins = playerStats.filter((player: PlayerStats) => player?.win) as any[] | null
-    if (wins) {
-      setWins(wins)
-      setWinRate(Math.round((wins.length / playerStats.length) * 100))
+    const _wins = playerStats.filter((player: PlayerStats) => player?.win) as any[] | null
+    if (_wins) {
+      setWins(_wins)
+      setWinRate(Math.round((_wins.length / playerStats.length) * 100))
     }
 
     const champions = playerStats.map((player: PlayerStats) => player?.championName)
@@ -85,11 +77,11 @@ export const useGetMatchHistory = (name: string) => {
   return {
     matchHistory,
     summoner,
-    isLoading,
+    isLoading: isLoading || isValidating,
     wins,
     winRate,
     mostPlayed,
-    size,
-    setSize
+    fetchAll,
+    setFetchAll
   }
 }

@@ -1,15 +1,17 @@
 'use client'
 
-import { summonerSpells } from '../constants'
-import Image from 'next/image'
+import { LEAGUE_CDN, summonerSpells } from '../constants'
 import { LeagueMatch, Summoner } from '../types'
+import Image from 'next/image'
+import Loader from './Loader/Loader'
 
 interface Props {
   matchHistory: Array<LeagueMatch>
   summoner: Summoner
+  isLoading?: boolean
 }
 
-const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
+const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner, isLoading }) => {
   if (!matchHistory || !summoner) return null
 
   return (
@@ -37,12 +39,13 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
                 <div className="w-14 h-14 border-border rounded-full border-[2.5px] overflow-hidden">
                   {playerStats && (
                     <Image
-                      src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${playerStats.championName}.png`}
+                      src={`${LEAGUE_CDN}/img/champion/${playerStats.championName}.png`}
                       alt="Champion splash art"
                       height={56}
                       width={56}
                       className="rounded-full"
                       quality={50}
+                      priority
                     />
                   )}
                 </div>
@@ -63,26 +66,22 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
                   {playerStats && (
                     <div className="h-5 border-border border-[1px] overflow-hidden">
                       <Image
-                        src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/spell/${
-                          summonerSpells[playerStats.summoner1Id]
-                        }.png`}
+                        src={`${LEAGUE_CDN}/img/spell/${summonerSpells[playerStats.summoner1Id]}.png`}
                         alt="Summoner spell"
                         height={20}
                         width={20}
-                        quality={50}
+                        quality={10}
                       />
                     </div>
                   )}
                   <div className="h-5 border-border border-[1px] overflow-hidden">
                     {playerStats && (
                       <Image
-                        src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/spell/${
-                          summonerSpells[playerStats.summoner2Id]
-                        }.png`}
+                        src={`${LEAGUE_CDN}/img/spell/${summonerSpells[playerStats.summoner2Id]}.png`}
                         alt="Summoner spell"
                         height={20}
                         width={20}
-                        quality={50}
+                        quality={10}
                       />
                     )}
                   </div>
@@ -108,9 +107,10 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
                             <Image
                               height={32}
                               width={32}
-                              src={`http://ddragon.leagueoflegends.com/cdn/12.8.1/img/item/${item}.png`}
+                              src={`${LEAGUE_CDN}/img/item/${item}.png`}
                               alt="Item splash art"
                               quality={50}
+                              priority
                             />
                           </div>
                         )
