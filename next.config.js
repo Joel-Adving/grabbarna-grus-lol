@@ -13,8 +13,8 @@ const nextConfig = {
         protocol: 'http',
         hostname: '**'
       }
-    ]
-    // minimumCacheTTL: 60 * 60 * 24 * 7 * 4 // 4 weeks
+    ],
+    minimumCacheTTL: 60 * 60 * 24 * 7 * 4 // 4 weeks
   },
   output: 'standalone'
 }
