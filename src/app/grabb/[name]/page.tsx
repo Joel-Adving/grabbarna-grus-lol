@@ -93,8 +93,8 @@ export default function GrusGrabb({ params }: any) {
                     <option value="totalDamageDealt">Damage</option>
                     <option value="totalDamageDealtToChampions">Damage To Champions</option>
                     <option value="gameLength">Game Length</option>
-                    <option value="champion">Champion</option>
-                    <option value="gold">Gold</option>
+                    <option value="championId">Champion</option>
+                    <option value="goldEarned">Gold</option>
                     <option value="soloKills">Solo Kills</option>
                     <option value="pentaKills">Penta Kills</option>
                     <option value="totalHeal">Total Healed</option>

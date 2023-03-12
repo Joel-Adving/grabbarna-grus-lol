@@ -34,6 +34,7 @@ export function useFilterAndSortMatches(matchHistory: any, summoner: Summoner) {
 
   const sortedMatchHistory = useMemo(() => {
     if (!matchHistory) return null
+    console.log(matchHistory)
     const sortedMatches = matchHistory.slice().sort((a: any, b: any) => {
       switch (sortBy) {
         case 'date':
