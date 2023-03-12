@@ -42,7 +42,7 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
                       height={56}
                       width={56}
                       className="rounded-full"
-                      quality={50}
+                      quality={60}
                       priority
                     />
                   )}
@@ -107,7 +107,7 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
                               width={32}
                               src={`${LEAGUE_CDN}/img/item/${item}.png`}
                               alt="Item splash art"
-                              quality={50}
+                              quality={60}
                               priority
                             />
                           </div>

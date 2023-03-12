@@ -24,7 +24,6 @@ export default function SummonerIcon({ summoner, size = 'small' }: Props) {
         className="rounded-full"
         alt="Summoners profile icon"
         priority
-        quality={70}
       />
     </div>
   )

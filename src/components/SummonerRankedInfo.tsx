@@ -71,7 +71,6 @@ export default function SummonerRankedInfo({ summoner }: { summoner: FullSummone
                   }.png`}
                   width={200}
                   height={200}
-                  quality={100}
                   alt={''}
                 />
                 <div className="flex mt-2 text-2xl text-text-highlight">

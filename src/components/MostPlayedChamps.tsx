@@ -12,7 +12,6 @@ export default function MostPlayedChamps({ mostPlayed }: { mostPlayed: Map<strin
               src={`${LEAGUE_CDN}/img/champion/${champ}.png`}
               height={64}
               width={64}
-              quality={70}
               priority
               className="border-[1px] border-gray-600 overflow-hidden"
               alt="Recently played champion"
