@@ -77,39 +77,41 @@ export default function GrusGrabb({ params }: any) {
                       onClick={() => setFetchAll(true)}
                       className="px-2 py-1 text-sm border rounded hover:border-text-light hover:text-text-highlight border-text-diffuse"
                     >
-                      Fetch all games since april 2022
+                      Fetch all games <span className="hidden sm:inline-block">since april 2022</span>
                     </button>
                   )}
 
-                  <select
-                    onChange={(e) => setSortBy(e.target.value as SortBy)}
-                    className="px-2 py-1 text-sm border rounded outline-none bg-background-darkest hover:border-text-light border-text-diffuse"
-                  >
-                    <option value="date">Date</option>
-                    <option value="kills">Kills</option>
-                    <option value="deaths">Deaths</option>
-                    <option value="assists">Assists</option>
-                    <option value="kda">K/D/A</option>
-                    <option value="totalDamageDealt">Damage</option>
-                    <option value="totalDamageDealtToChampions">Damage To Champions</option>
-                    <option value="gameLength">Game Length</option>
-                    <option value="championId">Champion</option>
-                    <option value="goldEarned">Gold</option>
-                    <option value="soloKills">Solo Kills</option>
-                    <option value="pentaKills">Penta Kills</option>
-                    <option value="totalHeal">Total Healed</option>
-                    <option value="totalMinionsKilled">Minions Killed</option>
-                    <option value="skillshotsDodged">Skillshots Dodged</option>
-                    <option value="perfectGame">Perfect Game</option>
-                    <option value="snowballsHit">Snowballs Hit</option>
-                  </select>
+                  {matchHistory?.length > 0 ? (
+                    <select
+                      onChange={(e) => setSortBy(e.target.value as SortBy)}
+                      className="px-2 py-1 text-sm border rounded outline-none bg-background-darkest hover:border-text-light border-text-diffuse"
+                    >
+                      <option value="date">Date</option>
+                      <option value="kills">Kills</option>
+                      <option value="deaths">Deaths</option>
+                      <option value="assists">Assists</option>
+                      <option value="kda">K/D/A</option>
+                      <option value="totalDamageDealt">Damage</option>
+                      <option value="totalDamageDealtToChampions">Damage To Champions</option>
+                      <option value="gameLength">Game Length</option>
+                      <option value="championId">Champion</option>
+                      <option value="goldEarned">Gold</option>
+                      <option value="soloKills">Solo Kills</option>
+                      <option value="pentaKills">Penta Kills</option>
+                      <option value="totalHeal">Total Healed</option>
+                      <option value="totalMinionsKilled">Minions Killed</option>
+                      <option value="skillshotsDodged">Skillshots Dodged</option>
+                      <option value="perfectGame">Perfect Game</option>
+                      <option value="snowballsHit">Snowballs Hit</option>
+                    </select>
+                  ) : null}
                 </div>
               </>
             )}
 
             <div className="flex w-full">
               {isLoading || (isValidating && fetchAll) ? (
-                <div className="grid w-full h-[50vh] place-content-center">
+                <div className="grid w-full sm:h-[50vh] h-[25vh] place-content-center">
                   <Loader />
                 </div>
               ) : (
