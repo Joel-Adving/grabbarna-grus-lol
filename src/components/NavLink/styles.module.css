@@ -1,0 +1,11 @@
+.navlink {
+  padding-bottom: 0.25rem;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: transparent;
+  outline: none;
+}
+
+.active {
+  border-color: var(--border-text);
+}

@@ -7,6 +7,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const summoner = await prisma.summoner.findFirst({
     where: {
       name: name as string
+    },
+    include: {
+      rankedStats: true
     }
   })
 

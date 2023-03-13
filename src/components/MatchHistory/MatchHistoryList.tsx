@@ -1,7 +1,7 @@
 'use client'
 
-import { LEAGUE_CDN, summonerSpells } from '../constants'
-import { LeagueMatch, Summoner } from '../types'
+import { LEAGUE_CDN, summonerSpells } from '../../constants'
+import { LeagueMatch, Summoner } from '../../types'
 import Image from 'next/image'
 
 interface Props {
@@ -9,12 +9,12 @@ interface Props {
   summoner: Summoner
 }
 
-const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
+export default function MatchHistoryList({ matchHistory, summoner }: Props) {
   if (!matchHistory || !summoner) return null
 
   return (
     <section className="flex flex-col flex-grow pt-4">
-      {matchHistory?.map((match) => {
+      {matchHistory.map((match) => {
         const { info } = match
         if (!info) return null
 
@@ -138,7 +138,7 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
               <div className="self-start mb-3 sm:mb-0">
                 <p className="text-xs">{info.mapId === 11 ? "Summoner's Rift" : 'Howling Abyss'}</p>
 
-                <div className="flex mt-1 space-x-3 text-xs sm:mt-2 ">
+                <div className="flex gap-3 mt-1 text-xs sm:mt-2 ">
                   <p>{(info.gameDuration / 60).toFixed(2).toString().replace('.', ':')}</p>
                   <p>{new Date(info.gameEndTimestamp).toLocaleDateString()}</p>
                 </div>
@@ -150,5 +150,3 @@ const MatchHistoryList: React.FC<Props> = ({ matchHistory, summoner }) => {
     </section>
   )
 }
-
-export default MatchHistoryList

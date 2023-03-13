@@ -1,7 +1,7 @@
-import { Summoner } from '@prisma/client'
+import { FullSummonerProfile } from '@/hooks/useSummoner'
 import SummonerIcon from './SummonerIcon/SummonerIcon'
 
-export default function ProfileInfo({ summoner }: { summoner: Summoner }) {
+export default function ProfileInfo({ summoner }: { summoner: FullSummonerProfile }) {
   return (
     <div className="flex items-center justify-center flex-grow py-3 mx-auto my-4 border-b-2 sm:mx-0 w-fit border-border bg-slate-4000 sm:justify-start">
       <SummonerIcon summoner={summoner} size="large" />

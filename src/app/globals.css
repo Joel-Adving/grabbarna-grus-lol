@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --gold: #ae914b;
+  --gold-light: #f4de93;
+  --background: #051420;
+  --background-lightest: #2f3948;
+  --background-light: #1a3e51;
+  --background-dark: #132225;
+  --background-darkest: #010a13;
+  --text: #cdbe91;
+  --text-highlight: #f0e6d2;
+  --text-light: #908d82;
+  --text-diffuse: #414443;
+  --border: #564624;
+  --border-light: #755c29;
+  --border-dark: #3e3023;
+  --teal-light: #a5f5d8;
+  --teal-medium: #3a7875;
+  --teal-dark: #14555b;
+  --blue-team: #0096ff;
+  --red-team: #c91d1d;
+  --experience: #9d25e9;
+  --victory: #0acbe6;
+  --defeat: #eb2141;
+  --diamond: #44578f;
+  --silver: #d2e0df;
+}
+
 @font-face {
   font-family: 'FrizQuadrata';
   src: url('/fonts/Friz-Quadrata-Regular.woff2') format('woff2');
