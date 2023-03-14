@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { summonerRankInfo } from '../types'
 import { FullSummonerProfile } from './useSummoner'
 
-export const useRankedStats = (summoner: FullSummonerProfile) => {
+export const useRankedStats = (summoner: FullSummonerProfile | undefined) => {
   const [filter, setFilter] = useState('RANKED_FLEX_SR')
   const [queuStats, setQueueStats] = useState<summonerRankInfo | null | undefined>(null)
 
