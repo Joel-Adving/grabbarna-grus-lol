@@ -1,6 +1,6 @@
-import { FullSummonerProfile } from '@/components/SummonerRankedInfo'
 import { useEffect, useState } from 'react'
 import { summonerRankInfo } from '../types'
+import { FullSummonerProfile } from './useSummoner'
 
 export const useRankedStats = (summoner: FullSummonerProfile) => {
   const [filter, setFilter] = useState('RANKED_FLEX_SR')
