@@ -12,7 +12,7 @@ interface Props {
   videoNumbers: Array<VideoNumber>
 }
 
-const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2&maxResults=50&key=${process.env.YOUTUBE_API_KEY}`
+const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2&maxResults=50&key=${process.env.NEXT_PUBLIC_API_KEY}`
 
 export default async function PlaylistPage() {
   const res = await fetch(url, { next: { revalidate: 120 } }).then((res) => res.json())

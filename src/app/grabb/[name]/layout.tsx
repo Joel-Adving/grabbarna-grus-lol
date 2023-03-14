@@ -1,4 +1,5 @@
 import FriendList from '@/components/FriendList'
+import MainLayout from '@/components/MainLayout'
 import NavLink, { NavLinkProps } from '@/components/NavLink'
 
 export default function GrabbLayout({ children, params }: { children: React.ReactNode; params: any }) {
@@ -6,19 +7,19 @@ export default function GrabbLayout({ children, params }: { children: React.Reac
 
   const links = [
     {
-      label: 'STATS',
+      children: 'STATS',
       href: `/grabb/${name}/stats`,
 
       targetSegment: 'stats'
     },
     {
-      label: 'MATCH HISTORY',
+      children: 'MATCH HISTORY',
       href: `/grabb/${name}/matches`,
 
       targetSegment: 'matches'
     },
     {
-      label: 'RANKED',
+      children: 'RANKED',
       href: `/grabb/${name}/ranked`,
 
       targetSegment: 'ranked'
@@ -26,19 +27,14 @@ export default function GrabbLayout({ children, params }: { children: React.Reac
   ] as NavLinkProps[]
 
   return (
-    <div className="container flex min-h-screen gap-4 px-4 py-5 mx-auto sm:px-0">
-      <div className="w-full">
-        <div className="flex gap-8 text-text font-BeaufortBold">
-          {links.map((link, i) => (
-            <NavLink key={i} {...link} />
-          ))}
-        </div>
+    <MainLayout>
+      <div className="flex gap-8 text-text font-BeaufortBold">
+        {links.map((link, i) => (
+          <NavLink key={i} {...link} />
+        ))}
+      </div>
 
-        {children}
-      </div>
-      <div className="hidden md:block md:ml-auto">
-        <FriendList />
-      </div>
-    </div>
+      {children}
+    </MainLayout>
   )
 }

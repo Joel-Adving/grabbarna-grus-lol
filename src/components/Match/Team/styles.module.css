@@ -1,0 +1,36 @@
+.rootGrid {
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+}
+
+.childGrid {
+  display: grid;
+  grid-template-columns: 7fr 3fr 2fr 2fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+  .childGrid {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .rootGrid {
+    display: flex;
+    margin-bottom: 2rem;
+    gap: 1rem;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .rootGrid {
+    align-items: center;
+  }
+  .childGrid {
+    flex-direction: column;
+    justify-content: center;
+  }
+}

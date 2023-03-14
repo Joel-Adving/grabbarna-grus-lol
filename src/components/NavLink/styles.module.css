@@ -1,9 +1,19 @@
-.navlink {
+.navlinkUnderline {
   padding-bottom: 0.25rem;
   border-bottom-width: 2px;
   border-bottom-style: solid;
   border-bottom-color: transparent;
   outline: none;
+}
+
+.navLink {
+  border: 0;
+  outline: none;
+}
+
+.navlink:hover,
+.navlinkUnderline:hover {
+  color: var(--text-highlight);
 }
 
 .active {
