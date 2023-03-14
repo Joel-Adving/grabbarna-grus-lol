@@ -39,7 +39,7 @@ export default function RankList() {
         return (
           <Link
             passHref
-            href={`grabb/${player.name}`}
+            href={`grabb/${player.name}/matches`}
             key={player.id}
             className="flex items-center justify-between py-1.5 text-sm hover:bg-background-lightest px-3 hover:text-text-highlight"
           >
