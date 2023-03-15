@@ -11,7 +11,7 @@ module.exports = {
       },
       colors: {
         gold: '#AE914B',
-        'gold-light': '#F4DE93',
+        'gold-light': '#e6c75f',
         background: '#051420',
         'background-lightest': '#2f3948',
         'background-light': '#1a3e51',

@@ -290,6 +290,7 @@ type RiftHerald = {
 }
 
 export type Participant = {
+  _highlightedSummoner: boolean
   win: boolean
   lane: string
   role: string
