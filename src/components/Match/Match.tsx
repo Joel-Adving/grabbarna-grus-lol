@@ -29,8 +29,6 @@ export default function Match({ matchId, summoner }: { matchId: string; summoner
     return teams
   }, [match, summoner])
 
-  console.log(teams)
-
   return (
     <div className="flex flex-col items-center gap-6 mt-5">
       {teams?.map((team, i) => {
