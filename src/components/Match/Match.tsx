@@ -14,9 +14,13 @@ export default function Match({ matchId, summoner }: { matchId: string; summoner
     if (!match) return []
     const teams = [getTeam(match, 100), getTeam(match, 200)]
     for (const team of teams) {
-      const foundSummoner = team.find((p) => p.summonerName === summoner)
-      if (!foundSummoner) continue
-      foundSummoner._highlightedSummoner = true
+      for (const participant of team) {
+        if (participant.summonerName === summoner) {
+          participant._highlightedSummoner = true
+        } else {
+          participant._highlightedSummoner = false
+        }
+      }
       //@ts-ignore
       team.sort((a) => {
         if (a.summonerName === summoner) return -1
