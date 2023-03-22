@@ -14,7 +14,9 @@ const nextConfig = {
         hostname: '**'
       }
     ],
-    minimumCacheTTL: 60 * 60 * 24 * 7 * 4 // 4 weeks
+    minimumCacheTTL: 2592000, // 30 days
+    deviceSizes: [640, 1080, 1920],
+    formats: ['image/avif', 'image/webp']
   },
   output: 'standalone'
 }

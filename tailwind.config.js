@@ -6,8 +6,8 @@ module.exports = {
         // xs: '440px',
       },
       fontFamily: {
-        frizQuad: 'FrizQuadrata',
-        BeaufortBold: 'BeaufortBold'
+        frizQuad: 'var(--font-FrizQuadrata)',
+        BeaufortBold: 'var(--font-BeaufortBold)'
       },
       colors: {
         gold: '#AE914B',
