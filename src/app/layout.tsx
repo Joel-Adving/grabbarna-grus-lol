@@ -19,7 +19,7 @@ const FrizQuadrata = localFont({
 })
 
 const name = 'Grabbarna Grus'
-const url = 'https://www.grabbarnagrus.lol/'
+const url = 'https://grabbarnagrus.lol/'
 const preview = url + 'preview.png'
 const description =
   'Grabbarna Grus is community of League of Legends players. Leader board with all the players current ranks. View each others match histories. See information about each individual match.'
