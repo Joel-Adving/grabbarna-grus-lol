@@ -11,14 +11,14 @@ In the future there will be features for analyzing players stats.
 
 # Stack: 
 
-### APIs:
+#### APIs:
 Riot Games API
 
-### Front end:
+#### Front end:
 Next.js, Typescript, Tailwind CSS
 
-### Backend:
+#### Backend:
 Next.js API routes, Prisma, MySQL
 
-### Deployment:
+#### Deployment:
 Docker, Hetzner VPS, Caprover
