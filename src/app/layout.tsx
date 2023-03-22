@@ -4,21 +4,18 @@ import Providers from '@/components/Providers'
 import type { Metadata } from 'next'
 import localFont from '@next/font/local'
 
-const fontProps = {
-  preload: true,
-  fallback: ['Times New Roman', 'Times', 'serif']
-}
-
 const BeaufortBold = localFont({
   src: '../../public/fonts/BeaufortBold.woff2',
   variable: '--font-BeaufortBold',
-  ...fontProps
+  preload: true,
+  fallback: ['Times New Roman', 'Times', 'serif']
 })
 
 const FrizQuadrata = localFont({
   src: '../../public/fonts/Friz-Quadrata-Regular.woff2',
   variable: '--font-FrizQuadrata',
-  ...fontProps
+  preload: true,
+  fallback: ['Times New Roman', 'Times', 'serif']
 })
 
 const name = 'Grabbarna Grus'
