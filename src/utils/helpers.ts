@@ -2,8 +2,8 @@ async function getJSON(url: string) {
   try {
     const res = await fetch(url)
     return await res.json()
-  } catch (err) {
-    console.log(err)
+  } catch (e) {
+    console.log(e)
   }
 }
 

@@ -1,10 +1,10 @@
-export interface User {
+export type User = {
   email: string | null
   image?: string | null
   name?: string | null
 }
 
-export interface Summoner {
+export type Summoner = {
   accountId: string
   id: string
   name: string
@@ -15,7 +15,7 @@ export interface Summoner {
   rankedStats: Array<summonerRankInfo>
 }
 
-export interface summonerRankInfo {
+export type summonerRankInfo = {
   freshBlood: boolean
   hotStreak: boolean
   inactive: boolean
@@ -31,17 +31,17 @@ export interface summonerRankInfo {
   wins: number
 }
 
-export interface SummonersInfo {
+export type SummonersInfo = {
   summoners: Array<Summoner>
   ranks: Array<summonerRankInfo>
 }
 
-export interface PageInfo {
+export type PageInfo = {
   totalResults: number
   resultsPerPage: number
 }
 
-export interface Snippet {
+export type Snippet = {
   channelId: string
   channelTitle: string
   description: string
@@ -55,21 +55,21 @@ export interface Snippet {
   videoOwnerChannelTitle: string
 }
 
-export interface PlaylistItem {
+export type PlaylistItem = {
   etag: string
   id: string
   kind: string
   snippet: Snippet
 }
 
-export interface Playlist {
+export type Playlist = {
   etag: string
   items: Array<PlaylistItem>
   kind: string
   pageInfo: PageInfo
 }
 
-export interface MatchInfo {
+export type MatchInfo = {
   gameCreation: number
   gameDuration: number
   gameEndTimestamp: number
@@ -87,23 +87,23 @@ export interface MatchInfo {
   tournamentCode: string
 }
 
-export interface MatchMetaData {
+export type MatchMetaData = {
   dataVersion: string
   matchId: string
   participants: Array<string>
 }
 
-export interface LeagueMatch {
+export type LeagueMatch = {
   info: MatchInfo
   metaData: MatchMetaData
 }
 
-export interface SummonerAndRank {
+export type SummonerAndRank = {
   summoner: summonerRankInfo
   rank: summonerRankInfo
 }
 
-export interface PlayerStats {
+export type PlayerStats = {
   assists: number
   baronKills: number
   bountyLevel: number

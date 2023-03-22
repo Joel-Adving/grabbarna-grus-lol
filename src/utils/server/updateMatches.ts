@@ -48,7 +48,5 @@ export async function updateMatchHistory(matches: any[], name: string) {
         }
       })
     )
-  } catch (err) {
-    console.log(err)
-  }
+  } catch (e) {}
 }

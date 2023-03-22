@@ -2,7 +2,7 @@ export const API_PLAYLIST_URL = 'https://www.googleapis.com/youtube/v3/playlistI
 export const LEAGUE_CDN = 'http://ddragon.leagueoflegends.com/cdn/13.5.1'
 export const authRequired = ['/add-grabb']
 
-export const leagueTiers: any = {
+export const leagueTiers: Record<string, number> = {
   GRANDMASTER: 1,
   MASTER: 2,
   DIAMOND: 3,
@@ -14,7 +14,7 @@ export const leagueTiers: any = {
   UNRANKED: 9
 }
 
-export const leagueRanks: any = {
+export const leagueRanks: Record<string, number> = {
   I: 1,
   II: 2,
   III: 3,
@@ -22,7 +22,7 @@ export const leagueRanks: any = {
   V: 5
 }
 
-export const rankColors: any = {
+export const rankColors: Record<string, string> = {
   GRANDMASTER: 'defeat',
   MASTER: 'experience',
   DIAMOND: 'indigo-300',
@@ -34,13 +34,13 @@ export const rankColors: any = {
   UNRANKED: 'text'
 }
 
-export const queueTypes: any = {
+export const queueTypes: Record<string, string> = {
   RANKED_FLEX_SR: 'RANKED FLEX',
   RANKED_SOLO_5x5: 'SOLO/DUO QUEUE',
   RANKED_TFT_PAIRS: 'TFT'
 }
 
-export const summonerSpells: any = {
+export const summonerSpells: Record<number, string> = {
   1: 'SummonerBoost',
   3: 'SummonerExhaust',
   4: 'SummonerFlash',
@@ -59,7 +59,7 @@ export const summonerSpells: any = {
   55: 'Summoner_UltBookSmitePlaceholder'
 }
 
-export const grusGrabbar: Array<string> = [
+export const grusGrabbar: string[] = [
   'Reeduns',
   'Bumbiiz',
   'DoomGladiator',
