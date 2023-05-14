@@ -1,8 +1,8 @@
 export const API_PLAYLIST_URL = 'https://www.googleapis.com/youtube/v3/playlistItems'
 export const LEAGUE_CDN = 'http://ddragon.leagueoflegends.com/cdn/13.5.1'
-export const authRequired = ['/add-grabb']
+export const authRequired = ['/add-grabb'] as const
 
-export const leagueTiers: Record<string, number> = {
+export const leagueTiers = {
   GRANDMASTER: 1,
   MASTER: 2,
   DIAMOND: 3,
@@ -12,17 +12,17 @@ export const leagueTiers: Record<string, number> = {
   BRONZE: 7,
   IRON: 8,
   UNRANKED: 9
-}
+} as const
 
-export const leagueRanks: Record<string, number> = {
+export const leagueRanks = {
   I: 1,
   II: 2,
   III: 3,
   IV: 4,
   V: 5
-}
+} as const
 
-export const rankColors: Record<string, string> = {
+export const rankColors = {
   GRANDMASTER: 'defeat',
   MASTER: 'experience',
   DIAMOND: 'indigo-300',
@@ -32,15 +32,15 @@ export const rankColors: Record<string, string> = {
   BRONZE: 'border',
   IRON: 'border-dark',
   UNRANKED: 'text'
-}
+} as const
 
-export const queueTypes: Record<string, string> = {
+export const queueTypes = {
   RANKED_FLEX_SR: 'RANKED FLEX',
   RANKED_SOLO_5x5: 'SOLO/DUO QUEUE',
   RANKED_TFT_PAIRS: 'TFT'
-}
+} as const
 
-export const summonerSpells: Record<number, string> = {
+export const summonerSpells = {
   1: 'SummonerBoost',
   3: 'SummonerExhaust',
   4: 'SummonerFlash',
@@ -57,9 +57,9 @@ export const summonerSpells: Record<number, string> = {
   39: 'SummonerSnowURFSnowball_Mark',
   54: 'Summoner_UltBookPlaceholder',
   55: 'Summoner_UltBookSmitePlaceholder'
-}
+} as const
 
-export const grusGrabbar: string[] = [
+export const grusGrabbar = [
   'Reeduns',
   'Bumbiiz',
   'DoomGladiator',
@@ -75,4 +75,4 @@ export const grusGrabbar: string[] = [
   'Leo36737',
   'xXitsyaboiXx',
   'Pappenos'
-]
+] as const
