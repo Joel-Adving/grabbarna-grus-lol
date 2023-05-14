@@ -6,6 +6,7 @@ import { queueTypes } from '../constants'
 import { capitalizeFirstLetter } from '../utils/helpers'
 import ProfileInfo from './ProfileInfo'
 import { useSummoner } from '@/hooks/useSummoner'
+import { QueueType } from '@/types'
 
 export default function SummonerRankedInfo({ name }: { name: string }) {
   const { summoner } = useSummoner(name)
@@ -19,11 +20,14 @@ export default function SummonerRankedInfo({ name }: { name: string }) {
 
           <div>
             <div className="flex justify-center gap-4 mb-8 mt-7 sm:mb-0 sm:justify-start font-BeaufortBold text-text-highlight">
-              {summoner?.rankedStats?.map((queue, i) => (
-                <button key={i} onClick={() => setFilter(queue.queueType)}>
-                  {queueTypes[queue.queueType]}
-                </button>
-              ))}
+              {summoner?.rankedStats?.map((queue, i) => {
+                const queueType = queue.queueType as QueueType
+                return (
+                  <button key={i} onClick={() => setFilter(queueType)}>
+                    {queueTypes[queueType]}
+                  </button>
+                )
+              })}
             </div>
 
             {queuStats && (

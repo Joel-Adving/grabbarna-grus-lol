@@ -1,8 +1,14 @@
+import { summonerSpells } from './constants'
+
 export type User = {
   email: string | null
   image?: string | null
   name?: string | null
 }
+
+export type QueueType = 'RANKED_FLEX_SR' | 'RANKED_SOLO_5x5' | 'RANKED_TFT_PAIRS'
+
+export type SummonerSpellKey = keyof typeof summonerSpells
 
 export type Summoner = {
   accountId: string

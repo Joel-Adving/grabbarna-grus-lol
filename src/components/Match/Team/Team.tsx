@@ -1,5 +1,5 @@
 import { LEAGUE_CDN } from '@/constants'
-import { Participant } from '@/types'
+import { Participant, SummonerSpellKey } from '@/types'
 import Image from 'next/image'
 import Items from '../../Items'
 import SummonerSpell from '../../SummonerSpell'
@@ -15,8 +15,8 @@ export default function Team({ team }: { team: Participant[] }) {
         >
           <div className="flex items-center gap-2.5">
             <div>
-              <SummonerSpell size={14} summonerSpellId={summoner.summoner1Id} />
-              <SummonerSpell size={14} summonerSpellId={summoner.summoner2Id} />
+              <SummonerSpell size={14} summonerSpellId={summoner.summoner1Id as SummonerSpellKey} />
+              <SummonerSpell size={14} summonerSpellId={summoner.summoner2Id as SummonerSpellKey} />
             </div>
 
             <p className="font-BeaufortBold text-text-highlight">{summoner.champLevel}</p>

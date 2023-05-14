@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { summonerRankInfo } from '../types'
+import { QueueType, summonerRankInfo } from '../types'
 import { FullSummonerProfile } from './useSummoner'
 
 export const useRankedStats = (summoner: FullSummonerProfile | undefined) => {
-  const [filter, setFilter] = useState('RANKED_FLEX_SR')
+  const [filter, setFilter] = useState<QueueType>('RANKED_FLEX_SR')
   const [queuStats, setQueueStats] = useState<summonerRankInfo | null | undefined>(null)
 
   useEffect(() => {

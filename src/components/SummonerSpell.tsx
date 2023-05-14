@@ -2,7 +2,7 @@ import { LEAGUE_CDN, summonerSpells } from '@/constants'
 import Image from 'next/image'
 
 type Props = {
-  summonerSpellId: number
+  summonerSpellId: keyof typeof summonerSpells
   size?: number
 }
 
