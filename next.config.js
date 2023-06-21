@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true
-  },
   images: {
     remotePatterns: [
       {
@@ -14,7 +11,7 @@ const nextConfig = {
         hostname: '**'
       }
     ],
-    minimumCacheTTL: 2592000 // 30 days
+    minimumCacheTTL: 31536000 // 1 year
   },
   output: 'standalone'
 }

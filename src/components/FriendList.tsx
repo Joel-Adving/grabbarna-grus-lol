@@ -17,7 +17,7 @@ export default function FriendList() {
         .map((summoner: Summoner) => (
           <React.Fragment key={summoner.puuid}>
             <Link
-              href={`grabb/${summoner.name}/matches`}
+              href={`/grabb/${summoner.name}/matches`}
               className="flex items-center pl-2 rounded-sm cursor-pointer lg:pr-14 md:pr-2 hover:bg-slate-800 text-text-light hover:text-text-highlight"
             >
               <SummonerIcon size="medium" summoner={summoner} />

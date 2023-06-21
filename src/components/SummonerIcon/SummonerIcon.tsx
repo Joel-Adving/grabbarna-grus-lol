@@ -1,3 +1,5 @@
+'use client'
+
 import { LEAGUE_CDN } from '@/constants'
 import { Summoner } from '@prisma/client'
 import Image from 'next/image'

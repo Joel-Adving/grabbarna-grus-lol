@@ -29,7 +29,6 @@ export default function Team({ team }: { team: Participant[] }) {
                 width={36}
                 className="rounded-full"
                 quality={60}
-                priority
               />
             </div>
             <p className={`${summoner._highlightedSummoner && styles.highlight}`}>{summoner.summonerName}</p>

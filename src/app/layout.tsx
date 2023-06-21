@@ -2,7 +2,7 @@ import './globals.css'
 import Header from '@/components/Header/Header'
 import Providers from '@/components/Providers'
 import type { Metadata } from 'next'
-import localFont from '@next/font/local'
+import localFont from 'next/font/local'
 
 const BeaufortBold = localFont({
   src: '../../public/fonts/BeaufortBold.woff2',

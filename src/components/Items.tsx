@@ -30,7 +30,6 @@ export default function Items({ playerStats, size = 32 }: Props) {
             src={`${LEAGUE_CDN}/img/item/${item}.png`}
             alt="Item splash art"
             quality={60}
-            priority
           />
         )
       })}

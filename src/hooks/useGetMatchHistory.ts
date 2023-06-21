@@ -3,6 +3,7 @@ import { useSummoners } from './useSummoners'
 import { useEffect, useState } from 'react'
 import { LeagueMatch, PlayerStats } from '@/types'
 import { findSummonerByName } from '@/utils/helpers'
+import { useSearchParams } from 'next/navigation'
 
 const fetcher = async (name: string, fetchAll: boolean) =>
   await fetch(`/api/matchHistory/name/${name}?fetchAll=${fetchAll}`).then((res) => res.json())
@@ -19,10 +20,18 @@ export const useGetMatchHistory = (name: string) => {
   const { mutate } = useSWRConfig()
   const { data: matchHistory, isLoading, isValidating } = useSWR(`matchHistory/${name}`, () => fetcher(name, fetchAll))
 
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    if (searchParams?.get('show') === 'all') {
+      setFetchAll(true)
+    }
+  }, [searchParams])
+
   useEffect(() => {
     if (!matchHistory || matchHistory?.length > 20) return
     mutate(`matchHistory/${name}`)
-  }, [fetchAll])
+  }, [fetchAll, matchHistory, mutate, name])
 
   useEffect(() => {
     if (!matchHistory || matchHistory?.length < 1 || !summoner?.puuid) return

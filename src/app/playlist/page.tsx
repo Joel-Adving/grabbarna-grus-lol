@@ -47,7 +47,6 @@ export default async function PlaylistPage() {
           ?.map((item: any, i: number) => (
             <Link
               passHref
-              // href={`https://www.youtube.com/watch?v=${item.snippet.resourceId.videoId}&list=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2`}
               href={`video/${item.snippet.resourceId.videoId}`}
               key={item.id}
               className="flex items-center pr-12 cursor-pointer sm:pr-1 hover:bg-background hover:text-text-highlight"

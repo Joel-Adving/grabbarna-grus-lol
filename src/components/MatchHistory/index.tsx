@@ -7,6 +7,7 @@ import ProfileInfo from '@/components/ProfileInfo'
 import { SortBy, useFilterAndSortMatches } from '@/hooks/useFilterAndSortMatches'
 import { useGetMatchHistory } from '@/hooks/useGetMatchHistory'
 import MatchHistoryList from './MatchHistoryList'
+import { useRouter } from 'next/navigation'
 
 const selectOptions = [
   { value: 'date', label: 'Date' },
@@ -28,9 +29,9 @@ const selectOptions = [
 ]
 
 export default function MatchHistory({ name }: { name: string }) {
-  const { matchHistory, summoner, mostPlayed, winRate, wins, isLoading, isValidating, setFetchAll, fetchAll } =
-    useGetMatchHistory(name)
+  const { matchHistory, summoner, mostPlayed, winRate, wins, isLoading, isValidating, fetchAll } = useGetMatchHistory(name)
   const { setSortBy, sortedMatchHistory } = useFilterAndSortMatches(matchHistory, summoner)
+  const router = useRouter()
 
   return (
     <div className="grid w-full">
@@ -58,10 +59,10 @@ export default function MatchHistory({ name }: { name: string }) {
         {matchHistory?.length <= 20 && (
           <button
             disabled={isLoading}
-            onClick={() => setFetchAll(true)}
+            onClick={() => router.push(`/grabb/${name}/matches?show=all`)}
             className="px-2 py-1 text-sm border rounded hover:border-text-light hover:text-text-highlight border-text-diffuse"
           >
-            Fetch all games <span className="hidden sm:inline-block">since april 2022</span>
+            Show all games <span className="hidden sm:inline-block">since april 2022</span>
           </button>
         )}
 

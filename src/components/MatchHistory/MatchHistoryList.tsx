@@ -41,7 +41,6 @@ export default function MatchHistoryList({ matchHistory, summoner }: Props) {
                     width={56}
                     className="rounded-full"
                     quality={60}
-                    priority
                   />
                 </div>
 
