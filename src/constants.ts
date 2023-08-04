@@ -1,5 +1,5 @@
 export const API_PLAYLIST_URL = 'https://www.googleapis.com/youtube/v3/playlistItems'
-export const LEAGUE_CDN = 'http://ddragon.leagueoflegends.com/cdn/13.5.1'
+export const LEAGUE_CDN = 'http://ddragon.leagueoflegends.com/cdn/13.15.1'
 export const authRequired = ['/add-grabb'] as const
 
 export const leagueTiers = {
@@ -39,7 +39,8 @@ export const queueTypes = {
   RANKED_SOLO_5x5: 'SOLO/DUO QUEUE',
   RANKED_TFT_PAIRS: 'TFT'
 } as const
-
+2202
+2201
 export const summonerSpells = {
   1: 'SummonerBoost',
   3: 'SummonerExhaust',
@@ -56,7 +57,9 @@ export const summonerSpells = {
   32: 'SummonerSnowball',
   39: 'SummonerSnowURFSnowball_Mark',
   54: 'Summoner_UltBookPlaceholder',
-  55: 'Summoner_UltBookSmitePlaceholder'
+  55: 'Summoner_UltBookSmitePlaceholder',
+  2201: 'SummonerCherryHold',
+  2202: 'SummonerCherryFlash'
 } as const
 
 export const grusGrabbar = [

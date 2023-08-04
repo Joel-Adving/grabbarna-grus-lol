@@ -7,6 +7,7 @@ type Props = {
 }
 
 export default function SummonerSpell({ summonerSpellId, size = 20 }: Props) {
+  console.log(summonerSpellId)
   return (
     <div className={`h-[${size}px] border-border border-[1px] overflow-hidden`}>
       <Image

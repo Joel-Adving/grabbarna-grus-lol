@@ -1,6 +1,6 @@
 'use client'
 
-import { LEAGUE_CDN, summonerSpells } from '../../constants'
+import { LEAGUE_CDN } from '../../constants'
 import { LeagueMatch, Summoner } from '../../types'
 import Image from 'next/image'
 import Link from 'next/link'

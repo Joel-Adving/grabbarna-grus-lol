@@ -29,7 +29,8 @@ const selectOptions = [
 ]
 
 export default function MatchHistory({ name }: { name: string }) {
-  const { matchHistory, summoner, mostPlayed, winRate, wins, isLoading, isValidating, fetchAll } = useGetMatchHistory(name)
+  const { matchHistory, summoner, mostPlayed, winRate, wins, isLoading, isValidating, fetchAll } =
+    useGetMatchHistory(name)
   const { setSortBy, sortedMatchHistory } = useFilterAndSortMatches(matchHistory, summoner)
   const router = useRouter()
 
@@ -40,7 +41,9 @@ export default function MatchHistory({ name }: { name: string }) {
           {summoner && <ProfileInfo summoner={summoner} />}
 
           <div className="items-center hidden h-full gap-3 mt-2 font-BeaufortBold md:flex">
-            {wins && matchHistory && winRate && <MatchesInfo matchHistory={matchHistory} winRate={winRate} wins={wins} />}
+            {wins && matchHistory && winRate && (
+              <MatchesInfo matchHistory={matchHistory} winRate={winRate} wins={wins} />
+            )}
           </div>
         </div>
 

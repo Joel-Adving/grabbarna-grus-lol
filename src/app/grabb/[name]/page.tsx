@@ -8,7 +8,7 @@ export default function GrusGrabb({ params }: any) {
 
   useEffect(() => {
     router.push(`/grabb/${params.name}/matches`)
-  }, [])
+  }, [params.name, router])
 
   return <></>
 }
