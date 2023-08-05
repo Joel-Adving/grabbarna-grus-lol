@@ -2,7 +2,14 @@ import { useMemo } from 'react'
 import useSWR from 'swr'
 
 async function fetcher() {
-  return await fetch('https://static.developer.riotgames.com/docs/lol/queues.json').then((res) => res.json())
+  for (let i = 0; i < 3; i++) {
+    try {
+      return await fetch('https://static.developer.riotgames.com/docs/lol/queuess.json').then((res) => res.json())
+    } catch (e) {
+      await new Promise((e) => setTimeout(e, 250 * i))
+    }
+  }
+  return await fetch(window.location.origin + '/queues.json').then((res) => res.json())
 }
 
 export function useGetQueueTypes() {
