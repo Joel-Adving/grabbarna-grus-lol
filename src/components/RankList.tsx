@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useFilterRanks } from '../hooks/useFilterRanks'
 import SummonerIcon from './SummonerIcon/SummonerIcon'
+import { useGetQueueTypes } from '@/hooks/useGetQueueTypes'
 
 export default function RankList() {
   const { sortedSummoners, filter, setFilter } = useFilterRanks()
@@ -52,7 +53,8 @@ export default function RankList() {
             {player.rankedStats && (
               <div className="flex flex-grow max-w-[9rem] sm:max-w-[12rem]">
                 <p>
-                  {player.rankedStats.tier !== 'UNRANKED' ? player.rankedStats.tier : 'UNRANKED'} {player.rankedStats.rank}
+                  {player.rankedStats.tier !== 'UNRANKED' ? player.rankedStats.tier : 'UNRANKED'}{' '}
+                  {player.rankedStats.rank}
                 </p>
                 <span className="flex w-10 ml-auto">
                   <p className="text-victory">{player.rankedStats.wins}</p>

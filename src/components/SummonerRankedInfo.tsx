@@ -70,7 +70,9 @@ export default function SummonerRankedInfo({ name }: { name: string }) {
           </div>
         </div>
 
-        <div className="hidden sm:py-16 sm:pl-6 lg:pr-10 sm:block">{queuStats && <RankBadge queuStats={queuStats} />}</div>
+        <div className="hidden sm:py-16 sm:pl-6 lg:pr-10 sm:block">
+          {queuStats && <RankBadge queuStats={queuStats} />}
+        </div>
       </div>
       <div className="flex items-center justify-center mt-6 sm:hidden">
         {queuStats && <RankBadge queuStats={queuStats} />}
@@ -83,7 +85,9 @@ function RankBadge({ queuStats }: { queuStats: any }) {
   return (
     <div className="flex flex-col items-center w-full max-w-lg ">
       <Image
-        src={`/ranked-emblems/Emblem_${queuStats.tier ? capitalizeFirstLetter(queuStats.tier.toLocaleLowerCase()) : ''}.png`}
+        src={`/ranked-emblems/Emblem_${
+          queuStats.tier ? capitalizeFirstLetter(queuStats.tier.toLocaleLowerCase()) : ''
+        }.webp`}
         width={200}
         height={200}
         alt={''}

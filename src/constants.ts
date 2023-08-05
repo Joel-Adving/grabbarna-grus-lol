@@ -39,8 +39,7 @@ export const queueTypes = {
   RANKED_SOLO_5x5: 'SOLO/DUO QUEUE',
   RANKED_TFT_PAIRS: 'TFT'
 } as const
-2202
-2201
+
 export const summonerSpells = {
   1: 'SummonerBoost',
   3: 'SummonerExhaust',

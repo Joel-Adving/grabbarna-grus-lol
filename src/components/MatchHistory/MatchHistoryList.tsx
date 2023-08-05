@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Items from '../Items'
 import SummonerSpell from '../SummonerSpell'
+import { useGetQueueTypes } from '@/hooks/useGetQueueTypes'
 
 interface Props {
   matchHistory: LeagueMatch[]
@@ -13,6 +14,8 @@ interface Props {
 }
 
 export default function MatchHistoryList({ matchHistory, summoner }: Props) {
+  const { queues } = useGetQueueTypes()
+
   if (!matchHistory || !summoner) return null
 
   return (
@@ -23,7 +26,7 @@ export default function MatchHistoryList({ matchHistory, summoner }: Props) {
         const playerStats = info?.participants.find((el) => el.puuid === summoner.puuid)
         if (!playerStats) return null
         const win = playerStats?.win
-        const gameType = getGameType(info.gameMode)
+        const gameType = queues?.find((queue: any) => queue.queueId === info.queueId)?.description
 
         return (
           <Link
@@ -112,6 +115,8 @@ const getGameType = (gameMode: string) => {
       return 'Matched'
     case 'ARAM':
       return 'ARAM'
+    case 'CHERRY':
+      return 'Arena'
     case 'ONEFORALL':
       return 'One for All'
     case 'URF':
