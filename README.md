@@ -1,6 +1,6 @@
 # Grabbarna Grus
 
-https://grabbarnagrus.lol/
+https://grabbarnagrus.oki.gg/
 
 Grabbarna Grus is small community of League of Legends players.
 
