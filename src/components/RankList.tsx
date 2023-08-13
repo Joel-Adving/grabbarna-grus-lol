@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useFilterRanks } from '../hooks/useFilterRanks'
 import SummonerIcon from './SummonerIcon/SummonerIcon'
-import { useGetQueueTypes } from '@/hooks/useGetQueueTypes'
 
 export default function RankList() {
   const { sortedSummoners, filter, setFilter } = useFilterRanks()

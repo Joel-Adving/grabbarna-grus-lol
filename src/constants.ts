@@ -6,12 +6,13 @@ export const leagueTiers = {
   GRANDMASTER: 1,
   MASTER: 2,
   DIAMOND: 3,
-  PLATINUM: 4,
-  GOLD: 5,
-  SILVER: 6,
-  BRONZE: 7,
-  IRON: 8,
-  UNRANKED: 9
+  EMERALD: 4,
+  PLATINUM: 5,
+  GOLD: 6,
+  SILVER: 7,
+  BRONZE: 8,
+  IRON: 9,
+  UNRANKED: 10
 } as const
 
 export const leagueRanks = {
