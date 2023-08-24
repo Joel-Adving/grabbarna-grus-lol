@@ -1,13 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { useSummoners } from '@/hooks/useSummoners'
 import React from 'react'
 import SummonerIcon from './SummonerIcon/SummonerIcon'
 import { Summoner } from '@prisma/client'
+import { useGetSummoners } from '@/hooks/useSummoners'
 
 export default function FriendList() {
-  const { summoners } = useSummoners()
+  const { summoners } = useGetSummoners()
 
   return (
     <section className="max-w-[16rem] overflow-y-auto sticky top-[5.2rem] mx-auto bg-background border-[1px] border-background-light rounded-sm p-2 ml-3">

@@ -1,9 +1,9 @@
 import useSWR from 'swr'
+import { api } from '../services/api'
+import { Summoner } from '@/types'
 
-const fetcher = async () => await fetch(`/api/summoners`).then((res) => res.json())
-
-export function useSummoners() {
-  const { data, error, isLoading } = useSWR('summoners', fetcher)
+export function useGetSummoners() {
+  const { data, error, isLoading } = useSWR<Summoner[]>('summoners', api.getSummoners)
 
   return {
     summoners: data,

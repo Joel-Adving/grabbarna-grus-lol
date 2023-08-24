@@ -4,6 +4,8 @@ import Providers from '@/components/Providers'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 
+export const revalidate = 3600
+
 const BeaufortBold = localFont({
   src: '../../public/fonts/BeaufortBold.woff2',
   variable: '--font-BeaufortBold',

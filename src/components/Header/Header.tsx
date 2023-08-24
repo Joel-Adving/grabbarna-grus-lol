@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <nav className="container flex justify-between w-full min-h-[4rem] px-3 py-4 mx-auto sm:px-0">
+      <nav className="container flex justify-between w-full min-h-[4rem] px-3 mx-auto sm:px-0">
         <div className="flex items-center">
           <div className="flex space-x-8">
             <NavLink href="/" targetSegment="/">
@@ -25,6 +25,16 @@ export default function Header() {
             )}
           </div>
         </div>
+
+        <div className="flex flex-col items-center justify-center uppercase font-frizQuad text-gold-light">
+          Grabbarna
+          <span className="flex">
+            Grus
+            <span className="self-end mx-2 mb-[0.2rem] text-xs lowercase text-gold-light">of</span>
+            Legends
+          </span>
+        </div>
+
         {!user && <button onClick={() => signIn()}>SIGN IN</button>}
         {user && (
           <div className="flex items-center ">
@@ -33,7 +43,13 @@ export default function Header() {
             </NavLink>
 
             <div className="w-8 h-8 ml-3 sm:mx-3 border-[2.5px] rounded-full border-victory">
-              <Image className="rounded-full" src={user?.image as string} alt="User profile image" height={32} width={32} />
+              <Image
+                className="rounded-full"
+                src={user?.image as string}
+                alt="User profile image"
+                height={32}
+                width={32}
+              />
             </div>
             <h3 className="hidden sm:block text-text-highlight">{user?.name?.toUpperCase()}</h3>
           </div>

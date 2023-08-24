@@ -1,3 +1,5 @@
+import { Summoner } from '@/types'
+
 async function getJSON(url: string) {
   try {
     const res = await fetch(url)
@@ -13,7 +15,7 @@ function sleep(ms: number) {
   })
 }
 
-function findSummonerByName(summoners: any[], name: string) {
+function findSummonerByName(summoners: Summoner[], name: string) {
   return summoners?.find((summoner) => summoner.name.toLowerCase() === name.toLowerCase())
 }
 

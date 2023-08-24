@@ -1,4 +1,5 @@
-import { summonerSpells } from './constants'
+import { RankedStats, Summoner as PrismaSummoner } from '@prisma/client'
+import { leagueRanks, leagueTiers, summonerSpells } from './constants'
 
 export type User = {
   email: string | null
@@ -10,37 +11,46 @@ export type QueueType = 'RANKED_FLEX_SR' | 'RANKED_SOLO_5x5' | 'RANKED_TFT_PAIRS
 
 export type SummonerSpellKey = keyof typeof summonerSpells
 
-export type Summoner = {
-  accountId: string
-  id: string
-  name: string
-  profileIconId: number
-  puuid: string
-  revisionDate: number
-  summonerLevel: number
-  rankedStats: Array<summonerRankInfo>
+export type Summoner = PrismaSummoner & {
+  rankedStats: RankedStats[]
 }
 
-export type summonerRankInfo = {
-  freshBlood: boolean
-  hotStreak: boolean
-  inactive: boolean
-  leagueId: string
-  leaguePoints: number
-  losses: number
-  queueType: string
-  rank: string
-  summonerId: string
-  summonerName: string
-  tier: string
-  veteran: boolean
-  wins: number
-}
+export type LeagueRanks = keyof typeof leagueRanks
+export type LeagueTiers = keyof typeof leagueTiers
 
-export type SummonersInfo = {
-  summoners: Array<Summoner>
-  ranks: Array<summonerRankInfo>
-}
+export type SortRankedType = 'RANKED_FLEX_SR' | 'RANKED_SOLO_5x5'
+
+// export type Summoner = {
+//   accountId: string
+//   id: string
+//   name: string
+//   profileIconId: number
+//   puuid: string
+//   revisionDate: number
+//   summonerLevel: number
+//   rankedStats: Array<summonerRankInfo>
+// }
+
+// export type summonerRankInfo = {
+//   freshBlood: boolean
+//   hotStreak: boolean
+//   inactive: boolean
+//   leagueId: string
+//   leaguePoints: number
+//   losses: number
+//   queueType: string
+//   rank: string
+//   summonerId: string
+//   summonerName: string
+//   tier: string
+//   veteran: boolean
+//   wins: number
+// }
+
+// export type SummonersInfo = {
+//   summoners: Array<Summoner>
+//   ranks: Array<summonerRankInfo>
+// }
 
 export type PageInfo = {
   totalResults: number
@@ -104,10 +114,10 @@ export type LeagueMatch = {
   metaData: MatchMetaData
 }
 
-export type SummonerAndRank = {
-  summoner: summonerRankInfo
-  rank: summonerRankInfo
-}
+// export type SummonerAndRank = {
+//   summoner: summonerRankInfo
+//   rank: summonerRankInfo
+// }
 
 export type PlayerStats = {
   assists: number

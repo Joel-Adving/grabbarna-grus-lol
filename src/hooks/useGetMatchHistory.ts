@@ -1,26 +1,28 @@
 import useSWR, { useSWRConfig } from 'swr'
-import { useSummoners } from './useSummoners'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { LeagueMatch, PlayerStats } from '@/types'
 import { findSummonerByName } from '@/utils/helpers'
 import { useSearchParams } from 'next/navigation'
+import { useGetSummoners } from './useSummoners'
 
 const fetcher = async (name: string, fetchAll: boolean) =>
   await fetch(`/api/matchHistory/name/${name}?fetchAll=${fetchAll}`).then((res) => res.json())
 
 export const useGetMatchHistory = (name: string) => {
-  const [wins, setWins] = useState<any[] | null>()
-  const [winRate, setWinRate] = useState<number>()
-  const [mostPlayed, setMostPlayed] = useState<Map<any, any> | null>(null)
-
-  const { summoners } = useSummoners()
-  const summoner = findSummonerByName(summoners, name)
-  const [fetchAll, setFetchAll] = useState(false)
-
   const { mutate } = useSWRConfig()
+  const searchParams = useSearchParams()
+  const { summoners } = useGetSummoners()
+
   const { data: matchHistory, isLoading, isValidating } = useSWR(`matchHistory/${name}`, () => fetcher(name, fetchAll))
 
-  const searchParams = useSearchParams()
+  const [wins, setWins] = useState<any[] | null>()
+  const [winRate, setWinRate] = useState<number>()
+  const [fetchAll, setFetchAll] = useState(false)
+  const [mostPlayed, setMostPlayed] = useState<Map<any, any> | null>(null)
+
+  const summoner = useMemo(() => {
+    return summoners ? findSummonerByName(summoners, name) : null
+  }, [summoners, name])
 
   useEffect(() => {
     if (searchParams?.get('show') === 'all') {
