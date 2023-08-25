@@ -4,6 +4,7 @@ import { nextApi } from '@/services/nextApi'
 import { riotApi } from '@/services/riotApi'
 import { prisma } from '@/lib/prisma'
 import { prismaService } from '@/services/prismaService'
+import { revalidateTag, revalidatePath } from 'next/cache'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   logRequestInfo(req)
@@ -42,6 +43,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   await sleep(1100)
   await prismaService.updateProfileAndMatchHistory(summonerName)
+
+  revalidateTag('summoners')
+  revalidatePath('/')
 
   return res.status(201).json({ success: true, data: { ...createdSummoner } })
 }

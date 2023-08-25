@@ -1,8 +1,8 @@
 import { Summoner } from '@/types'
 
-async function get(url: string) {
+async function get(url: string, options?: Record<string, any>) {
   try {
-    const res = await fetch(url)
+    const res = await fetch(url, options)
     return await res.json()
   } catch (e) {
     console.log(e)
@@ -10,9 +10,9 @@ async function get(url: string) {
 }
 
 function Get(baseUrl: string) {
-  return async function get(url: string) {
+  return async function get(url: string, options?: Record<string, any>) {
     try {
-      const res = await fetch(baseUrl + url)
+      const res = await fetch(baseUrl + url, options)
       return await res.json()
     } catch (e) {
       console.log(e)

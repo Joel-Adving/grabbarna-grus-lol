@@ -9,7 +9,7 @@ const BASE_URL =
 const get = Get(BASE_URL + '/api/')
 
 async function getSummoners(): Promise<Summoner[]> {
-  return await get(`summoners`)
+  return await get(`summoners`, { next: { tags: ['summoners'] } })
 }
 
 async function getSummonerByName(name: string): Promise<Summoner> {

@@ -2,7 +2,7 @@ import MatchHistory from '@/components/MatchHistory'
 import { nextApi } from '@/services/nextApi'
 import { riotApi } from '@/services/riotApi'
 
-export const revalidate = 3600
+export const revalidate = 3600 // 1 hour
 
 export async function generateStaticParams() {
   const summoners = await nextApi.getSummoners()
