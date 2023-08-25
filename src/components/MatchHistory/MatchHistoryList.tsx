@@ -38,6 +38,7 @@ export default function MatchHistoryList({ matchHistory, summoner, queueTypes }:
         if (!playerStats) return null
         const win = playerStats?.win
         const gameType = queues?.find((queue: any) => queue.queueId === info.queueId)?.description
+        const map = queues?.find((queue: any) => queue.queueId === info.queueId)?.map
 
         return (
           <Link
@@ -99,8 +100,7 @@ export default function MatchHistoryList({ matchHistory, summoner, queueTypes }:
               </div>
 
               <div className="self-start mb-3 sm:mb-0">
-                <p className="text-xs">{info.mapId === 11 ? "Summoner's Rift" : 'Howling Abyss'}</p>
-
+                <p className="text-xs">{map}</p>
                 <div className="flex gap-3 mt-1 text-xs sm:mt-2 ">
                   <p>{(info.gameDuration / 60).toFixed(2).toString().replace('.', ':')}</p>
                   <p>{formatDate(info.gameEndTimestamp)}</p>
