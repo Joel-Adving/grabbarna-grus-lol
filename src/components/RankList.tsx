@@ -9,7 +9,15 @@ export default function RankList({ summoners }: { summoners: Summoner[] }) {
   const { sortedSummoners, sortBy, setSortBy } = useSortRanks(summoners)
 
   return (
-    <section className="flex flex-col max-w-[30rem] sm:pb-20 pb-4 mx-auto font-BeaufortBold text-text-light">
+    <section className="flex flex-col max-w-[29rem] sm:pb-20 pb-4 mx-auto font-BeaufortBold text-text-light">
+      <div className="flex flex-col items-center justify-center mt-6 text-2xl uppercase font-frizQuad text-gold-light">
+        Grabbarna
+        <span className="flex">
+          Grus
+          <span className="self-end mx-2 mb-[0.35rem] text-xs lowercase text-gold-light">of</span>
+          Legends
+        </span>
+      </div>
       <div className="container flex justify-center mt-6 mb-8 space-x-8 text-text bg-background-darkest">
         <button
           className={`${sortBy === 'RANKED_FLEX_SR' ? 'border-text' : 'border-background-darkest'}  border-b-2`}

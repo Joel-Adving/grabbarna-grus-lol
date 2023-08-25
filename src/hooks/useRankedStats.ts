@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { QueueType, summonerRankInfo } from '../types'
+import { QueueType } from '../types'
 import { FullSummonerProfile } from './useSummoner'
+import { RankedStats } from '@prisma/client'
 
 export const useRankedStats = (summoner: FullSummonerProfile | undefined) => {
   const [filter, setFilter] = useState<QueueType>('RANKED_FLEX_SR')
-  const [queuStats, setQueueStats] = useState<summonerRankInfo | null | undefined>(null)
+  const [queuStats, setQueueStats] = useState<RankedStats | null | undefined>(null)
 
   useEffect(() => {
     if (!summoner) return

@@ -8,15 +8,26 @@ import Items from '../Items'
 import SummonerSpell from '../SummonerSpell'
 import { useGetQueueTypes } from '@/hooks/useGetQueueTypes'
 
+const formatDate = (int: number) => {
+  const date = new Date(int)
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0') // Months are 0-indexed
+  const year = date.getFullYear()
+  return `${day}/${month}/${year}`
+}
+
 interface Props {
   matchHistory: LeagueMatch[]
   summoner: Summoner
+  queueTypes: any
 }
 
-export default function MatchHistoryList({ matchHistory, summoner }: Props) {
-  const { queues } = useGetQueueTypes()
+export default function MatchHistoryList({ matchHistory, summoner, queueTypes }: Props) {
+  const { queues } = useGetQueueTypes(queueTypes)
 
-  if (!matchHistory || !summoner) return null
+  if (!matchHistory || !summoner) {
+    return null
+  }
 
   return (
     <section className="flex flex-col flex-grow pt-4">
@@ -92,7 +103,7 @@ export default function MatchHistoryList({ matchHistory, summoner }: Props) {
 
                 <div className="flex gap-3 mt-1 text-xs sm:mt-2 ">
                   <p>{(info.gameDuration / 60).toFixed(2).toString().replace('.', ':')}</p>
-                  <p>{new Date(info.gameEndTimestamp).toLocaleDateString()}</p>
+                  <p>{formatDate(info.gameEndTimestamp)}</p>
                 </div>
               </div>
             </div>
@@ -101,31 +112,4 @@ export default function MatchHistoryList({ matchHistory, summoner }: Props) {
       })}
     </section>
   )
-}
-
-const getGameType = (gameMode: string) => {
-  switch (gameMode) {
-    case 'CLASSIC':
-      return 'Classic'
-    case 'TUTORIAL_GAME':
-      return 'Tutorial'
-    case 'CUSTOM_GAME':
-      return 'Custom'
-    case 'MATCHED_GAME':
-      return 'Matched'
-    case 'ARAM':
-      return 'ARAM'
-    case 'CHERRY':
-      return 'Arena'
-    case 'ONEFORALL':
-      return 'One for All'
-    case 'URF':
-      return 'URF'
-    case 'DOOMBOTSTEEMO':
-      return 'Doom Bots'
-    case 'NIGHTMARE_BOT':
-      return 'Nightmare Bot'
-    default:
-      return null
-  }
 }

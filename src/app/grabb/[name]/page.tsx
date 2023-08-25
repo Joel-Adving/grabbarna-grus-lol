@@ -1,14 +1,9 @@
-'use client'
+import GrabbClient from './GrabbClient'
 
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-
-export default function GrusGrabb({ params }: any) {
-  const router = useRouter()
-
-  useEffect(() => {
-    router.push(`/grabb/${params.name}/matches`)
-  }, [params.name, router])
-
-  return <></>
+export default function GrusGrabb() {
+  return (
+    <>
+      <GrabbClient />
+    </>
+  )
 }

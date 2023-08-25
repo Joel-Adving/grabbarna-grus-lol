@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import NavLink from '../NavLink'
 import styles from './styles.module.css'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const user = useUser()
@@ -19,23 +20,15 @@ export default function Header() {
               HOME
             </NavLink>
             {user && (
-              <NavLink href="playlist" targetSegment="playlist">
+              <NavLink href="/playlist" targetSegment="playlist">
                 PLAYLIST
               </NavLink>
             )}
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center uppercase font-frizQuad text-gold-light">
-          Grabbarna
-          <span className="flex">
-            Grus
-            <span className="self-end mx-2 mb-[0.2rem] text-xs lowercase text-gold-light">of</span>
-            Legends
-          </span>
-        </div>
-
         {!user && <button onClick={() => signIn()}>SIGN IN</button>}
+
         {user && (
           <div className="flex items-center ">
             <NavLink href="#" onClick={() => signOut()}>

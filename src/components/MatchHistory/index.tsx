@@ -8,6 +8,7 @@ import { SortBy, useFilterAndSortMatches } from '@/hooks/useFilterAndSortMatches
 import { useGetMatchHistory } from '@/hooks/useGetMatchHistory'
 import MatchHistoryList from './MatchHistoryList'
 import { useRouter } from 'next/navigation'
+import { Summoner } from '@/types'
 
 const selectOptions = [
   { value: 'date', label: 'Date' },
@@ -28,9 +29,19 @@ const selectOptions = [
   { value: 'snowballsHit', label: 'Snowballs Hit' }
 ]
 
-export default function MatchHistory({ name }: { name: string }) {
-  const { matchHistory, summoner, mostPlayed, winRate, wins, isLoading, isValidating, fetchAll } =
-    useGetMatchHistory(name)
+export default function MatchHistory({
+  serverSideSummoner,
+  serverSideMatchHistory,
+  queueTypes
+}: {
+  serverSideSummoner: Summoner
+  serverSideMatchHistory: any
+  queueTypes: any
+}) {
+  const { matchHistory, summoner, mostPlayed, winRate, wins, isLoading, isValidating, fetchAll } = useGetMatchHistory(
+    serverSideSummoner,
+    serverSideMatchHistory
+  )
   const { setSortBy, sortedMatchHistory } = useFilterAndSortMatches(matchHistory, summoner)
   const router = useRouter()
 
@@ -62,10 +73,10 @@ export default function MatchHistory({ name }: { name: string }) {
         {matchHistory?.length <= 20 && (
           <button
             disabled={isLoading}
-            onClick={() => router.push(`/grabb/${name}/matches?show=all`)}
+            onClick={() => router.push(`/grabb/${summoner.name}/matches?show=all`)}
             className="px-2 py-1 text-sm border rounded hover:border-text-light hover:text-text-highlight border-text-diffuse"
           >
-            Show all games <span className="hidden sm:inline-block">since april 2022</span>
+            Fetch all saved matches
           </button>
         )}
 
@@ -89,7 +100,10 @@ export default function MatchHistory({ name }: { name: string }) {
             <Loader />
           </div>
         ) : (
-          summoner && matchHistory && <MatchHistoryList matchHistory={sortedMatchHistory} summoner={summoner} />
+          summoner &&
+          matchHistory && (
+            <MatchHistoryList matchHistory={sortedMatchHistory} summoner={summoner} queueTypes={queueTypes} />
+          )
         )}
       </div>
     </div>

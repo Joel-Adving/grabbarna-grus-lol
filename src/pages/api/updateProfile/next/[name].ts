@@ -1,7 +1,7 @@
 import { findSummonerByName, logRequestInfo } from '@/utils/helpers'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '@/lib/prisma'
-import { api } from '@/services/api'
+import { nextApi } from '@/services/nextApi'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   logRequestInfo(req)
@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.json('bruh')
   }
 
-  const summoners = await api.getSummoners()
+  const summoners = await nextApi.getSummoners()
 
   if (!summoners) {
     return res.json('bruh')

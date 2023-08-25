@@ -1,46 +1,26 @@
 import Image from 'next/image'
-import { Playlist, PlaylistItem } from '../../types'
 import Link from 'next/link'
+import { PlaylistItem } from '../../types'
 
-interface VideoNumber {
+const URL = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2&maxResults=50&key=${process.env.NEXT_PUBLIC_API_KEY}`
+
+type VideoNumber = {
   id: string
   videoNumber: number
 }
 
-interface Props {
-  data: Playlist
-  videoNumbers: Array<VideoNumber>
-}
-
-const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2&maxResults=50&key=${process.env.NEXT_PUBLIC_API_KEY}`
-
 export default async function PlaylistPage() {
-  const res = await fetch(url, { next: { revalidate: 120 } }).then((res) => res.json())
+  const res = await fetch(URL, { next: { revalidate: 120 } }).then((res) => res.json())
   const data = { ...res, items: res?.items?.filter((item: any) => item?.snippet?.title !== 'Deleted video') }
 
-  const videoNumbers: Array<VideoNumber> = data?.items?.map((item: PlaylistItem, i: number) => ({
+  const videoNumbers: VideoNumber[] = data?.items?.map((item: PlaylistItem, i: number) => ({
     id: item.etag,
     videoNumber: i + 1
   }))
 
-  //   const [search, setSearch] = useState('')
-  //   const [filtered, setFiltered] = useState<Array<PlaylistItem>>([])
-
-  //   useEffect(() => {
-  //     if (!search) return setFiltered(data.items)
-  //     setFiltered(data.items.filter((item) => item.snippet.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())))
-  //   }, [search, data.items])
-
   return (
     <div className="bg-background-darkest ">
-      <section className="container flex flex-col pb-12 bg-black">
-        {/* <input
-          placeholder="Search"
-          className="flex-grow max-w-xl my-6 rounded placeholder:text-text-diffuse text-text-light bg-background-darkest border-[1px] border-neutral-700 p-2 mx-12"
-          type="text"
-          //   value={search}
-          //   onChange={(e) => setSearch(e.target.value)}
-        /> */}
+      <section className="container flex flex-col pb-12 mt-8">
         {data?.items
           ?.slice()
           ?.reverse()
@@ -51,12 +31,7 @@ export default async function PlaylistPage() {
               key={item.id}
               className="flex items-center pr-12 cursor-pointer sm:pr-1 hover:bg-background hover:text-text-highlight"
             >
-              <p className="mx-4 ">
-                {
-                  // @ts-ignore
-                  videoNumbers.find((video) => video.id === item.etag).videoNumber
-                }
-              </p>
+              <p className="mx-4 ">{videoNumbers?.find((video) => video?.id === item?.etag)?.videoNumber}</p>
               <div className="flex border-b-[1px] border-neutral-700 flex-grow">
                 <div className="flex items-center">
                   <div className="">

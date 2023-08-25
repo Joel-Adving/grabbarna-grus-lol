@@ -1,11 +1,22 @@
 import { Summoner } from '@/types'
 
-async function getJSON(url: string) {
+async function get(url: string) {
   try {
     const res = await fetch(url)
     return await res.json()
   } catch (e) {
     console.log(e)
+  }
+}
+
+function Get(baseUrl: string) {
+  return async function get(url: string) {
+    try {
+      const res = await fetch(baseUrl + url)
+      return await res.json()
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 
@@ -38,4 +49,4 @@ function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-export { getJSON, sleep, findSummonerByName, findSummonerById, logRequestInfo, percentages, capitalizeFirstLetter }
+export { get, sleep, findSummonerByName, findSummonerById, logRequestInfo, percentages, capitalizeFirstLetter, Get }

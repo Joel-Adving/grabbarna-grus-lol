@@ -1,7 +1,7 @@
 import RankList from '@/components/RankList'
-import { api } from '@/services/api'
+import { nextApi } from '@/services/nextApi'
 
 export default async function Home() {
-  const summoners = await api.getSummoners()
+  const summoners = await nextApi.getSummoners()
   return <RankList summoners={summoners} />
 }
