@@ -15,7 +15,7 @@ export default function SummonerRankedInfo({ name }: { name: string }) {
   return (
     <>
       <div className="flex font-BeaufortBold">
-        <div className="w-full">
+        <div className="w-full px-6 sm:px-0">
           {summoner && <ProfileInfo summoner={summoner} />}
 
           <div>
@@ -83,7 +83,7 @@ export default function SummonerRankedInfo({ name }: { name: string }) {
 
 function RankBadge({ queuStats }: { queuStats: any }) {
   return (
-    <div className="flex flex-col items-center w-full max-w-lg ">
+    <div className="flex flex-col items-center w-full max-w-lg mb-12 sm:mb-0">
       <Image
         src={`/ranked-emblems/Emblem_${
           queuStats.tier ? capitalizeFirstLetter(queuStats.tier.toLocaleLowerCase()) : ''

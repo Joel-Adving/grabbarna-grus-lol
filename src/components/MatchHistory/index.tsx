@@ -70,9 +70,8 @@ export default function MatchHistory({
       </div>
 
       <div className="flex gap-2 mx-auto mt-2 sm:mx-0 sm:mr-auto">
-        {matchHistory?.length <= 20 && (
+        {matchHistory?.length <= 20 && !isLoading && (
           <button
-            disabled={isLoading}
             onClick={() => router.push(`/grabb/${summoner.name}/matches?show=all`)}
             className="px-2 py-1 text-sm border rounded hover:border-text-light hover:text-text-highlight border-text-diffuse"
           >
@@ -96,7 +95,7 @@ export default function MatchHistory({
 
       <div className="flex w-full">
         {isLoading || (isValidating && fetchAll) ? (
-          <div className="grid w-full sm:h-[50vh] h-[25vh] place-content-center">
+          <div className="grid w-full sm:h-[40vh] h-[25vh] place-content-center">
             <Loader />
           </div>
         ) : (
