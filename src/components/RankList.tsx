@@ -9,7 +9,7 @@ export default function RankList({ summoners }: { summoners: Summoner[] }) {
   const { sortedSummoners, sortBy, setSortBy } = useSortRanks(summoners)
 
   return (
-    <section className="flex flex-col max-w-[29rem] sm:pb-20 pb-4 mx-auto font-BeaufortBold text-text-light">
+    <section className="flex flex-col max-w-[29rem] mx-auto font-BeaufortBold text-text-light">
       <div className="flex flex-col items-center justify-center mt-6 text-2xl uppercase font-frizQuad text-gold-light">
         Grabbarna
         <span className="flex">
@@ -44,7 +44,7 @@ export default function RankList({ summoners }: { summoners: Summoner[] }) {
         </div>
       </div>
 
-      <div className="relative max-h-[68dvh] sm:max-h-none pb-3 sm:pt-1 overflow-y-auto pt-2">
+      <div className="relative short:max-h-[55dvh] sm:pt-1 overflow-y-auto sm:pb-14 pb-6">
         {sortedSummoners?.map((player, i) => {
           return (
             <Link

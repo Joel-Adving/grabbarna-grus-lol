@@ -61,21 +61,3 @@ export const summonerSpells = {
   2201: 'SummonerCherryHold',
   2202: 'SummonerCherryFlash'
 } as const
-
-export const grusGrabbar = [
-  'Reeduns',
-  'Bumbiiz',
-  'DoomGladiator',
-  'TheLewenhaupt',
-  'Forssa',
-  'smashdude1',
-  'Exmortius',
-  'ChimpNE',
-  'darkeningday',
-  'TEEEMO',
-  'Loot',
-  'Spex8',
-  'Leo36737',
-  'xXitsyaboiXx',
-  'Pappenos'
-] as const

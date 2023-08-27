@@ -4,6 +4,8 @@ module.exports = {
     extend: {
       screens: {
         // xs: '440px',
+        short: { raw: '(max-height: 800px)' },
+        tall: { raw: '(min-height: 800px)' }
       },
       fontFamily: {
         frizQuad: 'var(--font-FrizQuadrata)',
