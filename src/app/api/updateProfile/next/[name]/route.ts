@@ -1,25 +1,26 @@
 import { findSummonerByName, logRequestInfo } from '@/utils/helpers'
-import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '@/lib/prisma'
 import { nextApi } from '@/services/nextApi'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  logRequestInfo(req)
+export async function GET(request: Request, { params }: { params: { name: string } }) {
+  const url = new URL(request.url)
+  const key = url.searchParams.get('key')
+  const name = params.name
+  logRequestInfo(request)
 
-  const { key, name } = req.query
   if (key !== process.env.UPDATE_GRABB || !name) {
-    return res.json('bruh')
+    return Response.json('bruh')
   }
 
   const summoners = await nextApi.getSummoners()
 
   if (!summoners) {
-    return res.json('bruh')
+    return Response.json('bruh')
   }
 
-  const foundSummoner = findSummonerByName(summoners, name as string)
+  const foundSummoner = findSummonerByName(summoners, name)
   if (!foundSummoner) {
-    return res.json({ error: { message: name + " doesn't exist in database", status: 404 } })
+    return Response.json({ error: { message: name + " doesn't exist in database", status: 404 } })
   }
 
   const summoner = await prisma.lastUpdated.findFirst()
@@ -30,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         summonerId: foundSummoner.summonerId
       }
     })
-    return res.json('bruh')
+    return Response.json('bruh')
   }
 
   await prisma.lastUpdated.update({
@@ -43,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   })
 
-  res.json({
+  return Response.json({
     'Next profile to be updated': {
       name: foundSummoner.name,
       summonerId: foundSummoner.id

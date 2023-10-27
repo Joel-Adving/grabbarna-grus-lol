@@ -1,33 +1,33 @@
 import { findSummonerById, findSummonerByName, logRequestInfo } from '@/utils/helpers'
-import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '@/lib/prisma'
 import { nextApi } from '@/services/nextApi'
 import { prismaService } from '@/services/prismaService'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  logRequestInfo(req)
-
-  const { key, name } = req.query
+export async function GET(request: Request, { params }: { params: { name: string } }) {
+  const url = new URL(request.url)
+  const key = url.searchParams.get('key')
+  const name = params.name
+  logRequestInfo(request)
 
   const summoners = await nextApi.getSummoners()
   if (!summoners) {
-    return res.json('bruh')
+    return Response.json('bruh')
   }
 
   if (key !== process.env.UPDATE_GRABB) {
-    return res.json('bruuh')
+    return Response.json('bruuh')
   }
 
   if (name !== '_') {
-    const foundSummoner = findSummonerByName(summoners, name as string)
+    const foundSummoner = findSummonerByName(summoners, name)
 
     if (foundSummoner) {
       await prismaService.updateProfileAndMatchHistory(foundSummoner.name)
       console.log('updated: ', foundSummoner.name)
-      return res.json({ success: { status: 200 }, data: { updated: foundSummoner.name } })
+      return Response.json({ success: { status: 200 }, data: { updated: foundSummoner.name } })
     }
 
-    return res.json({ error: { message: `${name} does not exist in database` }, status: 404 })
+    return Response.json({ error: { message: `${name} does not exist in database` }, status: 404 })
   }
 
   const lastUpdated = await prisma.lastUpdated.findFirst()
@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         summonerId: summoners[0].summonerId
       }
     })
-    return res.json('no last updated')
+    return Response.json('no last updated')
   }
 
   const foundSummoner = findSummonerById(summoners, lastUpdated.summonerId)
@@ -60,7 +60,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log('updated: ', lastUpdated.name)
     console.log('next to be updated: ', summoners[0].name)
 
-    return res.json({ updated: lastUpdated.name, nextUp: summoners[0].name })
+    return Response.json({ updated: lastUpdated.name, nextUp: summoners[0].name })
   }
 
   if (indexOfUpdatededProfile + 1 <= summoners.length) {
@@ -79,6 +79,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log('updated: ', lastUpdated.name)
     console.log('next to be updated: ', nextToBeUpdated.name)
 
-    return res.json({ updated: lastUpdated.name, nextUp: nextToBeUpdated.name })
+    return Response.json({ updated: lastUpdated.name, nextUp: nextToBeUpdated.name })
   }
 }

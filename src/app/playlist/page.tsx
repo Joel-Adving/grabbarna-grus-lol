@@ -2,6 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { PlaylistItem } from '../../types'
 
+export const revalidate = 3600 // 1 hour
+
 const URL = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLvy2rk4fbO5XK1axk5qbhFTXPf5EmiDp2&maxResults=50&key=${process.env.NEXT_PUBLIC_API_KEY}`
 
 type VideoNumber = {
