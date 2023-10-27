@@ -1,11 +1,10 @@
 import { prisma } from '@/lib/prisma'
-import { NextApiRequest, NextApiResponse } from 'next'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+  const { id } = params
 
   if (!id || typeof +id !== 'number' || isNaN(+id) || !isFinite(+id)) {
-    res.status(400).json({ message: `Invalid ID: ${id}` })
+    return Response.json({ message: `Invalid ID: ${id}` })
   }
 
   const matches = await prisma.match.findMany({
@@ -23,8 +22,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   })
 
   if (!matches) {
-    res.status(404).json({ message: `No matches found for ${id}` })
+    return Response.json({ message: `No matches found for ${id}` })
   }
 
-  res.status(200).json(matches)
+  return Response.json(matches)
 }

@@ -34,8 +34,9 @@ function findSummonerById(summoners: any[], summonerId: string) {
   return summoners.find((summoner) => summoner.summonerId === summonerId)
 }
 
-function logRequestInfo(req: any) {
-  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+function logRequestInfo(req: Request) {
+  const requestHeaders = new Headers(req.headers)
+  const ip = requestHeaders.get('x-forwarded-for')
   const date = new Date()
   const formattedDate = `${date.toLocaleDateString()}, ${date.toLocaleTimeString()}`
   console.log({ ip, at: formattedDate })

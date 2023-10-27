@@ -1,13 +1,14 @@
 import { prisma } from '@/lib/prisma'
-import { NextApiRequest, NextApiResponse } from 'next'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { name, fetchAll } = req.query
+export async function GET(request: Request, { params }: { params: { name: string } }) {
+  const { name } = params
 
   if (!name) {
-    res.status(404).json({ message: `No name provided` })
+    return Response.json({ message: `No name provided` })
   }
 
+  const url = new URL(request.url)
+  const fetchAll = url.searchParams.get('fetchAll')
   if (fetchAll && fetchAll === 'true') {
     const matches = await prisma.match.findMany({
       where: {
@@ -22,8 +23,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     })
 
-    if (!matches) res.status(404).json({ message: `No matches found for ${name}` })
-    res.status(200).json(matches)
+    if (!matches) {
+      return Response.json({ message: `No matches found for ${name}` })
+    }
+    return Response.json(matches)
   }
 
   const matches = await prisma.match.findMany({
@@ -40,6 +43,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   })
 
-  if (!matches) res.status(404).json({ message: `No matches found for ${name}` })
-  res.status(200).json(matches)
+  if (!matches) {
+    return Response.json({ message: `No matches found for ${name}` })
+  }
+  return Response.json(matches)
 }

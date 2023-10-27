@@ -1,36 +1,37 @@
 import { findSummonerByName, logRequestInfo, sleep } from '@/utils/helpers'
-import { NextApiRequest, NextApiResponse } from 'next'
 import { nextApi } from '@/services/nextApi'
 import { riotApi } from '@/services/riotApi'
 import { prisma } from '@/lib/prisma'
 import { prismaService } from '@/services/prismaService'
 import { revalidateTag, revalidatePath } from 'next/cache'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  logRequestInfo(req)
+export async function GET(request: Request, { params }: { params: { name: string } }) {
+  const url = new URL(request.url)
+  const key = url.searchParams.get('key')
+  logRequestInfo(request)
 
-  if (req.query.key !== process.env.UPDATE_GRABB) {
-    return res.json('access denied')
+  if (key !== process.env.UPDATE_GRABB) {
+    return Response.json('access denied')
   }
 
-  const summonerName = req.query.name as string
+  const summonerName = params.name
   if (!summonerName) {
-    return res.status(200).json({ message: 'Summoner name is required' })
+    return Response.json({ message: 'Summoner name is required' })
   }
 
   const summoners = await nextApi.getSummoners()
   if (!summoners) {
-    return res.json('bruh')
+    return Response.json('bruh')
   }
 
   const foundSummoner = findSummonerByName(summoners, summonerName)
   if (foundSummoner) {
-    return res.status(200).json({ message: `${summonerName} already added` })
+    return Response.json({ message: `${summonerName} already added` })
   }
 
   const summoner = await riotApi.summoner(summonerName)
   if (!summoner) {
-    return res.status(200).json({ message: `Summoner ${summonerName} not found` })
+    return Response.json({ message: `Summoner ${summonerName} not found` })
   }
 
   const { id, ...rest } = summoner
@@ -47,5 +48,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   revalidateTag('summoners')
   revalidatePath('/')
 
-  return res.status(201).json({ success: true, data: { ...createdSummoner } })
+  return Response.json({ success: true, data: { ...createdSummoner } })
 }

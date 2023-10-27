@@ -1,12 +1,9 @@
-import { prisma } from '@/lib/prisma'
-import { NextApiRequest, NextApiResponse } from 'next'
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
   //   const matches = await prisma.match.findMany()
 
   //   if (!matches) {
   //     res.status(404).json({ message: `No matches found` })
   //   }
 
-  res.status(200).json('')
+  return Response.json('')
 }
