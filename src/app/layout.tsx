@@ -58,10 +58,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${BeaufortBold.variable} ${FrizQuadrata.variable}`}>
       <head />
       <body>
-        <Providers>
+        <div>Hej</div>
+        {/* <Providers>
           <Header />
           {children}
-        </Providers>
+        </Providers> */}
       </body>
     </html>
   )
