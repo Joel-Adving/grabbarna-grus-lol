@@ -3,6 +3,7 @@ import Header from '@/components/Header/Header'
 import Providers from '@/components/Providers'
 import { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { PropsWithChildren } from 'react'
 
 const name = 'Grabbarna Grus'
 const url = 'https://grabbarnagrus.oki.gg/'
@@ -56,7 +57,7 @@ const FrizQuadrata = localFont({
   fallback: ['Times New Roman', 'Times', 'serif']
 })
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={`${BeaufortBold.variable} ${FrizQuadrata.variable}`}>
       <head />

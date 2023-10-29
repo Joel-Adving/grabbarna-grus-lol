@@ -3,7 +3,6 @@ import { nextApi } from '@/services/nextApi'
 import { riotApi } from '@/services/riotApi'
 import { prisma } from '@/lib/prisma'
 import { prismaService } from '@/services/prismaService'
-import { revalidateTag, revalidatePath } from 'next/cache'
 
 export async function GET(request: Request, { params }: { params: { name: string } }) {
   const url = new URL(request.url)
@@ -44,9 +43,6 @@ export async function GET(request: Request, { params }: { params: { name: string
 
   await sleep(1100)
   await prismaService.updateProfileAndMatchHistory(summonerName)
-
-  revalidateTag('summoners')
-  revalidatePath('/')
 
   return Response.json({ success: true, data: { ...createdSummoner } })
 }

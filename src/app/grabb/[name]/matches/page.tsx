@@ -1,9 +1,6 @@
 import MatchHistory from '@/components/MatchHistory'
 import { nextApi } from '@/services/nextApi'
 import { riotApi } from '@/services/riotApi'
-import { Suspense } from 'react'
-
-export const revalidate = 3600 // 1 hour
 
 export async function generateStaticParams() {
   const summoners = await nextApi.getSummoners()
@@ -18,11 +15,5 @@ export default async function MatchHistoryPage({ params }: { params: { name: str
   const matchHistory = await nextApi.getMatchHistory(name)
   const queueTypes = await riotApi.getQueueTypes()
 
-  return (
-    <>
-      <Suspense>
-        <MatchHistory serverSideSummoner={summoner} serverSideMatchHistory={matchHistory} queueTypes={queueTypes} />
-      </Suspense>
-    </>
-  )
+  return <MatchHistory serverSideSummoner={summoner} serverSideMatchHistory={matchHistory} queueTypes={queueTypes} />
 }

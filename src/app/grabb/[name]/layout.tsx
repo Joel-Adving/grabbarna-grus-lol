@@ -1,9 +1,8 @@
 import MainLayout from '@/components/MainLayout'
 import NavLink, { NavLinkProps } from '@/components/NavLink'
+import { PropsWithChildren } from 'react'
 
-export const revalidate = 3600 // 1 hour
-
-export default function GrabbLayout({ children, params }: { children: React.ReactNode; params: any }) {
+export default function GrabbLayout({ children, params }: PropsWithChildren & { params: { name: string } }) {
   const { name } = params
 
   const links: NavLinkProps[] = [

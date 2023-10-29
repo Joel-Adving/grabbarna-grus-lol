@@ -1,11 +1,5 @@
 import PlayerStats from '@/components/PlayerStats'
 
-export default function StatsPage({ params }: any) {
-  const { name } = params
-
-  return (
-    <>
-      <PlayerStats name={name as string} />
-    </>
-  )
+export default function StatsPage({ params }: { params: { name: string } }) {
+  return <PlayerStats name={params.name} />
 }
