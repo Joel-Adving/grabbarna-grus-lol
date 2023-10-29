@@ -63,6 +63,7 @@ async function updateRankedStats(summonerId: string) {
   const rankedStats = await riotApi.rank(summonerId)
   if (rankedStats.length > 0) {
     rankedStats.forEach(async (stats: any) => {
+      const { summonerId, ...rest } = stats
       const rankedStatsExists = await prisma.rankedStats.findFirst({
         where: {
           summonerId,
@@ -82,10 +83,10 @@ async function updateRankedStats(summonerId: string) {
       } else {
         await prisma.rankedStats.create({
           data: {
-            ...stats,
+            ...rest,
             summoner: {
               connect: {
-                id: summonerId
+                summonerId
               }
             }
           }

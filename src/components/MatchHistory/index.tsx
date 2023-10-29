@@ -7,8 +7,8 @@ import ProfileInfo from '@/components/ProfileInfo'
 import { SortBy, useFilterAndSortMatches } from '@/hooks/useFilterAndSortMatches'
 import { useGetMatchHistory } from '@/hooks/useGetMatchHistory'
 import MatchHistoryList from './MatchHistoryList'
-import { useRouter } from 'next/navigation'
 import { Summoner } from '@/types'
+import Link from 'next/link'
 
 const selectOptions = [
   { value: 'date', label: 'Date' },
@@ -43,7 +43,6 @@ export default function MatchHistory({
     serverSideMatchHistory
   )
   const { setSortBy, sortedMatchHistory } = useFilterAndSortMatches(matchHistory, summoner)
-  const router = useRouter()
 
   return (
     <div className="grid w-full">
@@ -71,12 +70,12 @@ export default function MatchHistory({
 
       <div className="flex gap-2 mx-auto mt-2 sm:mx-0 sm:mr-auto">
         {matchHistory?.length <= 20 && !isLoading && (
-          <button
-            onClick={() => router.push(`/grabb/${summoner.name}/matches?show=all`)}
+          <Link
+            href={`/grabb/${summoner.name}/matches?show=all`}
             className="px-2 py-1 text-sm border rounded hover:border-text-light hover:text-text-highlight border-text-diffuse"
           >
             Fetch all saved matches
-          </button>
+          </Link>
         )}
 
         {matchHistory?.length > 0 && (
