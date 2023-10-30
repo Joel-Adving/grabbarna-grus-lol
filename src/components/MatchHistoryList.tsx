@@ -1,12 +1,16 @@
 'use client'
 
-import { LEAGUE_CDN } from '../../constants'
-import { LeagueMatch, Summoner } from '../../types'
+import { LEAGUE_CDN } from '../constants'
+import { LeagueMatch, Summoner } from '../types'
 import Image from 'next/image'
 import Link from 'next/link'
-import Items from '../Items'
-import SummonerSpell from '../SummonerSpell'
+import Items from './Items'
+import SummonerSpell from './SummonerSpell'
 import { useGetQueueTypes } from '@/hooks/useGetQueueTypes'
+import { useFilterAndSortMatches } from '@/hooks/useFilterAndSortMatches'
+import Loader from './Loader'
+import { useIsLoadingMatchHistory } from '@/store'
+import { useGetMatchHistory } from '@/hooks/useGetMatchHistory'
 
 const formatDate = (int: number) => {
   const date = new Date(int)
@@ -24,14 +28,25 @@ interface Props {
 
 export default function MatchHistoryList({ matchHistory, summoner, queueTypes }: Props) {
   const { queues } = useGetQueueTypes(queueTypes)
+  const { matchHistory: _matchHistory } = useGetMatchHistory(summoner, matchHistory)
+  const { sortedMatchHistory } = useFilterAndSortMatches(_matchHistory, summoner)
+  const [isLoading] = useIsLoadingMatchHistory()
 
-  if (!matchHistory || !summoner) {
+  if (!matchHistory || !summoner || !sortedMatchHistory) {
     return null
+  }
+
+  if (isLoading) {
+    return (
+      <div className="grid w-full sm:h-[40vh] h-[25vh] place-content-center">
+        <Loader />
+      </div>
+    )
   }
 
   return (
     <section className="flex flex-col flex-grow pt-4">
-      {matchHistory.map((match) => {
+      {sortedMatchHistory.map((match) => {
         const { info } = match
         if (!info) return null
         const playerStats = info?.participants.find((el) => el.puuid === summoner.puuid)

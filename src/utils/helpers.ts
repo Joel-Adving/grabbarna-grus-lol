@@ -37,9 +37,12 @@ function findSummonerById(summoners: any[], summonerId: string) {
 function logRequestInfo(req: Request) {
   const requestHeaders = new Headers(req.headers)
   const ip = requestHeaders.get('x-forwarded-for')
+  const path = req.url
+  const method = req.method
   const date = new Date()
   const formattedDate = `${date.toLocaleDateString()}, ${date.toLocaleTimeString()}`
-  console.log({ ip, at: formattedDate })
+  const userAgent = requestHeaders.get('user-agent')
+  console.log({ method, path, ip, userAgent, date: formattedDate })
 }
 
 function percentages(arr: Array<any>) {

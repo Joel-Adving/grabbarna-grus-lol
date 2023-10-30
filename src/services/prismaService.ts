@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { sleep } from '@/utils/helpers'
 import { riotApi } from './riotApi'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 async function addRecentMatches(name: string) {
   const resSummoner: any = await riotApi.summoner(name)
@@ -151,6 +152,12 @@ async function updateProfileAndMatchHistory(name: string) {
   await addRecentMatches(name)
   await sleep(1100)
   await updateSummonerProfile(name)
+
+  // revalidate relevant paths and tags
+  revalidatePath(`/grabb/${name}/matches`)
+  revalidatePath(`/grabb/${name}/ranked`)
+  revalidatePath(`/grabb/${name}/stats`)
+  revalidateTag('summoners')
 }
 
 export const prismaService = {

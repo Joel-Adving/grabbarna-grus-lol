@@ -3,13 +3,13 @@ import { useEffect, useMemo, useState } from 'react'
 import { LeagueMatch, PlayerStats, Summoner } from '@/types'
 import { useSearchParams } from 'next/navigation'
 import { nextApi } from '@/services/nextApi'
+import { useIsLoadingMatchHistory } from '@/store'
 
-export const useGetMatchHistory = (summoner: Summoner, serverSideMatchHistory: any) => {
+export const useGetMatchHistory = (summoner: Summoner, serverSideMatchHistory: LeagueMatch[]) => {
   const { mutate } = useSWRConfig()
   const searchParams = useSearchParams()
-
   const [fetchAll, setFetchAll] = useState(false)
-
+  const [_isLoading, setIsLoading] = useIsLoadingMatchHistory()
   const { data, isLoading, isValidating } = useSWR(fetchAll ? `matchHistory/${summoner.name}` : null, () => {
     return nextApi.getMatchHistory(summoner.name, fetchAll)
   })
@@ -33,17 +33,6 @@ export const useGetMatchHistory = (summoner: Summoner, serverSideMatchHistory: a
         ),
     [matchHistory, summoner?.puuid]
   )
-
-  useEffect(() => {
-    if (searchParams?.get('show') === 'all') {
-      setFetchAll(true)
-    }
-  }, [searchParams])
-
-  useEffect(() => {
-    if (!matchHistory || matchHistory?.length > 20) return
-    mutate(`matchHistory/${summoner.name}`)
-  }, [fetchAll, matchHistory, mutate, summoner.name])
 
   const wins = useMemo(() => {
     if (!matchHistory || matchHistory?.length < 1 || !summoner?.puuid) return
@@ -97,10 +86,26 @@ export const useGetMatchHistory = (summoner: Summoner, serverSideMatchHistory: a
     return mostPlayed
   }, [matchHistory, playerStats, summoner?.puuid])
 
+  useEffect(() => {
+    if (searchParams?.get('show') === 'all') {
+      setFetchAll(true)
+    }
+  }, [searchParams])
+
+  useEffect(() => {
+    if (!matchHistory || matchHistory?.length > 20) return
+    mutate(`matchHistory/${summoner.name}`)
+  }, [fetchAll, matchHistory, mutate, summoner.name])
+
+  useEffect(() => {
+    setIsLoading(isLoading)
+    return () => setIsLoading(false)
+  }, [isLoading, setIsLoading])
+
   return {
     matchHistory,
     summoner,
-    isLoading,
+    isLoading: _isLoading || isLoading,
     isValidating,
     wins,
     winRate,

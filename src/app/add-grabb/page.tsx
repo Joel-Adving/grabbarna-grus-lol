@@ -19,7 +19,6 @@ export default function AddSummoner() {
     setLoading(true)
     setData(null)
     const res = await nextApi.addNewSummoner(summonerName, key)
-    console.log(res)
     if (res.success) {
       setMessage('Summoner added successfully')
       setData(res.data)

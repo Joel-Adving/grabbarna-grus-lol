@@ -61,3 +61,22 @@ export const summonerSpells = {
   2201: 'SummonerCherryHold',
   2202: 'SummonerCherryFlash'
 } as const
+
+export const matchHistorySelectOptions = [
+  { value: 'date', label: 'Date' },
+  { value: 'kills', label: 'Kills' },
+  { value: 'deaths', label: 'Deaths' },
+  { value: 'assists', label: 'Assists' },
+  { value: 'kda', label: 'K/D/A' },
+  { value: 'totalDamageDealt', label: 'Damage' },
+  { value: 'totalDamageDealtToChampions', label: 'Damage To Champions' },
+  { value: 'gameLength', label: 'Game Length' },
+  { value: 'championId', label: 'Champion' },
+  { value: 'goldEarned', label: 'Gold' },
+  { value: 'soloKills', label: 'Solo Kills' },
+  { value: 'pentaKills', label: 'Penta Kills' },
+  { value: 'totalHeal', label: 'Total Healed' },
+  { value: 'totalMinionsKilled', label: 'Minions Killed' },
+  { value: 'skillshotsDodged', label: 'Skillshots Dodged' },
+  { value: 'snowballsHit', label: 'Snowballs Hit' }
+]

@@ -1,4 +1,4 @@
-import { Summoner } from '@/types'
+import { LeagueMatch, Summoner } from '@/types'
 import { Get } from '@/utils/helpers'
 
 const BASE_URL =
@@ -16,7 +16,7 @@ async function getSummonerByName(name: string): Promise<Summoner> {
   return await get(`summoners/name/${name}`)
 }
 
-async function getMatchHistory(name: string, fetchAll: boolean = false) {
+async function getMatchHistory(name: string, fetchAll: boolean = false): Promise<LeagueMatch[]> {
   return await get(`matchHistory/name/${name}?fetchAll=${fetchAll}`)
 }
 

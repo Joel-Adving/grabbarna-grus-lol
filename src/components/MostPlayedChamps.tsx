@@ -1,7 +1,23 @@
+'use client'
+
 import { LEAGUE_CDN } from '@/constants'
+import { useGetMatchHistory } from '@/hooks/useGetMatchHistory'
+import { LeagueMatch, Summoner } from '@/types'
 import Image from 'next/image'
 
-export default function MostPlayedChamps({ mostPlayed }: { mostPlayed: Map<string, number> }) {
+export default function MostPlayedChamps({
+  matchHistory,
+  summoner
+}: {
+  matchHistory: LeagueMatch[]
+  summoner: Summoner
+}) {
+  const { mostPlayed } = useGetMatchHistory(summoner, matchHistory)
+
+  if (!mostPlayed) {
+    return null
+  }
+
   return (
     <>
       <h3 className="mb-2 font-BeaufortBold text-text-highlight">MOST PLAYED CHAMPIONS</h3>

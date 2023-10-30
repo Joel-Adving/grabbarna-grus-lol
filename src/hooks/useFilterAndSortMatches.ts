@@ -1,3 +1,5 @@
+import { useSortBy } from '@/store'
+import { LeagueMatch } from '@/types'
 import { Summoner } from '@prisma/client'
 import { useMemo, useState } from 'react'
 
@@ -29,11 +31,13 @@ const sortChallenges = (a: any, b: any, summoner: Summoner, key: SortBy) =>
   b.info.participants.find((p: any) => p.summonerId === summoner.summonerId).challenges?.[key] -
   a.info.participants.find((p: any) => p.summonerId === summoner.summonerId).challenges?.[key]
 
-export function useFilterAndSortMatches(matchHistory: any, summoner: Summoner) {
-  const [sortBy, setSortBy] = useState<SortBy>('date')
+export function useFilterAndSortMatches(matchHistory: LeagueMatch[], summoner: Summoner) {
+  const [sortBy] = useSortBy()
 
   const sortedMatchHistory = useMemo(() => {
-    if (!matchHistory) return null
+    if (!matchHistory) {
+      return null
+    }
     const sortedMatches = matchHistory.slice().sort((a: any, b: any) => {
       switch (sortBy) {
         case 'date':
@@ -74,9 +78,8 @@ export function useFilterAndSortMatches(matchHistory: any, summoner: Summoner) {
           return 0
       }
     })
-
     return sortedMatches
   }, [matchHistory, sortBy, summoner])
 
-  return { sortedMatchHistory, sortBy, setSortBy }
+  return { sortedMatchHistory }
 }
