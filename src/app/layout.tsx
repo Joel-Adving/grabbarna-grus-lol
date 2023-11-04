@@ -26,21 +26,7 @@ export const metadata: Metadata = {
     { rel: 'alternate icon', type: 'image/png', href: '/favicon.png', url: '/favicon.png' },
     { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg', url: '/favicon.svg' }
   ],
-  manifest: '/site.webmanifest',
-  openGraph: {
-    type: 'website',
-    url,
-    title: name,
-    description,
-    images: [{ url: preview }]
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: name,
-    description,
-    images: [{ url: preview }],
-    site: url
-  }
+  manifest: '/site.webmanifest'
 }
 
 const BeaufortBold = localFont({

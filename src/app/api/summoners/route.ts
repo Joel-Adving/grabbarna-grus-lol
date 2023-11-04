@@ -1,11 +1,7 @@
-import { prisma } from '@/lib/prisma'
+import { db } from '@/services/dbQueries'
 
 export async function GET() {
-  const summoners = await prisma.summoner.findMany({
-    include: {
-      rankedStats: true
-    }
-  })
+  const summoners = await db.summoners.findManyIncludeRankedStats()
 
   if (!summoners) {
     return Response.json({ message: 'Summoners not found' })

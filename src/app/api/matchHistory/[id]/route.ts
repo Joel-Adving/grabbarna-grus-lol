@@ -8,7 +8,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
   }
 
   const url = new URL(request.url)
-  const fetchAll = url.searchParams.get('fetchAll')
+  const fetchAll = url.searchParams.get('fetchAll') === 'true'
 
   try {
     const matches = await db.summoners.matches(+id!, fetchAll ? 9999 : 20)

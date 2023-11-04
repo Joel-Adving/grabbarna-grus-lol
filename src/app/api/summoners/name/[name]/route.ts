@@ -7,6 +7,8 @@ export async function GET(request: Request, { params }: { params: { name: string
     return Response.json({ message: 'Summoner name not found' })
   }
 
+  //   const summoner = await db.summoners.findByNameIncludeRankedStats(name)
+
   const summoner = await prisma.summoner.findFirst({
     where: {
       name: name as string

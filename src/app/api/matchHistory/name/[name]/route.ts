@@ -8,7 +8,7 @@ export async function GET(request: Request, { params }: { params: { name: string
   }
 
   const url = new URL(request.url)
-  const fetchAll = url.searchParams.get('fetchAll')
+  const fetchAll = url.searchParams.get('fetchAll') === 'true'
 
   try {
     const summoner = await db.summoners.findByName(name as string)

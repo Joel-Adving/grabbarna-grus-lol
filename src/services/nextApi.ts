@@ -1,6 +1,5 @@
 import { LeagueMatch, Summoner } from '@/types'
 import { Get } from '@/utils/helpers'
-import { Match } from '@prisma/client'
 
 const BASE_URL =
   process.env.NODE_ENV === 'development'

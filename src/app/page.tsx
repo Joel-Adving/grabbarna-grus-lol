@@ -1,9 +1,9 @@
 import RankList from '@/components/RankList'
-import { db } from '@/services/dbQueries'
+import { nextApi } from '@/services/nextApi'
 
 export const revalidate = 3600 // 1 hour
 
 export default async function Home() {
-  const summoners = await db.summoners.findManyIncludeRankedStats()
+  const summoners = await nextApi.getSummoners()
   return <RankList summoners={summoners} />
 }

@@ -21,7 +21,10 @@ export async function generateStaticParams() {
 
 export default async function MatchHistoryPage({ params }: { params: { name: string } }) {
   const summoner = await db.summoners.findByNameIncludeRankedStats(params.name)
-  const [matchHistory, queueTypes] = await Promise.all([db.summoners.matches(summoner.id, 20), riotApi.getQueueTypes()])
+  const [matchHistory, queueTypes] = await Promise.all([
+    db.summoners.matches(+summoner.id!, 20),
+    riotApi.getQueueTypes()
+  ])
   const _matches = matchHistory as unknown as LeagueMatch[]
   return (
     <div className="grid w-full">

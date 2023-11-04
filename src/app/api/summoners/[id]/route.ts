@@ -7,6 +7,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
     return Response.json({ message: 'Summoner id not found' })
   }
 
+  //   const summoner = await db.summoners.findById(+id!)
+
   const summoner = await prisma.summoner.findFirst({
     where: {
       id: +id!
