@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { db } from '@/services/dbQueries'
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   const { id } = params
@@ -7,23 +7,18 @@ export async function GET(request: Request, { params }: { params: { id: string }
     return Response.json({ message: `Invalid ID: ${id}` })
   }
 
-  const matches = await prisma.match.findMany({
-    take: 20,
-    where: {
-      summoners: {
-        some: {
-          id: +id!
-        }
-      }
-    },
-    orderBy: {
-      date: 'desc'
-    }
-  })
+  const url = new URL(request.url)
+  const fetchAll = url.searchParams.get('fetchAll')
 
-  if (!matches) {
+  try {
+    const matches = await db.summoners.matches(+id!, fetchAll ? 9999 : 20)
+
+    if (!matches) {
+      return Response.json({ message: `No matches found for ${id}` })
+    }
+
+    return Response.json(matches)
+  } catch (error) {
     return Response.json({ message: `No matches found for ${id}` })
   }
-
-  return Response.json(matches)
 }

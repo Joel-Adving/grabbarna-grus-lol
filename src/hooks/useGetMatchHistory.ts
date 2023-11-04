@@ -1,9 +1,10 @@
 import useSWR, { useSWRConfig } from 'swr'
 import { useEffect, useMemo, useState } from 'react'
 import { LeagueMatch, PlayerStats, Summoner } from '@/types'
-import { useSearchParams } from 'next/navigation'
 import { nextApi } from '@/services/nextApi'
+import { useSearchParams } from 'next/navigation'
 import { useIsLoadingMatchHistory } from '@/store'
+import { Match } from '@prisma/client'
 
 export const useGetMatchHistory = (summoner: Summoner, serverSideMatchHistory: LeagueMatch[]) => {
   const { mutate } = useSWRConfig()
@@ -27,10 +28,8 @@ export const useGetMatchHistory = (summoner: Summoner, serverSideMatchHistory: L
   const playerStats = useMemo(
     () =>
       matchHistory
-        .filter((match: LeagueMatch) => match?.info !== undefined || match?.info == null)
-        .map((match: LeagueMatch) =>
-          match?.info?.participants.find((player: any) => player?.puuid === summoner?.puuid)
-        ),
+        .filter((match) => match?.info !== undefined || match?.info == null)
+        .map((match: any) => match?.info?.participants.find((player: any) => player?.puuid === summoner?.puuid)),
     [matchHistory, summoner?.puuid]
   )
 

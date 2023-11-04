@@ -7,6 +7,8 @@ import { riotApi } from '@/services/riotApi'
 import FetchAllButton from './FetchAllButton'
 import SortBy from './SortBy'
 import { Suspense } from 'react'
+import { db } from '@/services/dbQueries'
+import { LeagueMatch } from '@/types'
 
 export const revalidate = 3600 // 1 hour
 
@@ -18,12 +20,9 @@ export async function generateStaticParams() {
 }
 
 export default async function MatchHistoryPage({ params }: { params: { name: string } }) {
-  const [summoner, matchHistory, queueTypes] = await Promise.all([
-    nextApi.getSummonerByName(params.name),
-    nextApi.getMatchHistory(params.name),
-    riotApi.getQueueTypes()
-  ])
-
+  const summoner = await db.summoners.findByNameIncludeRankedStats(params.name)
+  const [matchHistory, queueTypes] = await Promise.all([db.summoners.matches(summoner.id, 20), riotApi.getQueueTypes()])
+  const _matches = matchHistory as unknown as LeagueMatch[]
   return (
     <div className="grid w-full">
       <div className="flex flex-col items-center md:flex-row">
@@ -32,7 +31,7 @@ export default async function MatchHistoryPage({ params }: { params: { name: str
 
           <div className="items-center hidden h-full gap-3 mt-2 font-BeaufortBold md:flex">
             <Suspense fallback={null}>
-              <MatchesInfo summoner={summoner} matchHistory={matchHistory} />
+              <MatchesInfo summoner={summoner} matchHistory={_matches} />
             </Suspense>
           </div>
         </div>
@@ -40,14 +39,14 @@ export default async function MatchHistoryPage({ params }: { params: { name: str
         <div className="flex flex-col items-center mt-3 mb-3 text-sm md:ml-auto lg:mr-24">
           <div className="flex flex-col items-center h-32 min-w-[15rem]">
             <Suspense fallback={null}>
-              <MostPlayedChamps summoner={summoner} matchHistory={matchHistory} />
+              <MostPlayedChamps summoner={summoner} matchHistory={_matches} />
             </Suspense>
           </div>
         </div>
 
         <div className="flex items-center justify-center h-full gap-3 mt-6 mb-3 font-BeaufortBold md:hidden">
           <Suspense fallback={null}>
-            <MatchesInfo summoner={summoner} matchHistory={matchHistory} />
+            <MatchesInfo summoner={summoner} matchHistory={_matches} />
           </Suspense>
         </div>
       </div>
@@ -61,7 +60,7 @@ export default async function MatchHistoryPage({ params }: { params: { name: str
 
       <div className="flex w-full">
         <Suspense fallback={null}>
-          <MatchHistoryList summoner={summoner} matchHistory={matchHistory} queueTypes={queueTypes} />
+          <MatchHistoryList summoner={summoner} matchHistory={_matches} queueTypes={queueTypes} />
         </Suspense>
       </div>
     </div>

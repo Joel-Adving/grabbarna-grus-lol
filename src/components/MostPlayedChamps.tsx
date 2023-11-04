@@ -3,6 +3,7 @@
 import { LEAGUE_CDN } from '@/constants'
 import { useGetMatchHistory } from '@/hooks/useGetMatchHistory'
 import { LeagueMatch, Summoner } from '@/types'
+import { Match } from '@prisma/client'
 import Image from 'next/image'
 
 export default function MostPlayedChamps({

@@ -3,10 +3,8 @@
 import { useUser } from '@/hooks/useUser'
 import { signIn, signOut } from 'next-auth/react'
 import Image from 'next/image'
-import Link from 'next/link'
 import NavLink from '../NavLink'
 import styles from './styles.module.css'
-import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const user = useUser()

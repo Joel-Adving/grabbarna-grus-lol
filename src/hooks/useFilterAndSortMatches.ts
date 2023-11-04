@@ -1,6 +1,6 @@
 import { useSortBy } from '@/store'
 import { LeagueMatch } from '@/types'
-import { Summoner } from '@prisma/client'
+import { Match, Summoner } from '@prisma/client'
 import { useMemo, useState } from 'react'
 
 export type SortBy =
