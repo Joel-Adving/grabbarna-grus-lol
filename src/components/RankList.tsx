@@ -4,9 +4,11 @@ import Link from 'next/link'
 import SummonerIcon from './SummonerIcon/SummonerIcon'
 import { useSortRanks } from '@/hooks/useSortRanks'
 import { Summoner } from '@/types'
+import { useRouter } from 'next/navigation'
 
 export default function RankList({ summoners }: { summoners: Summoner[] }) {
   const { sortedSummoners, sortBy, setSortBy } = useSortRanks(summoners)
+  const router = useRouter()
 
   return (
     <section className="flex flex-col max-w-[29rem] mx-auto font-BeaufortBold text-text-light">
@@ -50,6 +52,8 @@ export default function RankList({ summoners }: { summoners: Summoner[] }) {
             <Link
               passHref
               href={`/grabb/${player.name}/matches`}
+              prefetch={false}
+              onMouseOver={() => router.prefetch(`/grabb/${player.name}/matches`)}
               key={player.id}
               className="flex items-center justify-between py-1.5 text-sm hover:bg-background-lightest px-3 hover:text-text-highlight"
             >

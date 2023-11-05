@@ -1,5 +1,5 @@
-import FriendList from './FriendList'
 import { twMerge } from 'tailwind-merge'
+import FriendList from './FriendList'
 
 export default function MainLayout({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
