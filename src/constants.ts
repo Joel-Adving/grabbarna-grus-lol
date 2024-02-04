@@ -1,5 +1,5 @@
 export const API_PLAYLIST_URL = 'https://www.googleapis.com/youtube/v3/playlistItems'
-export const LEAGUE_CDN = 'http://ddragon.leagueoflegends.com/cdn/13.15.1'
+export const LEAGUE_CDN = 'http://ddragon.leagueoflegends.com/cdn/14.2.1'
 export const authRequired = ['/add-grabb'] as const
 
 export const leagueTiers = {
