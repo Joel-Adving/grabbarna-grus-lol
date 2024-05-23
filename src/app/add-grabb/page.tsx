@@ -8,7 +8,7 @@ export default function AddSummoner() {
   const [key, setKey] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
-  const [summonerName, setSummonerName] = useState('')
+  const [name, setName] = useState('')
   const [data, setData] = useState<any>(null)
 
   const user = useUser()
@@ -18,11 +18,11 @@ export default function AddSummoner() {
     setMessage('')
     setLoading(true)
     setData(null)
-    const res = await nextApi.addNewSummoner(summonerName, key)
+    const res = await nextApi.addNewSummoner(name, key)
     if (res.success) {
       setMessage('Summoner added successfully')
       setData(res.data)
-      setSummonerName('')
+      setName('')
     } else {
       setMessage(res.message)
     }
@@ -48,8 +48,8 @@ export default function AddSummoner() {
         <input
           className="focus:outline-none rouded mx-auto w-full text-text-highlight bg-background border-[1px] border-neutral-700 rounded-sm p-1 pl-2"
           type="text"
-          value={summonerName}
-          onChange={(e) => setSummonerName(e.currentTarget.value)}
+          value={name}
+          onChange={(e) => setName(e.currentTarget.value)}
           placeholder="Summoner name"
           required
         />

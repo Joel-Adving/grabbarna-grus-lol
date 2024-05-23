@@ -9,6 +9,8 @@ async function addRecentMatches(name: string) {
 
   await sleep(1100)
 
+  console.log({ resMatchHistory, resSummoner })
+
   const matchesInfo = await riotApi.matches(resMatchHistory)
   const currentRecentMatches = await prisma.match.findMany({
     take: 20,

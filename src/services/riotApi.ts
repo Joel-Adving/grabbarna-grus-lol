@@ -1,18 +1,37 @@
 import { get } from '../utils/helpers'
 
 const KEY = process.env.RIOT_API_KEY
-const domain = 'api.riotgames.com/lol'
+const domain = 'api.riotgames.com'
 
-async function summoner(name: string, region = 'eun1') {
-  return await get(`https://${region}.${domain}/summoner/v4/summoners/by-name/${name}?api_key=${KEY}`)
+async function getPuuid(name: string, region = 'europe', tag = 'EUNE') {
+  return await get(`https://${region}.${domain}/riot/account/v1/accounts/by-riot-id/${name}/${tag}?api_key=${KEY}`)
 }
 
-async function summoners(names: string[]) {
-  return await Promise.all(names.map((name) => summoner(name)))
+async function getSummonerByName(name: string) {
+  const partialProfile = await getPuuid(name)
+  if (!partialProfile) {
+    throw new Error('Summoner not found')
+  }
+  const res = await summoner(partialProfile.puuid)
+  if (!res) {
+    throw new Error('Summoner not found')
+  }
+  return {
+    name: partialProfile.gameName,
+    ...res
+  }
+}
+
+async function summoner(encryptedPUUID: string, region = 'eun1') {
+  return await get(`https://${region}.${domain}/lol/summoner/v4/summoners/by-puuid/${encryptedPUUID}?api_key=${KEY}`)
+}
+
+async function summoners(puuids: string[]) {
+  return await Promise.all(puuids.map((puuid) => summoner(puuid)))
 }
 
 async function match(matchId: string, region = 'europe') {
-  return await get(`https://${region}.${domain}/match/v5/matches/${matchId}?api_key=${KEY}`)
+  return await get(`https://${region}.${domain}/lol/match/v5/matches/${matchId}?api_key=${KEY}`)
 }
 
 async function matches(matchIds: string[]) {
@@ -23,8 +42,8 @@ async function matches(matchIds: string[]) {
   )
 }
 
-async function activeMatch(id: string, region = 'eun1') {
-  return await get(`https://${region}.${domain}/spectator/v4/active-games/by-summoner/${id}?api_key=${KEY}`)
+async function activeMatch(id: string, region = 'europe') {
+  return await get(`https://${region}.${domain}/lol/spectator/v4/active-games/by-summoner/${id}?api_key=${KEY}`)
 }
 
 async function activeMatches(ids: string[]) {
@@ -32,20 +51,20 @@ async function activeMatches(ids: string[]) {
 }
 
 async function matchHistory(puuid: string, region = 'europe') {
-  return await get(`https://${region}.${domain}/match/v5/matches/by-puuid/${puuid}/ids?api_key=${KEY}`)
+  return await get(`https://${region}.${domain}/lol/match/v5/matches/by-puuid/${puuid}/ids?api_key=${KEY}`)
 }
 
 async function matchHistories(puuids: string[], region = 'europe') {
   return await Promise.allSettled(
     puuids.map(async (puuid) => {
-      const res = await get(`https://${region}.${domain}/match/v5/matches/by-puuid/${puuid}/ids?api_key=${KEY}`)
+      const res = await get(`https://${region}.${domain}/lol/match/v5/matches/by-puuid/${puuid}/ids?api_key=${KEY}`)
       return { puuid, matches: res }
     })
   )
 }
 
-async function rank(id: string, region = 'eun1') {
-  return await get(`https://${region}.${domain}/league/v4/entries/by-summoner/${id}?api_key=${KEY}`)
+async function rank(id: string, region = 'europe') {
+  return await get(`https://${region}.${domain}/lol/league/v4/entries/by-summoner/${id}?api_key=${KEY}`)
 }
 
 async function ranks(ids: string[]) {
@@ -64,6 +83,8 @@ async function getQueueTypes() {
 }
 
 export const riotApi = {
+  getSummonerByName,
+  getPuuid,
   summoner,
   summoners,
   match,

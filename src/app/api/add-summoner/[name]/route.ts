@@ -1,4 +1,4 @@
-import { findSummonerByName, logRequestInfo, sleep } from '@/utils/helpers'
+import { findSummonerName, logRequestInfo, sleep } from '@/utils/helpers'
 import { nextApi } from '@/services/nextApi'
 import { riotApi } from '@/services/riotApi'
 import { prisma } from '@/lib/prisma'
@@ -13,36 +13,35 @@ export async function GET(request: Request, { params }: { params: { name: string
     return Response.json('access denied')
   }
 
-  const summonerName = params.name
-  if (!summonerName) {
-    return Response.json({ message: 'Summoner name is required' })
+  const name = params.name
+  if (!name) {
+    return Response.json({ message: 'name is required' })
   }
 
-  const summoners = await nextApi.getSummoners()
-  if (!summoners) {
-    return Response.json('bruh')
-  }
-
-  const foundSummoner = findSummonerByName(summoners, summonerName)
-  if (foundSummoner) {
-    return Response.json({ message: `${summonerName} already added` })
-  }
-
-  const summoner = await riotApi.summoner(summonerName)
-  if (!summoner) {
-    return Response.json({ message: `Summoner ${summonerName} not found` })
-  }
-
-  const { id, ...rest } = summoner
-  const createdSummoner = await prisma.summoner.create({
-    data: {
-      summonerId: id,
-      ...rest
+  try {
+    const summoners = await nextApi.getSummoners()
+    if (!summoners) {
+      return Response.json('bruh')
     }
-  })
 
-  await sleep(1100)
-  await prismaService.updateProfileAndMatchHistory(summonerName)
+    const foundSummoner = findSummonerName(summoners, name)
+    if (foundSummoner) {
+      return Response.json({ message: `${foundSummoner.name} already added` })
+    }
 
-  return Response.json({ success: true, data: { ...createdSummoner } })
+    const summoner = await riotApi.getSummonerByName(name)
+    const { id, ...rest } = summoner
+    const createdSummoner = await prisma.summoner.create({
+      data: {
+        summonerId: id,
+        ...rest
+      }
+    })
+    await sleep(1100)
+    await prismaService.updateProfileAndMatchHistory(summoner.name)
+    return Response.json({ success: true, data: { ...createdSummoner } })
+  } catch (error) {
+    console.log(error)
+    return Response.json({ message: 'Error' })
+  }
 }

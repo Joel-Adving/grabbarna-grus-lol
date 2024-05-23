@@ -20,8 +20,8 @@ async function getMatchHistory(name: string, fetchAll: boolean = false): Promise
   return await get(`matchHistory/name/${name}?fetchAll=${fetchAll}`)
 }
 
-async function addNewSummoner(name: string, key: string) {
-  return await get(`add-summoner/${name}?key=${key}`)
+async function addNewSummoner(puuid: string, key: string) {
+  return await get(`add-summoner/${puuid}?key=${key}`)
 }
 
 export const nextApi = {
