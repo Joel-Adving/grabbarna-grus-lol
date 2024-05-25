@@ -1,4 +1,4 @@
-import { findSummonerName, logRequestInfo, sleep } from '@/utils/helpers'
+import { findSummonerByName, logRequestInfo, sleep } from '@/utils/helpers'
 import { nextApi } from '@/services/nextApi'
 import { riotApi } from '@/services/riotApi'
 import { prisma } from '@/lib/prisma'
@@ -21,15 +21,21 @@ export async function GET(request: Request, { params }: { params: { name: string
   try {
     const summoners = await nextApi.getSummoners()
     if (!summoners) {
-      return Response.json('bruh')
+      return Response.json('No summoners found')
     }
 
-    const foundSummoner = findSummonerName(summoners, name)
+    const foundSummoner = findSummonerByName(summoners, name)
     if (foundSummoner) {
       return Response.json({ message: `${foundSummoner.name} already added` })
     }
 
-    const summoner = await riotApi.getSummonerByName(name)
+    const region = url.searchParams.get('region') ?? 'europe'
+    const tag = url.searchParams.get('tag') ?? 'EUNE'
+    const summoner = await riotApi.getSummonerByName(name, region, tag)
+
+    if (!summoner) {
+      return Response.json({ message: 'Summoner not found' })
+    }
     const { id, ...rest } = summoner
     const createdSummoner = await prisma.summoner.create({
       data: {

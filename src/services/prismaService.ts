@@ -2,9 +2,14 @@ import { prisma } from '@/lib/prisma'
 import { sleep } from '@/utils/helpers'
 import { riotApi } from './riotApi'
 import { revalidatePath, revalidateTag } from 'next/cache'
+import { nextApi } from './nextApi'
 
 async function addRecentMatches(name: string) {
-  const resSummoner = await riotApi.getSummonerByName(name)
+  const dbSummoner = await nextApi.getSummonerByName(name)
+  if (!dbSummoner) {
+    throw new Error('Summoner not found')
+  }
+  const resSummoner = await riotApi.summoner(dbSummoner.puuid)
   const resMatchHistory = await riotApi.matchHistory(resSummoner.puuid)
 
   await sleep(1100)
@@ -44,7 +49,7 @@ async function updateSummonerProfile(name: string) {
   const summoner = await prisma.summoner.findFirst({ where: { name } })
   if (!summoner) return
 
-  const summonerProfile = await riotApi.summoner(summoner.name)
+  const summonerProfile = await riotApi.summoner(summoner.puuid)
   if (summonerProfile) {
     const { profileIconId, summonerLevel, revisionDate } = summonerProfile
     await prisma.summoner.update({

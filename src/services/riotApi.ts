@@ -7,8 +7,8 @@ async function getPuuid(name: string, region = 'europe', tag = 'EUNE') {
   return await get(`https://${region}.${domain}/riot/account/v1/accounts/by-riot-id/${name}/${tag}?api_key=${KEY}`)
 }
 
-async function getSummonerByName(name: string) {
-  const partialProfile = await getPuuid(name)
+async function getSummonerByName(name: string, region?: string, tag?: string) {
+  const partialProfile = await getPuuid(name, region, tag)
   if (!partialProfile) {
     throw new Error('Summoner not found')
   }

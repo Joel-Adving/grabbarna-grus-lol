@@ -5,7 +5,7 @@ import { SortBy } from '@/hooks/useFilterAndSortMatches'
 import { useSortBy } from '@/store'
 import React, { useEffect } from 'react'
 
-export default function SortBy() {
+export default function SortByPage() {
   const [sortBy, setSortBy] = useSortBy()
 
   useEffect(() => {

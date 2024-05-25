@@ -26,7 +26,7 @@ function sleep(ms: number) {
   })
 }
 
-function findSummonerName(summoners: Summoner[], name: string) {
+function findSummonerByName(summoners: Summoner[], name: string) {
   return summoners?.find((summoner) => summoner.name.toLowerCase() === name.toLowerCase())
 }
 
@@ -53,4 +53,4 @@ function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-export { get, sleep, findSummonerName, findSummonerById, logRequestInfo, percentages, capitalizeFirstLetter, Get }
+export { get, sleep, findSummonerByName, findSummonerById, logRequestInfo, percentages, capitalizeFirstLetter, Get }
