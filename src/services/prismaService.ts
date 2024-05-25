@@ -4,8 +4,8 @@ import { riotApi } from './riotApi'
 import { revalidatePath, revalidateTag } from 'next/cache'
 
 async function addRecentMatches(name: string) {
-  const resSummoner: any = await riotApi.summoner(name)
-  const resMatchHistory: any = await riotApi.matchHistory(resSummoner.puuid)
+  const resSummoner = await riotApi.getSummonerByName(name)
+  const resMatchHistory = await riotApi.matchHistory(resSummoner.puuid)
 
   await sleep(1100)
 
@@ -26,7 +26,7 @@ async function addRecentMatches(name: string) {
     }
   })
 
-  const newMatches = matchesInfo.filter((match: any) => {
+  const newMatches = matchesInfo.filter((match) => {
     for (let currentMatch of currentRecentMatches) {
       if (currentMatch?.matchId === match?.metadata?.matchId) {
         return false
